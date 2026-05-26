@@ -1,0 +1,27 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout title="Sistema de diseño">
+  <main class="min-h-screen flex flex-col items-center justify-center gap-10 p-8">
+    <h1 class="text-6xl text-gradient-synalab">SYNALAB</h1>
+
+    <p class="text-lg text-(--color-slate-muted)">
+      Educación Tecnológica Consciente
+    </p>
+
+    <section class="flex flex-wrap gap-4 justify-center">
+      <div class="w-20 h-20 rounded-lg bg-cyan-synalab"></div>
+      <div class="w-20 h-20 rounded-lg bg-violet-deep"></div>
+      <div class="w-20 h-20 rounded-lg bg-electric-blue"></div>
+      <div class="w-20 h-20 rounded-lg bg-slate-muted"></div>
+    </section>
+
+    <button class="gradient-synalab text-navy-profundo font-semibold px-8 py-3 rounded-md">
+      Botón con gradiente oficial
+    </button>
+
+    <p class="text-sm text-(--color-slate-muted) max-w-md text-center">
+      Esta página es solo de validación. Será reemplazada por el Inicio real.
+    </p>
+  </main>
+</Layout>

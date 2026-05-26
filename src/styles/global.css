@@ -1,0 +1,93 @@
+@import "tailwindcss";
+
+/* === TIPOGRAFÍAS AUTOHOSPEDADAS === */
+@import '@fontsource-variable/space-grotesk';
+@import '@fontsource-variable/inter';
+
+/* ============================================
+   TOKENS DEL SISTEMA DE DISEÑO SYNALAB
+   Fuente: Documento Maestro v7.0 · Sección 7.1
+   ============================================ */
+@theme {
+  /* Paleta oficial */
+  --color-cyan-synalab: #00C8D7;
+  --color-violet-deep: #7B5EA7;
+  --color-electric-blue: #3B8BEB;
+  --color-navy-profundo: #0D1B2A;
+  --color-blanco-puro: #FFFFFF;
+  --color-slate-muted: #8FA3B8;
+
+  /* Tipografías */
+  --font-display: 'Space Grotesk Variable', system-ui, sans-serif;
+  --font-body: 'Inter Variable', system-ui, sans-serif;
+
+  /* Radios de bordes */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+}
+
+/* ============================================
+   ESTILOS BASE GLOBALES
+   ============================================ */
+@layer base {
+  html {
+    background-color: var(--color-navy-profundo);
+    color: var(--color-blanco-puro);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    min-height: 100dvh;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+  }
+
+  /* Selección de texto en colores de marca */
+  ::selection {
+    background-color: var(--color-cyan-synalab);
+    color: var(--color-navy-profundo);
+  }
+
+  /* Anillo de foco accesible para navegación con teclado */
+  :focus-visible {
+    outline: 2px solid var(--color-cyan-synalab);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+  }
+}
+
+/* ============================================
+   UTILIDADES DE MARCA
+   ============================================ */
+@layer utilities {
+  /* Gradiente oficial Cyan → Violeta (horizontal, izq → der) */
+  .gradient-synalab {
+    background: linear-gradient(
+      90deg,
+      var(--color-cyan-synalab) 0%,
+      var(--color-violet-deep) 100%
+    );
+  }
+
+  /* Mismo gradiente aplicado a texto */
+  .text-gradient-synalab {
+    background: linear-gradient(
+      90deg,
+      var(--color-cyan-synalab) 0%,
+      var(--color-violet-deep) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+}
