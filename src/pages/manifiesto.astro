@@ -1,0 +1,211 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Container from '../components/ui/Container.astro';
+import Button from '../components/ui/Button.astro';
+import { SITE } from '../lib/site';
+
+const valores = [
+  {
+    nombre: 'Propósito antes que código',
+    descripcion: 'Toda herramienta parte de un problema real identificado. Si no existe ese problema, no existe la herramienta.',
+  },
+  {
+    nombre: 'Seguridad no negociable',
+    descripcion: 'Nada sale del laboratorio sin haber pasado el protocolo de seguridad propio. Quince reglas aplicadas a cada línea de código, sin excepción.',
+  },
+  {
+    nombre: 'Local-first',
+    descripcion: 'Por diseño, el software de Synalab opera sin dependencia de servidores propios en la nube. Los datos del usuario pertenecen al usuario.',
+  },
+  {
+    nombre: 'Rigor con accesibilidad',
+    descripcion: 'Las soluciones están diseñadas para funcionar en entornos con recursos limitados, sin requerir infraestructura costosa.',
+  },
+  {
+    nombre: 'Replicabilidad',
+    descripcion: 'Cada herramienta está concebida para ser útil más allá del contexto en que nació. Lo que resuelve un problema específico debe poder adaptarse a otros contextos similares.',
+  },
+];
+---
+<Layout
+  title="Manifiesto"
+  description="El manifiesto de Synalab: origen, propósito, principios y la pregunta que define cada proyecto del laboratorio."
+>
+
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0 -z-10 pointer-events-none" aria-hidden="true">
+      <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[400px] bg-violet-deep/15 rounded-full blur-[140px]"></div>
+    </div>
+
+    <Container class="py-24 md:py-32">
+      <div class="max-w-3xl">
+        <p class="text-sm font-semibold tracking-wider uppercase text-cyan-synalab mb-6">
+          Manifiesto
+        </p>
+        <h1 class="text-5xl md:text-6xl font-bold leading-[1.05] tracking-tight mb-8">
+          Por qué existe <span class="text-gradient-synalab">Synalab</span>.
+        </h1>
+        <p class="text-lg md:text-xl text-blanco-puro/80 leading-relaxed">
+          Este es el texto donde decimos en voz alta lo que creemos. No es marketing. Es la brújula que decide qué se construye aquí y qué no.
+        </p>
+      </div>
+    </Container>
+  </section>
+
+  <section class="border-t border-slate-muted/10">
+    <Container class="py-20 md:py-24">
+      <div class="max-w-3xl">
+        <p class="text-sm font-semibold tracking-wider uppercase text-cyan-synalab mb-4">
+          El nombre
+        </p>
+        <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-8">
+          Synapse + Laboratorio.
+        </h2>
+        <div class="space-y-6 text-lg text-blanco-puro/80 leading-relaxed">
+          <p>
+            Synalab es la fusión deliberada de dos conceptos. <strong class="text-blanco-puro">Synapse</strong> representa la conexión neurológica, el pensamiento estructurado y el desarrollo cognitivo humano. <strong class="text-blanco-puro">Laboratorio</strong> representa la creación metódica, la experimentación con propósito y el rigor técnico.
+          </p>
+          <p>
+            El resultado es una marca que convierte ideas en herramientas digitales reales, construidas con inteligencia artificial y validadas por criterio pedagógico. El nombre no es decorativo: es la promesa del trabajo.
+          </p>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <section class="border-t border-slate-muted/10">
+    <Container class="py-20 md:py-24">
+      <div class="max-w-3xl">
+        <p class="text-sm font-semibold tracking-wider uppercase text-cyan-synalab mb-4">
+          Qué es
+        </p>
+        <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-8">
+          Un estudio independiente con principios.
+        </h2>
+        <div class="space-y-6 text-lg text-blanco-puro/80 leading-relaxed">
+          <p>
+            Synalab es un estudio independiente de creación de software funcional impulsado por inteligencia artificial. Nace de la educación, pero el laboratorio no tiene paredes: cada herramienta que se construye aquí parte de un problema real, se desarrolla con criterio, y se entrega con estándares de seguridad profesionales.
+          </p>
+          <p>
+            No es un estudio de desarrollo tradicional ni una plataforma de contenido educativo genérico. Es la confluencia de tres capacidades que rara vez coexisten en una sola propuesta: <strong class="text-blanco-puro">formación pedagógica sólida</strong> con experiencia documentada en educación inclusiva; <strong class="text-blanco-puro">dominio del proceso de construcción de software funcional mediante inteligencia artificial</strong>; y <strong class="text-blanco-puro">un protocolo de seguridad propio</strong> que eleva el vibe coding a una práctica profesional y responsable.
+          </p>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <section class="border-t border-slate-muted/10">
+    <Container class="py-20 md:py-24">
+      <div class="max-w-3xl">
+        <p class="text-sm font-semibold tracking-wider uppercase text-cyan-synalab mb-4">
+          El principio
+        </p>
+        <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-8">
+          Un laboratorio se define por cómo trabaja, no por qué construye.
+        </h2>
+        <div class="space-y-6 text-lg text-blanco-puro/80 leading-relaxed">
+          <p>
+            Un laboratorio no define de antemano qué va a construir. Define cómo lo va a construir. Synalab opera bajo ese principio: el estándar de calidad, seguridad y propósito es constante; lo que varía es el problema que se aborda.
+          </p>
+          <p>
+            Esa flexibilidad no es ausencia de foco. Es la consecuencia lógica de tener un método sólido. La educación es el cimiento, no el techo. Desde ese cimiento se construye cualquier herramienta que tenga utilidad real para quien la necesita.
+          </p>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <section class="border-t border-slate-muted/10">
+    <Container class="py-20 md:py-28">
+      <div class="max-w-3xl">
+        <div class="relative overflow-hidden rounded-2xl border border-cyan-synalab/20 p-10 md:p-14">
+          <div class="absolute inset-0 -z-10 pointer-events-none" aria-hidden="true">
+            <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-cyan-synalab/10 via-transparent to-violet-deep/10"></div>
+          </div>
+          <p class="text-sm font-semibold tracking-wider uppercase text-cyan-synalab mb-6">
+            La pregunta que define cada proyecto
+          </p>
+          <div class="space-y-4 text-2xl md:text-3xl font-bold tracking-tight leading-snug">
+            <p>¿Existe un problema real?</p>
+            <p>¿La solución es construible con los estándares del laboratorio?</p>
+            <p>¿Será genuinamente útil para quien la use?</p>
+          </div>
+          <p class="mt-8 text-lg text-blanco-puro/80 leading-relaxed">
+            Si las tres respuestas son afirmativas, el proyecto tiene lugar en Synalab. Si no, por más interesante que parezca, no se construye.
+          </p>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <section class="border-t border-slate-muted/10">
+    <Container class="py-20 md:py-28">
+      <div class="max-w-3xl mb-16">
+        <p class="text-sm font-semibold tracking-wider uppercase text-cyan-synalab mb-4">
+          Valores
+        </p>
+        <h2 class="text-3xl md:text-4xl font-bold tracking-tight">
+          Cinco principios que no se negocian.
+        </h2>
+      </div>
+
+      <div class="max-w-3xl space-y-12">
+        {valores.map((valor, index) => (
+          <div class="grid grid-cols-[auto_1fr] gap-6 md:gap-8">
+            <span class="text-5xl md:text-6xl font-bold text-gradient-synalab leading-none">
+              {String(index + 1).padStart(2, '0')}
+            </span>
+            <div>
+              <h3 class="text-xl md:text-2xl font-semibold mb-3">{valor.nombre}</h3>
+              <p class="text-lg text-blanco-puro/80 leading-relaxed">
+                {valor.descripcion}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <section class="border-t border-slate-muted/10">
+    <Container class="py-20 md:py-24">
+      <div class="max-w-3xl">
+        <p class="text-sm font-semibold tracking-wider uppercase text-cyan-synalab mb-4">
+          Declaración personal
+        </p>
+        <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-8">
+          Por qué hago esto.
+        </h2>
+        <div class="space-y-6 text-lg text-blanco-puro/80 leading-relaxed">
+          <p>
+            Sé lo que es estar en un aula, frente a estudiantes con realidades muy distintas, queriendo dar más de lo que las herramientas disponibles permiten. Synalab nace de esa frustración productiva: de saber que la tecnología puede aportar algo concreto cuando se construye con criterio, no cuando se acumulan funciones por moda.
+          </p>
+          <p>
+            La inteligencia artificial cambió lo que una sola persona puede construir. Pero ese poder solo vale algo cuando se usa con propósito, con responsabilidad y con un estándar de seguridad que proteja a quien va a usar el software.
+          </p>
+          <p>
+            Synalab es mi forma de poner ese poder al servicio de problemas reales, sin perder el rigor pedagógico ni el respeto por los datos de quien confía en lo que construyo.
+          </p>
+        </div>
+        <p class="mt-10 text-base text-slate-muted">
+          — {SITE.founder}, fundador de {SITE.name}.
+        </p>
+      </div>
+    </Container>
+  </section>
+
+  <section class="border-t border-slate-muted/10">
+    <Container class="py-20 md:py-28">
+      <div class="max-w-3xl flex flex-col md:flex-row gap-6 items-start md:items-center justify-between">
+        <p class="text-xl md:text-2xl font-semibold tracking-tight">
+          ¿Quieres conocer al estudio o proponer un proyecto?
+        </p>
+        <div class="flex flex-wrap gap-3">
+          <Button href="/estudio" variant="secondary">Conocer al estudio</Button>
+          <Button href="/contacto" variant="primary">Contacto</Button>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+</Layout>

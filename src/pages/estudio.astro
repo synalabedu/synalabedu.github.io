@@ -1,0 +1,188 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Container from '../components/ui/Container.astro';
+import Button from '../components/ui/Button.astro';
+import { getTeamMembers } from '../lib/team';
+import { SITE } from '../lib/site';
+
+const team = getTeamMembers();
+---
+<Layout
+  title="Estudio"
+  description="Conoce al equipo detrás de Synalab. Quién construye, qué le da forma al laboratorio, y por qué."
+>
+
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0 -z-10 pointer-events-none" aria-hidden="true">
+      <div class="absolute top-0 right-1/4 w-[600px] h-[400px] bg-cyan-synalab/15 rounded-full blur-[140px]"></div>
+    </div>
+
+    <Container class="py-24 md:py-32">
+      <div class="max-w-3xl">
+        <p class="text-sm font-semibold tracking-wider uppercase text-cyan-synalab mb-6">
+          El estudio
+        </p>
+        <h1 class="text-5xl md:text-6xl font-bold leading-[1.05] tracking-tight mb-8">
+          Quién está <span class="text-gradient-synalab">detrás</span>.
+        </h1>
+        <p class="text-lg md:text-xl text-blanco-puro/80 leading-relaxed">
+          Synalab es un estudio independiente. Actualmente está conformado por una sola persona; sin embargo, en la medida en que los desafíos y proyectos de impacto evolucionen, podrán integrarse nuevos colaboradores. Cada integrante que haga parte de este estudio compartirá y representará los mismos principios, valores y visión que orientan su propósito.
+        </p>
+      </div>
+    </Container>
+  </section>
+
+  {team.map((member, index) => (
+    <section class="border-t border-slate-muted/10">
+      <Container class="py-20 md:py-28">
+
+        <div class="grid grid-cols-1 md:grid-cols-[auto_1fr] gap-10 md:gap-14 items-start">
+
+          <div class="flex flex-col items-center md:items-start gap-6 shrink-0">
+            <div class="relative w-40 h-40 md:w-48 md:h-48 rounded-full overflow-hidden border-2 border-cyan-synalab/30 bg-gradient-to-br from-cyan-synalab/10 to-violet-deep/10 flex items-center justify-center">
+              {member.photo ? (
+                <img src={member.photo} alt={member.name} class="w-full h-full object-cover" />
+              ) : (
+                <span class="text-5xl md:text-6xl font-bold text-gradient-synalab">{member.initials}</span>
+              )}
+            </div>
+
+            <ul class="flex gap-3">
+              {member.socials.linkedin && (
+                <li>
+                  <a
+                    href={member.socials.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`LinkedIn de ${member.name}`}
+                    class="flex items-center justify-center w-10 h-10 rounded-md border border-slate-muted/20 text-blanco-puro/80 hover:text-cyan-synalab hover:border-cyan-synalab/40 transition-colors"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                      <rect x="2" y="9" width="4" height="12"></rect>
+                      <circle cx="4" cy="4" r="2"></circle>
+                    </svg>
+                  </a>
+                </li>
+              )}
+              {member.socials.github && (
+                <li>
+                  <a
+                    href={member.socials.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`GitHub de ${member.name}`}
+                    class="flex items-center justify-center w-10 h-10 rounded-md border border-slate-muted/20 text-blanco-puro/80 hover:text-cyan-synalab hover:border-cyan-synalab/40 transition-colors"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                    </svg>
+                  </a>
+                </li>
+              )}
+              {member.socials.email && (
+                <li>
+                  <a
+                    href={`mailto:${member.socials.email}`}
+                    aria-label={`Correo de ${member.name}`}
+                    class="flex items-center justify-center w-10 h-10 rounded-md border border-slate-muted/20 text-blanco-puro/80 hover:text-cyan-synalab hover:border-cyan-synalab/40 transition-colors"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                      <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                  </a>
+                </li>
+              )}
+            </ul>
+          </div>
+
+          <div>
+            {member.isFounder && (
+              <span class="inline-flex items-center px-2.5 py-1 text-xs font-medium rounded-full border bg-cyan-synalab/15 text-cyan-synalab border-cyan-synalab/30 mb-4">
+                Fundador
+              </span>
+            )}
+            <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-2">{member.name}</h2>
+            <p class="text-lg text-cyan-synalab mb-6">{member.role}</p>
+
+            <p class="text-lg text-blanco-puro/80 leading-relaxed mb-8">
+              {member.bio}
+            </p>
+
+            <div class="mb-10">
+              <p class="text-xs font-semibold tracking-wider uppercase text-slate-muted mb-3">
+                Áreas de especialidad
+              </p>
+              <div class="flex flex-wrap gap-2.5">
+                {member.specialties.map((s) => (
+                  <span class="px-4 py-2 text-sm rounded-full border border-slate-muted/30 bg-slate-muted/5 text-blanco-puro/80">
+                    {s}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div class="space-y-12">
+              <div>
+                <h3 class="text-xl md:text-2xl font-semibold tracking-tight mb-6">
+                  Trayectoria
+                </h3>
+                <div class="space-y-5 text-base md:text-lg text-blanco-puro/80 leading-relaxed">
+                  {member.longBio.map((paragraph) => (
+                    <p>{paragraph}</p>
+                  ))}
+                </div>
+              </div>
+
+              {member.motivation && (
+                <div>
+                  <h3 class="text-xl md:text-2xl font-semibold tracking-tight mb-6">
+                    Lo que me mueve
+                  </h3>
+                  <div class="relative pl-6 border-l-2 border-cyan-synalab/40">
+                    <p class="text-base md:text-lg text-blanco-puro/90 leading-relaxed italic">
+                      {member.motivation}
+                    </p>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+
+        </div>
+      </Container>
+    </section>
+  ))}
+
+  <section class="border-t border-slate-muted/10">
+    <Container class="py-20 md:py-24">
+      <div class="max-w-3xl">
+        <p class="text-sm font-semibold tracking-wider uppercase text-cyan-synalab mb-4">
+          Crecimiento del estudio
+        </p>
+        <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-6">
+          {SITE.name} está abierto a crecer.
+        </h2>
+        <p class="text-lg text-blanco-puro/80 leading-relaxed">
+          Si te identificas con los principios del laboratorio y crees que tu trabajo encaja con lo que construimos aquí, hablemos. El equipo crecerá cuando los problemas que vale la pena resolver lo justifiquen, no antes.
+        </p>
+      </div>
+    </Container>
+  </section>
+
+  <section class="border-t border-slate-muted/10">
+    <Container class="py-20 md:py-28">
+      <div class="max-w-3xl flex flex-col md:flex-row gap-6 items-start md:items-center justify-between">
+        <p class="text-xl md:text-2xl font-semibold tracking-tight">
+          ¿Quieres conversar o proponer un proyecto?
+        </p>
+        <div class="flex flex-wrap gap-3">
+          <Button href="/manifiesto" variant="secondary">Leer el manifiesto</Button>
+          <Button href="/contacto" variant="primary">Contacto</Button>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+</Layout>
