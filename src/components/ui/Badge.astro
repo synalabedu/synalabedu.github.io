@@ -1,0 +1,31 @@
+---
+interface Props {
+  variant?: 'completo' | 'desarrollo' | 'revision' | 'default';
+  class?: string;
+}
+
+const { variant = 'default', class: className = '' } = Astro.props;
+
+const variantClasses = {
+  completo: 'bg-cyan-synalab/15 text-cyan-synalab border-cyan-synalab/30',
+  desarrollo: 'bg-violet-deep/15 text-violet-deep border-violet-deep/30',
+  revision: 'bg-electric-blue/15 text-electric-blue border-electric-blue/30',
+  default: 'bg-slate-muted/15 text-slate-muted border-slate-muted/30',
+};
+
+const labels = {
+  completo: 'Completo',
+  desarrollo: 'En desarrollo',
+  revision: 'En revisión',
+  default: '',
+};
+---
+<span
+  class:list={[
+    'inline-flex items-center px-2.5 py-1 text-xs font-medium rounded-full border',
+    variantClasses[variant],
+    className,
+  ]}
+>
+  <slot>{labels[variant]}</slot>
+</span>

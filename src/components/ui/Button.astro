@@ -1,0 +1,55 @@
+---
+interface Props {
+  href?: string;
+  variant?: 'primary' | 'secondary' | 'ghost';
+  size?: 'sm' | 'md' | 'lg';
+  type?: 'button' | 'submit' | 'reset';
+  class?: string;
+  external?: boolean;
+}
+
+const {
+  href,
+  variant = 'primary',
+  size = 'md',
+  type = 'button',
+  class: className = '',
+  external = false,
+} = Astro.props;
+
+const baseClasses =
+  'inline-flex items-center justify-center font-semibold rounded-md transition-all duration-200';
+
+const sizeClasses = {
+  sm: 'px-4 py-2 text-sm',
+  md: 'px-6 py-3 text-base',
+  lg: 'px-8 py-4 text-lg',
+};
+
+const variantClasses = {
+  primary: 'gradient-synalab text-navy-profundo hover:opacity-90',
+  secondary:
+    'border border-cyan-synalab/40 text-blanco-puro hover:bg-cyan-synalab/10 hover:border-cyan-synalab',
+  ghost: 'text-blanco-puro hover:text-cyan-synalab',
+};
+
+const isLink = Boolean(href);
+const externalAttrs =
+  isLink && external ? { target: '_blank', rel: 'noopener noreferrer' } : {};
+---
+{isLink ? (
+    <a
+    href={href}
+    class:list={[baseClasses, sizeClasses[size], variantClasses[variant], className]}
+    {...externalAttrs}
+  >
+    <slot />
+  </a>
+) : (
+  <button
+    type={type}
+    class:list={[baseClasses, sizeClasses[size], variantClasses[variant], className]}
+  >
+    <slot />
+  </button>
+)}

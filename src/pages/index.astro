@@ -1,27 +1,196 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Container from '../components/ui/Container.astro';
+import Button from '../components/ui/Button.astro';
+import Badge from '../components/ui/Badge.astro';
+import { getFeaturedProjects } from '../lib/projects';
+import { getAllServices } from '../lib/services';
+
+const featuredProjects = getFeaturedProjects();
+const services = getAllServices();
 ---
-<Layout title="Sistema de diseño">
-  <main class="min-h-screen flex flex-col items-center justify-center gap-10 p-8">
-    <h1 class="text-6xl text-gradient-synalab">SYNALAB</h1>
+<Layout>
 
-    <p class="text-lg text-(--color-slate-muted)">
-      Educación Tecnológica Consciente
-    </p>
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0 -z-10 pointer-events-none" aria-hidden="true">
+      <div class="absolute top-0 left-1/4 w-[600px] h-[600px] bg-cyan-synalab/20 rounded-full blur-[120px]"></div>
+      <div class="absolute top-32 right-1/4 w-[500px] h-[500px] bg-violet-deep/20 rounded-full blur-[120px]"></div>
+    </div>
 
-    <section class="flex flex-wrap gap-4 justify-center">
-      <div class="w-20 h-20 rounded-lg bg-cyan-synalab"></div>
-      <div class="w-20 h-20 rounded-lg bg-violet-deep"></div>
-      <div class="w-20 h-20 rounded-lg bg-electric-blue"></div>
-      <div class="w-20 h-20 rounded-lg bg-slate-muted"></div>
-    </section>
+    <Container class="py-24 md:py-32">
+      <div class="max-w-4xl">
+        <p class="text-sm font-semibold tracking-wider uppercase text-cyan-synalab mb-6">
+          Educación Tecnológica Consciente
+        </p>
+        <h1 class="text-5xl md:text-7xl font-bold leading-[1.05] tracking-tight mb-8">
+          Construimos software funcional con
+          <span class="text-gradient-synalab">criterio humano</span>
+          y rigor técnico.
+        </h1>
+        <p class="text-lg md:text-xl text-blanco-puro/80 max-w-2xl mb-10 leading-relaxed">
+          Estudio independiente de creación de software impulsado por inteligencia artificial. Cada herramienta nace de un problema real, se construye con protocolo de seguridad propio y se entrega funcional.
+        </p>
+        <div class="flex flex-wrap gap-4">
+          <Button href="/laboratorio" variant="primary" size="lg">
+            Explorar el laboratorio
+          </Button>
+          <Button href="/contacto" variant="secondary" size="lg">
+            Hablemos de tu proyecto
+          </Button>
+        </div>
+      </div>
+    </Container>
+  </section>
 
-    <button class="gradient-synalab text-navy-profundo font-semibold px-8 py-3 rounded-md">
-      Botón con gradiente oficial
-    </button>
+  <section>
+    <Container class="py-20 md:py-28">
+      <div class="max-w-2xl mb-16">
+        <p class="text-sm font-semibold tracking-wider uppercase text-cyan-synalab mb-4">
+          El estilo Synalab
+        </p>
+        <h2 class="text-4xl md:text-5xl font-bold tracking-tight">
+          Tres capacidades que rara vez coexisten.
+        </h2>
+      </div>
 
-    <p class="text-sm text-(--color-slate-muted) max-w-md text-center">
-      Esta página es solo de validación. Será reemplazada por el Inicio real.
-    </p>
-  </main>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+        <div class="p-8 rounded-lg border border-slate-muted/15 bg-slate-muted/[0.03] hover:border-cyan-synalab/30 transition-colors">
+          <div class="w-12 h-12 rounded-md bg-cyan-synalab/10 flex items-center justify-center mb-6">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-cyan-synalab" aria-hidden="true">
+              <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+              <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold mb-3">Origen en el aula</h3>
+          <p class="text-blanco-puro/70 leading-relaxed">
+            Cada herramienta nace de problemas educativos reales. La pedagogía no es decoración, es el criterio que define qué construir y cómo.
+          </p>
+        </div>
+
+        <div class="p-8 rounded-lg border border-slate-muted/15 bg-slate-muted/[0.03] hover:border-cyan-synalab/30 transition-colors">
+          <div class="w-12 h-12 rounded-md bg-violet-deep/10 flex items-center justify-center mb-6">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-violet-deep" aria-hidden="true">
+              <rect x="4" y="4" width="16" height="16" rx="2"></rect>
+              <rect x="9" y="9" width="6" height="6"></rect>
+              <path d="M9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold mb-3">Construcción con IA</h3>
+          <p class="text-blanco-puro/70 leading-relaxed">
+            Vibe coding con propósito. La inteligencia artificial es la herramienta; el criterio humano define qué se construye y para qué.
+          </p>
+        </div>
+
+        <div class="p-8 rounded-lg border border-slate-muted/15 bg-slate-muted/[0.03] hover:border-cyan-synalab/30 transition-colors">
+          <div class="w-12 h-12 rounded-md bg-electric-blue/10 flex items-center justify-center mb-6">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-electric-blue" aria-hidden="true">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold mb-3">Protocolo propio</h3>
+          <p class="text-blanco-puro/70 leading-relaxed">
+            Quince reglas de seguridad aplicadas a cada línea de código. Software local-first por diseño. Los datos del usuario pertenecen al usuario.
+          </p>
+        </div>
+
+      </div>
+    </Container>
+  </section>
+
+  <section class="border-t border-slate-muted/10">
+    <Container class="py-20 md:py-28">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
+        <div class="max-w-2xl">
+          <p class="text-sm font-semibold tracking-wider uppercase text-cyan-synalab mb-4">
+            Del laboratorio
+          </p>
+          <h2 class="text-4xl md:text-5xl font-bold tracking-tight">
+            Herramientas construidas con propósito.
+          </h2>
+        </div>
+        <Button href="/laboratorio" variant="ghost">
+          Ver todos →
+        </Button>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {featuredProjects.map((project) => (
+          <a
+            href={`/laboratorio/${project.slug}`}
+            class="group p-8 rounded-lg border border-slate-muted/15 bg-slate-muted/[0.03] hover:border-cyan-synalab/30 hover:bg-slate-muted/[0.05] transition-all"
+          >
+            <div class="flex items-center justify-between mb-6">
+              <Badge variant={project.status} />
+              {project.version && (
+                <span class="text-xs text-slate-muted font-mono">{project.version}</span>
+              )}
+            </div>
+            <h3 class="text-2xl font-semibold mb-3 group-hover:text-cyan-synalab transition-colors">
+              {project.name}
+            </h3>
+            <p class="text-blanco-puro/70 leading-relaxed mb-6">
+              {project.tagline}
+            </p>
+            <span class="text-sm text-cyan-synalab font-medium">
+              Ver detalle →
+            </span>
+          </a>
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <section class="border-t border-slate-muted/10">
+    <Container class="py-20 md:py-28">
+      <div class="max-w-2xl mb-16">
+        <p class="text-sm font-semibold tracking-wider uppercase text-cyan-synalab mb-4">
+          Cómo trabajamos contigo
+        </p>
+        <h2 class="text-4xl md:text-5xl font-bold tracking-tight">
+          Tres formas de colaborar.
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {services.map((service) => (
+          <div class="p-8 rounded-lg border border-slate-muted/15 bg-slate-muted/[0.03] flex flex-col">
+            <h3 class="text-xl font-semibold mb-3">{service.name}</h3>
+            <p class="text-cyan-synalab text-sm mb-4 italic">{service.tagline}</p>
+            <p class="text-blanco-puro/70 leading-relaxed mb-8 flex-grow">
+              {service.description}
+            </p>
+            <a
+              href={service.href}
+              class="text-sm font-medium text-blanco-puro/80 hover:text-cyan-synalab transition-colors"
+            >
+              {service.cta} →
+            </a>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <section class="border-t border-slate-muted/10">
+    <Container class="py-20 md:py-28">
+      <div class="relative overflow-hidden rounded-2xl border border-cyan-synalab/20 p-12 md:p-16">
+        <div class="absolute inset-0 -z-10 pointer-events-none" aria-hidden="true">
+          <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-cyan-synalab/10 via-transparent to-violet-deep/10"></div>
+        </div>
+        <div class="max-w-2xl">
+          <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-6">
+            ¿Tienes un problema real que merezca su propia herramienta?
+          </h2>
+          <p class="text-lg text-blanco-puro/80 mb-8 leading-relaxed">
+            Si la respuesta a "¿existe un problema real, es construible con nuestros estándares, y será genuinamente útil?" es sí en los tres, el proyecto tiene lugar en Synalab.
+          </p>
+          <Button href="/contacto" variant="primary" size="lg">
+            Hablemos de tu proyecto
+          </Button>
+        </div>
+      </div>
+    </Container>
+  </section>
+
 </Layout>
