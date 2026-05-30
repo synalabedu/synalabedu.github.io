@@ -1,0 +1,52 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Container from '../components/ui/Container.astro';
+import Button from '../components/ui/Button.astro';
+---
+<Layout
+  title="Página no encontrada"
+  description="La página que buscas no existe o fue movida. Vuelve al inicio o explora las secciones principales del laboratorio."
+  noindex={true}
+>
+
+  <section class="min-h-[70vh] flex items-center justify-center">
+    <Container class="py-16 md:py-24">
+      <div class="max-w-2xl mx-auto text-center">
+
+        <p class="text-8xl md:text-[10rem] font-bold text-gradient-synalab leading-none mb-6 tracking-tight">
+          404
+        </p>
+
+        <h1 class="text-3xl md:text-4xl font-bold tracking-tight mb-6">
+          Esta página no existe en el laboratorio.
+        </h1>
+
+        <p class="text-lg text-blanco-puro/80 mb-10 leading-relaxed">
+          O fue movida, o el enlace se rompió, o nunca estuvo aquí. El laboratorio sí existe, y tiene cosas que pueden interesarte.
+        </p>
+
+        <div class="flex flex-wrap gap-3 justify-center">
+          <Button href="/" variant="primary">Ir al inicio</Button>
+          <Button href="/laboratorio" variant="secondary">Explorar el laboratorio</Button>
+        </div>
+
+        <div class="mt-16 pt-10 border-t border-blanco-puro/10">
+          <p class="text-sm text-slate-muted mb-4">O navega por las secciones principales:</p>
+          <nav aria-label="Navegación de recuperación" class="flex flex-wrap gap-3 justify-center text-sm items-center">
+            <a href="/manifiesto" class="text-blanco-puro/80 hover:text-cyan-synalab transition-colors">Manifiesto</a>
+            <span class="text-slate-muted/40" aria-hidden="true">·</span>
+            <a href="/estudio" class="text-blanco-puro/80 hover:text-cyan-synalab transition-colors">Estudio</a>
+            <span class="text-slate-muted/40" aria-hidden="true">·</span>
+            <a href="/formacion" class="text-blanco-puro/80 hover:text-cyan-synalab transition-colors">Formación</a>
+            <span class="text-slate-muted/40" aria-hidden="true">·</span>
+            <a href="/recursos" class="text-blanco-puro/80 hover:text-cyan-synalab transition-colors">Recursos</a>
+            <span class="text-slate-muted/40" aria-hidden="true">·</span>
+            <a href="/contacto" class="text-blanco-puro/80 hover:text-cyan-synalab transition-colors">Contacto</a>
+          </nav>
+        </div>
+
+      </div>
+    </Container>
+  </section>
+
+</Layout>
