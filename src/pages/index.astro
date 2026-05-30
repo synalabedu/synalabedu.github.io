@@ -11,12 +11,7 @@ const services = getAllServices();
 ---
 <Layout>
 
-  <section class="relative overflow-hidden">
-    <div class="absolute inset-0 -z-10 pointer-events-none" aria-hidden="true">
-      <div class="absolute top-0 left-1/4 w-[600px] h-[600px] bg-cyan-synalab/20 rounded-full blur-[120px]"></div>
-      <div class="absolute top-32 right-1/4 w-[500px] h-[500px] bg-violet-deep/20 rounded-full blur-[120px]"></div>
-    </div>
-
+  <section>
     <Container class="py-24 md:py-32">
       <div class="max-w-4xl">
         <p class="text-sm font-semibold tracking-wider uppercase text-cyan-synalab mb-6">
@@ -25,10 +20,10 @@ const services = getAllServices();
         <h1 class="text-5xl md:text-7xl font-bold leading-[1.05] tracking-tight mb-8">
           Construimos software funcional con
           <span class="text-gradient-synalab">criterio humano</span>
-          y rigor técnico.
+          y rigor técnico
         </h1>
         <p class="text-lg md:text-xl text-blanco-puro/80 max-w-2xl mb-10 leading-relaxed">
-          Estudio independiente de creación de software impulsado por inteligencia artificial. Cada herramienta nace de un problema real, se construye con protocolo de seguridad propio y se entrega funcional.
+          Estudio independiente de creación de software asistido por inteligencia artificial. Cada herramienta surge de una necesidad real, se desarrolla bajo protocolos propios de seguridad y se entrega como una solución funcional, aplicable y con propósito definido.
         </p>
         <div class="flex flex-wrap gap-4">
           <Button href="/laboratorio" variant="primary" size="lg">
@@ -55,20 +50,20 @@ const services = getAllServices();
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
-        <div class="p-8 rounded-lg border border-slate-muted/15 bg-slate-muted/[0.03] hover:border-cyan-synalab/30 transition-colors">
+        <div class="p-8 rounded-lg border border-blanco-puro/10 bg-blanco-puro/[0.03] backdrop-blur-sm hover:border-cyan-synalab/40 hover:bg-blanco-puro/[0.05] transition-all">
           <div class="w-12 h-12 rounded-md bg-cyan-synalab/10 flex items-center justify-center mb-6">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-cyan-synalab" aria-hidden="true">
               <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
               <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
             </svg>
           </div>
-          <h3 class="text-xl font-semibold mb-3">Origen en el aula</h3>
+          <h3 class="text-xl font-semibold mb-3">Comprensión contextual</h3>
           <p class="text-blanco-puro/70 leading-relaxed">
-            Cada herramienta nace de problemas educativos reales. La pedagogía no es decoración, es el criterio que define qué construir y cómo.
+            Cada herramienta nace de observar necesidades reales antes que tendencias. La experiencia pedagógica aporta criterio para entender el problema, definir prioridades y construir soluciones que realmente tengan sentido en su contexto.
           </p>
         </div>
 
-        <div class="p-8 rounded-lg border border-slate-muted/15 bg-slate-muted/[0.03] hover:border-cyan-synalab/30 transition-colors">
+        <div class="p-8 rounded-lg border border-blanco-puro/10 bg-blanco-puro/[0.03] backdrop-blur-sm hover:border-cyan-synalab/40 hover:bg-blanco-puro/[0.05] transition-all">
           <div class="w-12 h-12 rounded-md bg-violet-deep/10 flex items-center justify-center mb-6">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-violet-deep" aria-hidden="true">
               <rect x="4" y="4" width="16" height="16" rx="2"></rect>
@@ -78,11 +73,11 @@ const services = getAllServices();
           </div>
           <h3 class="text-xl font-semibold mb-3">Construcción con IA</h3>
           <p class="text-blanco-puro/70 leading-relaxed">
-            Vibe coding con propósito. La inteligencia artificial es la herramienta; el criterio humano define qué se construye y para qué.
+            Vibe coding con propósito. La inteligencia artificial amplía la capacidad de diseñar, iterar y desarrollar software; el criterio humano sigue definiendo qué vale la pena construir y por qué hacerlo.
           </p>
         </div>
 
-        <div class="p-8 rounded-lg border border-slate-muted/15 bg-slate-muted/[0.03] hover:border-cyan-synalab/30 transition-colors">
+        <div class="p-8 rounded-lg border border-blanco-puro/10 bg-blanco-puro/[0.03] backdrop-blur-sm hover:border-cyan-synalab/40 hover:bg-blanco-puro/[0.05] transition-all">
           <div class="w-12 h-12 rounded-md bg-electric-blue/10 flex items-center justify-center mb-6">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-electric-blue" aria-hidden="true">
               <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
@@ -90,7 +85,7 @@ const services = getAllServices();
           </div>
           <h3 class="text-xl font-semibold mb-3">Protocolo propio</h3>
           <p class="text-blanco-puro/70 leading-relaxed">
-            Quince reglas de seguridad aplicadas a cada línea de código. Software local-first por diseño. Los datos del usuario pertenecen al usuario.
+            Quince reglas de seguridad aplicadas a cada línea de código. Arquitectura local-first por diseño y desarrollo orientado a la autonomía tecnológica. Los datos del usuario permanecen bajo control del usuario.
           </p>
         </div>
 
@@ -98,7 +93,7 @@ const services = getAllServices();
     </Container>
   </section>
 
-  <section class="border-t border-slate-muted/10">
+  <section>
     <Container class="py-20 md:py-28">
       <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
         <div class="max-w-2xl">
@@ -118,7 +113,7 @@ const services = getAllServices();
         {featuredProjects.map((project) => (
           <a
             href={`/laboratorio/${project.slug}`}
-            class="group p-8 rounded-lg border border-slate-muted/15 bg-slate-muted/[0.03] hover:border-cyan-synalab/30 hover:bg-slate-muted/[0.05] transition-all"
+            class="group p-8 rounded-lg border border-blanco-puro/10 bg-blanco-puro/[0.03] backdrop-blur-sm hover:border-cyan-synalab/40 hover:bg-blanco-puro/[0.05] transition-all"
           >
             <div class="flex items-center justify-between mb-6">
               <Badge variant={project.status} />
@@ -141,7 +136,7 @@ const services = getAllServices();
     </Container>
   </section>
 
-  <section class="border-t border-slate-muted/10">
+  <section>
     <Container class="py-20 md:py-28">
       <div class="max-w-2xl mb-16">
         <p class="text-sm font-semibold tracking-wider uppercase text-cyan-synalab mb-4">
@@ -154,7 +149,7 @@ const services = getAllServices();
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         {services.map((service) => (
-          <div class="p-8 rounded-lg border border-slate-muted/15 bg-slate-muted/[0.03] flex flex-col">
+          <div class="p-8 rounded-lg border border-blanco-puro/10 bg-blanco-puro/[0.03] backdrop-blur-sm flex flex-col">
             <h3 class="text-xl font-semibold mb-3">{service.name}</h3>
             <p class="text-cyan-synalab text-sm mb-4 italic">{service.tagline}</p>
             <p class="text-blanco-puro/70 leading-relaxed mb-8 flex-grow">
@@ -172,23 +167,21 @@ const services = getAllServices();
     </Container>
   </section>
 
-  <section class="border-t border-slate-muted/10">
+  <section>
     <Container class="py-20 md:py-28">
-      <div class="relative overflow-hidden rounded-2xl border border-cyan-synalab/20 p-12 md:p-16">
-        <div class="absolute inset-0 -z-10 pointer-events-none" aria-hidden="true">
-          <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-cyan-synalab/10 via-transparent to-violet-deep/10"></div>
-        </div>
-        <div class="max-w-2xl">
-          <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-6">
-            ¿Tienes un problema real que merezca su propia herramienta?
-          </h2>
-          <p class="text-lg text-blanco-puro/80 mb-8 leading-relaxed">
-            Si la respuesta a "¿existe un problema real, es construible con nuestros estándares, y será genuinamente útil?" es sí en los tres, el proyecto tiene lugar en Synalab.
-          </p>
-          <Button href="/contacto" variant="primary" size="lg">
-            Hablemos de tu proyecto
-          </Button>
-        </div>
+      <div class="relative max-w-3xl mx-auto overflow-hidden rounded-2xl border border-blanco-puro/10 bg-blanco-puro/[0.03] backdrop-blur-md p-10 md:p-14">
+        <p class="text-sm font-semibold tracking-wider uppercase text-cyan-synalab mb-6">
+          Empezamos cuando tengas listo el problema
+        </p>
+        <h2 class="text-3xl md:text-5xl font-bold tracking-tight mb-6">
+          ¿Existe un problema real que merezca su propia herramienta?
+        </h2>
+        <p class="text-lg text-blanco-puro/80 mb-10 leading-relaxed">
+          No desarrollamos software por tendencia ni por volumen. Construimos herramientas cuando existe un problema real, una solución viable y un propósito claro detrás de lo que se crea.
+        </p>
+        <Button href="/contacto" variant="primary" size="lg">
+          Hablemos de tu proyecto
+        </Button>
       </div>
     </Container>
   </section>

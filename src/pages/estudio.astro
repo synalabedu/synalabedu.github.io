@@ -12,18 +12,14 @@ const team = getTeamMembers();
   description="Conoce al equipo detrás de Synalab. Quién construye, qué le da forma al laboratorio, y por qué."
 >
 
-  <section class="relative overflow-hidden">
-    <div class="absolute inset-0 -z-10 pointer-events-none" aria-hidden="true">
-      <div class="absolute top-0 right-1/4 w-[600px] h-[400px] bg-cyan-synalab/15 rounded-full blur-[140px]"></div>
-    </div>
-
+  <section>
     <Container class="py-24 md:py-32">
       <div class="max-w-3xl">
         <p class="text-sm font-semibold tracking-wider uppercase text-cyan-synalab mb-6">
           El estudio
         </p>
         <h1 class="text-5xl md:text-6xl font-bold leading-[1.05] tracking-tight mb-8">
-          Quién está <span class="text-gradient-synalab">detrás</span>.
+          ¿Quién está <span class="text-gradient-synalab">detrás</span>?
         </h1>
         <p class="text-lg md:text-xl text-blanco-puro/80 leading-relaxed">
           Synalab es un estudio independiente. Actualmente está conformado por una sola persona; sin embargo, en la medida en que los desafíos y proyectos de impacto evolucionen, podrán integrarse nuevos colaboradores. Cada integrante que haga parte de este estudio compartirá y representará los mismos principios, valores y visión que orientan su propósito.
@@ -33,7 +29,7 @@ const team = getTeamMembers();
   </section>
 
   {team.map((member, index) => (
-    <section class="border-t border-slate-muted/10">
+    <section>
       <Container class="py-20 md:py-28">
 
         <div class="grid grid-cols-1 md:grid-cols-[auto_1fr] gap-10 md:gap-14 items-start">
@@ -155,7 +151,7 @@ const team = getTeamMembers();
     </section>
   ))}
 
-  <section class="border-t border-slate-muted/10">
+  <section>
     <Container class="py-20 md:py-24">
       <div class="max-w-3xl">
         <p class="text-sm font-semibold tracking-wider uppercase text-cyan-synalab mb-4">
@@ -171,7 +167,7 @@ const team = getTeamMembers();
     </Container>
   </section>
 
-  <section class="border-t border-slate-muted/10">
+  <section>
     <Container class="py-20 md:py-28">
       <div class="max-w-3xl flex flex-col md:flex-row gap-6 items-start md:items-center justify-between">
         <p class="text-xl md:text-2xl font-semibold tracking-tight">

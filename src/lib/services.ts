@@ -25,18 +25,18 @@ export const SERVICES: Service[] = [
   {
     id: 'implementacion',
     name: 'Implementación acompañada',
-    tagline: 'No te entregamos código, te entregamos una solución funcional.',
+    tagline: 'Cada herramienta se entrega lista para funcionar en contexto real.',
     description:
-      'Cada herramienta se entrega con instalación, configuración y capacitación. Software listo para usar bajo el protocolo de seguridad Synalab.',
+      'Instalación, configuración y acompañamiento técnico bajo el protocolo de seguridad Synalab.',
     href: '/laboratorio',
     cta: 'Explorar el laboratorio',
   },
   {
     id: 'desarrollo-medida',
     name: 'Desarrollo a medida',
-    tagline: '¿Tienes un problema real que merezca su propia herramienta?',
+    tagline: '¿Existe un problema real que merezca su propia herramienta?',
     description:
-      'Diseñamos y construimos software específico para tu contexto, con criterio pedagógico, protocolo de seguridad y acuerdo de servicio documentado.',
+      'Diseñamos y construimos software específico para cada contexto, con criterio contextual, protocolo de seguridad y acuerdos de servicio documentados.',
     href: '/contacto',
     cta: 'Solicitar cotización',
   },

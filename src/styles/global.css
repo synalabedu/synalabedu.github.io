@@ -33,7 +33,6 @@
    ============================================ */
 @layer base {
   html {
-    background-color: var(--color-navy-profundo);
     color: var(--color-blanco-puro);
     font-family: var(--font-body);
     -webkit-font-smoothing: antialiased;
@@ -41,8 +40,56 @@
     text-rendering: optimizeLegibility;
   }
 
+  /*
+   * Iluminación ambiental global.
+   *
+   * Capa A (radial): tres luces principales en la parte superior,
+   *   con feathering muy gradual (6 stops) para que la transición
+   *   sea imperceptible.
+   *
+   * Capa B (linear sutil): un velo lineal muy tenue que cubre todo
+   *   el body de arriba a abajo, encargado de "rellenar" el espacio
+   *   intermedio entre el final de las luces radiales y el navy puro.
+   *   Sin este velo, en páginas con prosa simple después del hero
+   *   (manifiesto, estudio) se notaría la frontera del gradient.
+   */
   body {
     min-height: 100dvh;
+    background-color: var(--color-navy-profundo);
+    background-image:
+      radial-gradient(
+        ellipse 140% 2800px at 50% -300px,
+        rgba(0, 200, 215, 0.20) 0%,
+        rgba(0, 200, 215, 0.14) 15%,
+        rgba(0, 200, 215, 0.08) 35%,
+        rgba(0, 200, 215, 0.04) 55%,
+        rgba(0, 200, 215, 0.01) 80%,
+        transparent 100%
+      ),
+      radial-gradient(
+        ellipse 110% 2400px at 15% 100px,
+        rgba(59, 139, 235, 0.16) 0%,
+        rgba(59, 139, 235, 0.10) 25%,
+        rgba(59, 139, 235, 0.05) 50%,
+        rgba(59, 139, 235, 0.01) 80%,
+        transparent 100%
+      ),
+      radial-gradient(
+        ellipse 110% 2400px at 85% 200px,
+        rgba(0, 200, 215, 0.12) 0%,
+        rgba(0, 200, 215, 0.07) 25%,
+        rgba(0, 200, 215, 0.03) 55%,
+        transparent 90%
+      ),
+      linear-gradient(
+        180deg,
+        rgba(59, 139, 235, 0.05) 0%,
+        rgba(0, 200, 215, 0.03) 20%,
+        rgba(0, 200, 215, 0.01) 50%,
+        transparent 80%
+      );
+    background-repeat: no-repeat;
+    background-position: top center;
   }
 
   h1, h2, h3, h4, h5, h6 {
