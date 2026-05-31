@@ -1,0 +1,186 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Container from '../../components/ui/Container.astro';
+import Badge from '../../components/ui/Badge.astro';
+import { getCollection, getEntry } from 'astro:content';
+
+const page = await getEntry('pages', 'laboratorio');
+
+const allProjects = await getCollection('projects');
+const projects = allProjects.sort((a, b) => a.data.order - b.data.order);
+
+const statusCounts = {
+  todos: projects.length,
+  completo: projects.filter((p) => p.data.status === 'completo').length,
+  desarrollo: projects.filter((p) => p.data.status === 'desarrollo').length,
+  revision: projects.filter((p) => p.data.status === 'revision').length,
+};
+
+const categoryCounts = {
+  todos: projects.length,
+  educacion: projects.filter((p) => p.data.category === 'educacion').length,
+  gestion: projects.filter((p) => p.data.category === 'gestion').length,
+  productividad: projects.filter((p) => p.data.category === 'productividad').length,
+};
+---
+<Layout
+  title={page.data.title}
+  description={page.data.seoDescription || page.data.heroDescription}
+>
+
+  <section>
+    <Container class="py-24 md:py-32">
+      <div class="max-w-3xl">
+        {page.data.heroEyebrow && (
+          <p class="text-sm font-semibold tracking-wider uppercase text-cyan-synalab mb-6">
+            {page.data.heroEyebrow}
+          </p>
+        )}
+        <h1 class="text-5xl md:text-6xl font-bold leading-[1.05] tracking-tight mb-8">
+          {page.data.heroTitle}
+        </h1>
+        <p class="text-lg md:text-xl text-blanco-puro/80 leading-relaxed">
+          {page.data.heroDescription}
+        </p>
+      </div>
+    </Container>
+  </section>
+
+  <section>
+    <Container class="pb-10 space-y-6">
+
+      <div>
+        <p class="text-xs font-semibold tracking-wider uppercase text-slate-muted mb-3">
+          Estado
+        </p>
+        <div class="flex flex-wrap gap-2" id="filter-status" role="tablist" aria-label="Filtrar por estado">
+          <button type="button" data-status="todos" class="filter-btn filter-status-btn filter-active px-4 py-2 rounded-full text-sm font-medium border border-blanco-puro/10 bg-blanco-puro/[0.03] hover:border-cyan-synalab/40 transition-colors">
+            Todos <span class="counter">({statusCounts.todos})</span>
+          </button>
+          <button type="button" data-status="completo" class="filter-btn filter-status-btn px-4 py-2 rounded-full text-sm font-medium border border-blanco-puro/10 bg-blanco-puro/[0.03] hover:border-cyan-synalab/40 transition-colors">
+            Completos <span class="counter">({statusCounts.completo})</span>
+          </button>
+          <button type="button" data-status="desarrollo" class="filter-btn filter-status-btn px-4 py-2 rounded-full text-sm font-medium border border-blanco-puro/10 bg-blanco-puro/[0.03] hover:border-cyan-synalab/40 transition-colors">
+            En desarrollo <span class="counter">({statusCounts.desarrollo})</span>
+          </button>
+          <button type="button" data-status="revision" class="filter-btn filter-status-btn px-4 py-2 rounded-full text-sm font-medium border border-blanco-puro/10 bg-blanco-puro/[0.03] hover:border-cyan-synalab/40 transition-colors">
+            En revisión <span class="counter">({statusCounts.revision})</span>
+          </button>
+        </div>
+      </div>
+
+      <div>
+        <p class="text-xs font-semibold tracking-wider uppercase text-slate-muted mb-3">
+          Categoría
+        </p>
+        <div class="flex flex-wrap gap-2" id="filter-category" role="tablist" aria-label="Filtrar por categoría">
+          <button type="button" data-category="todos" class="filter-btn filter-category-btn filter-active px-4 py-2 rounded-full text-sm font-medium border border-blanco-puro/10 bg-blanco-puro/[0.03] hover:border-cyan-synalab/40 transition-colors">
+            Todas <span class="counter">({categoryCounts.todos})</span>
+          </button>
+          <button type="button" data-category="educacion" class="filter-btn filter-category-btn px-4 py-2 rounded-full text-sm font-medium border border-blanco-puro/10 bg-blanco-puro/[0.03] hover:border-cyan-synalab/40 transition-colors">
+            Educación <span class="counter">({categoryCounts.educacion})</span>
+          </button>
+          <button type="button" data-category="gestion" class="filter-btn filter-category-btn px-4 py-2 rounded-full text-sm font-medium border border-blanco-puro/10 bg-blanco-puro/[0.03] hover:border-cyan-synalab/40 transition-colors">
+            Gestión <span class="counter">({categoryCounts.gestion})</span>
+          </button>
+          <button type="button" data-category="productividad" class="filter-btn filter-category-btn px-4 py-2 rounded-full text-sm font-medium border border-blanco-puro/10 bg-blanco-puro/[0.03] hover:border-cyan-synalab/40 transition-colors">
+            Productividad <span class="counter">({categoryCounts.productividad})</span>
+          </button>
+        </div>
+      </div>
+
+    </Container>
+  </section>
+
+  <section>
+    <Container class="pb-20 md:pb-28">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="projects-grid">
+        {projects.map((project) => (
+          <a href={"/laboratorio/" + project.id} data-status={project.data.status} data-category={project.data.category} class="project-card group p-8 rounded-lg border border-blanco-puro/10 bg-blanco-puro/[0.03] backdrop-blur-sm hover:border-cyan-synalab/40 hover:bg-blanco-puro/[0.05] transition-all flex flex-col">
+            <div class="flex items-center justify-between mb-6">
+              <Badge variant={project.data.status} />
+              {project.data.version && (
+                <span class="text-xs text-slate-muted font-mono">{project.data.version}</span>
+              )}
+            </div>
+            <h2 class="text-2xl font-semibold mb-3 group-hover:text-cyan-synalab transition-colors">
+              {project.data.name}
+            </h2>
+            <p class="text-blanco-puro/70 leading-relaxed mb-6 flex-grow">
+              {project.data.tagline}
+            </p>
+            <span class="text-sm text-cyan-synalab font-medium">
+              Ver detalle →
+            </span>
+          </a>
+        ))}
+      </div>
+
+      <p id="empty-state" class="hidden text-center text-blanco-puro/60 py-16">
+        No hay proyectos que coincidan con los filtros seleccionados.
+      </p>
+    </Container>
+  </section>
+
+</Layout>
+
+<style>
+  .filter-active {
+    background-color: rgba(0, 200, 215, 0.15) !important;
+    border-color: rgba(0, 200, 215, 0.4) !important;
+    color: var(--color-cyan-synalab);
+  }
+  .filter-active .counter {
+    color: rgba(0, 200, 215, 0.7);
+  }
+  .counter {
+    color: var(--color-slate-muted);
+  }
+</style>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', function () {
+    var statusButtons = document.querySelectorAll('.filter-status-btn');
+    var categoryButtons = document.querySelectorAll('.filter-category-btn');
+    var cards = document.querySelectorAll('.project-card');
+    var emptyState = document.getElementById('empty-state');
+
+    var currentStatus = 'todos';
+    var currentCategory = 'todos';
+
+    function applyFilters() {
+      var visibleCount = 0;
+      cards.forEach(function (card) {
+        var matchStatus = currentStatus === 'todos' || card.dataset.status === currentStatus;
+        var matchCategory = currentCategory === 'todos' || card.dataset.category === currentCategory;
+        if (matchStatus && matchCategory) {
+          card.style.display = '';
+          visibleCount++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+      if (emptyState) {
+        emptyState.classList.toggle('hidden', visibleCount > 0);
+      }
+    }
+
+    statusButtons.forEach(function (button) {
+      button.addEventListener('click', function () {
+        currentStatus = button.dataset.status;
+        statusButtons.forEach(function (b) { b.classList.remove('filter-active'); });
+        button.classList.add('filter-active');
+        applyFilters();
+      });
+    });
+
+    categoryButtons.forEach(function (button) {
+      button.addEventListener('click', function () {
+        currentCategory = button.dataset.category;
+        categoryButtons.forEach(function (b) { b.classList.remove('filter-active'); });
+        button.classList.add('filter-active');
+        applyFilters();
+      });
+    });
+  });
+</script>

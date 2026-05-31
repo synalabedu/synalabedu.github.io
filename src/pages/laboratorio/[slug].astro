@@ -1,0 +1,240 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Container from '../../components/ui/Container.astro';
+import Button from '../../components/ui/Button.astro';
+import Badge from '../../components/ui/Badge.astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map((project) => ({
+    params: { slug: project.id },
+    props: { project },
+  }));
+}
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+}
+
+const { project } = Astro.props;
+const { data } = project;
+
+const allProjects = await getCollection('projects');
+const relatedProjects = allProjects
+  .filter((p) => p.id !== project.id && p.data.category === data.category)
+  .sort((a, b) => a.data.order - b.data.order)
+  .slice(0, 3);
+
+const categoryLabels: Record<string, string> = {
+  educacion: 'Educación',
+  gestion: 'Gestión',
+  productividad: 'Productividad',
+};
+---
+<Layout title={data.name} description={data.description}>
+
+  <section>
+    <Container class="py-24 md:py-32">
+      <div class="max-w-3xl">
+        <a href="/laboratorio" class="inline-block mb-8 text-sm text-cyan-synalab hover:text-cyan-synalab/80 transition-colors">
+          ← Volver al laboratorio
+        </a>
+
+        <div class="flex flex-wrap items-center gap-3 mb-6">
+          <Badge variant={data.status} />
+          {data.version && (
+            <span class="text-sm text-slate-muted font-mono">{data.version}</span>
+          )}
+          <span class="text-sm text-slate-muted">·</span>
+          <span class="text-sm text-cyan-synalab">{categoryLabels[data.category] || data.category}</span>
+        </div>
+
+        <h1 class="text-5xl md:text-6xl font-bold leading-[1.05] tracking-tight mb-6">
+          {data.name}
+        </h1>
+        <p class="text-xl md:text-2xl text-blanco-puro/90 leading-relaxed mb-8">
+          {data.tagline}
+        </p>
+        <p class="text-lg text-blanco-puro/80 leading-relaxed">
+          {data.description}
+        </p>
+
+        {(data.downloadUrl || data.documentationUrl) && (
+          <div class="flex flex-wrap gap-3 mt-10">
+            {data.downloadUrl && (
+              <Button href={data.downloadUrl} variant="primary">Descargar</Button>
+            )}
+            {data.documentationUrl && (
+              <Button href={data.documentationUrl} variant="secondary">Documentación</Button>
+            )}
+          </div>
+        )}
+      </div>
+    </Container>
+  </section>
+
+  {data.problem && (
+    <section>
+      <Container class="py-16 md:py-20">
+        <div class="max-w-3xl">
+          <p class="text-sm font-semibold tracking-wider uppercase text-cyan-synalab mb-4">El problema</p>
+          <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-6">¿Qué resuelve?</h2>
+          <p class="text-lg text-blanco-puro/80 leading-relaxed">{data.problem}</p>
+        </div>
+      </Container>
+    </section>
+  )}
+
+  {data.solution && (
+    <section>
+      <Container class="py-16 md:py-20">
+        <div class="max-w-3xl">
+          <p class="text-sm font-semibold tracking-wider uppercase text-cyan-synalab mb-4">La solución</p>
+          <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-6">Cómo lo resuelve</h2>
+          <p class="text-lg text-blanco-puro/80 leading-relaxed">{data.solution}</p>
+        </div>
+      </Container>
+    </section>
+  )}
+
+  {data.features && data.features.length > 0 && (
+    <section>
+      <Container class="py-16 md:py-20">
+        <div class="max-w-5xl">
+          <p class="text-sm font-semibold tracking-wider uppercase text-cyan-synalab mb-4">Características</p>
+          <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-12">Lo que hace</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {data.features.map((feature) => (
+              <div class="p-6 rounded-lg border border-blanco-puro/10 bg-blanco-puro/[0.03] backdrop-blur-sm">
+                <h3 class="text-lg font-semibold mb-3">{feature.title}</h3>
+                <p class="text-blanco-puro/70 leading-relaxed">{feature.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </Container>
+    </section>
+  )}
+
+  {data.images && data.images.length > 0 && (
+    <section>
+      <Container class="py-16 md:py-20">
+        <div class="max-w-5xl">
+          <p class="text-sm font-semibold tracking-wider uppercase text-cyan-synalab mb-4">Galería</p>
+          <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-12">En funcionamiento</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {data.images.map((image) => (
+              <figure class="rounded-lg overflow-hidden border border-blanco-puro/10 bg-blanco-puro/[0.03]">
+                <img src={image.src} alt={image.alt} class="w-full h-auto" loading="lazy" />
+                {image.caption && (
+                  <figcaption class="px-4 py-3 text-sm text-blanco-puro/70 border-t border-blanco-puro/10">
+                    {image.caption}
+                  </figcaption>
+                )}
+              </figure>
+            ))}
+          </div>
+        </div>
+      </Container>
+    </section>
+  )}
+
+  {(data.techStack || data.requirements || data.targetAudience || data.scormCompatible) && (
+    <section>
+      <Container class="py-16 md:py-20">
+        <div class="max-w-5xl">
+          <p class="text-sm font-semibold tracking-wider uppercase text-cyan-synalab mb-4">Ficha técnica</p>
+          <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-12">Detalles del proyecto</h2>
+          <dl class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
+            {data.techStack && data.techStack.length > 0 && (
+              <div>
+                <dt class="text-xs font-semibold tracking-wider uppercase text-slate-muted mb-3">Tecnologías</dt>
+                <dd class="flex flex-wrap gap-2">
+                  {data.techStack.map((tech) => (
+                    <span class="px-3 py-1.5 text-sm rounded-full border border-blanco-puro/10 bg-blanco-puro/[0.03] text-blanco-puro/80">
+                      {tech}
+                    </span>
+                  ))}
+                </dd>
+              </div>
+            )}
+            {data.requirements && (
+              <div>
+                <dt class="text-xs font-semibold tracking-wider uppercase text-slate-muted mb-3">Requisitos</dt>
+                <dd class="text-base text-blanco-puro/80 leading-relaxed">{data.requirements}</dd>
+              </div>
+            )}
+            {data.targetAudience && (
+              <div>
+                <dt class="text-xs font-semibold tracking-wider uppercase text-slate-muted mb-3">Audiencia objetivo</dt>
+                <dd class="text-base text-blanco-puro/80 leading-relaxed">{data.targetAudience}</dd>
+              </div>
+            )}
+            {data.scormCompatible && (
+              <div>
+                <dt class="text-xs font-semibold tracking-wider uppercase text-slate-muted mb-3">Compatibilidad</dt>
+                <dd class="text-base text-blanco-puro/80 leading-relaxed">
+                  Compatible con SCORM para integración en plataformas LMS como Moodle.
+                </dd>
+              </div>
+            )}
+          </dl>
+        </div>
+      </Container>
+    </section>
+  )}
+
+  <section>
+    <Container class="py-16 md:py-20">
+      <div class="max-w-3xl">
+        <p class="text-sm font-semibold tracking-wider uppercase text-cyan-synalab mb-4">Privacidad y seguridad</p>
+        <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-6">Datos respetados, código auditado</h2>
+        <p class="text-lg text-blanco-puro/80 leading-relaxed">
+          Como toda herramienta del laboratorio, este proyecto fue construido bajo el protocolo de seguridad propio de Synalab: quince reglas aplicadas a cada línea de código. Funciona local-first cuando es posible y no envía datos a servidores externos sin consentimiento explícito del usuario.
+        </p>
+      </div>
+    </Container>
+  </section>
+
+  {relatedProjects.length > 0 && (
+    <section>
+      <Container class="py-16 md:py-20">
+        <p class="text-sm font-semibold tracking-wider uppercase text-cyan-synalab mb-4">También del laboratorio</p>
+        <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-12">Proyectos relacionados</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {relatedProjects.map((related) => (
+            <a href={"/laboratorio/" + related.id} class="group p-8 rounded-lg border border-blanco-puro/10 bg-blanco-puro/[0.03] backdrop-blur-sm hover:border-cyan-synalab/40 hover:bg-blanco-puro/[0.05] transition-all flex flex-col">
+              <div class="flex items-center justify-between mb-6">
+                <Badge variant={related.data.status} />
+                {related.data.version && (
+                  <span class="text-xs text-slate-muted font-mono">{related.data.version}</span>
+                )}
+              </div>
+              <h3 class="text-xl font-semibold mb-3 group-hover:text-cyan-synalab transition-colors">
+                {related.data.name}
+              </h3>
+              <p class="text-blanco-puro/70 leading-relaxed flex-grow">
+                {related.data.tagline}
+              </p>
+            </a>
+          ))}
+        </div>
+      </Container>
+    </section>
+  )}
+
+  <section>
+    <Container class="py-20 md:py-28">
+      <div class="relative max-w-3xl mx-auto overflow-hidden rounded-2xl border border-blanco-puro/10 bg-blanco-puro/[0.03] backdrop-blur-md p-10 md:p-14">
+        <p class="text-sm font-semibold tracking-wider uppercase text-cyan-synalab mb-6">¿Te interesa este proyecto?</p>
+        <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-6">Conversemos sobre cómo usarlo.</h2>
+        <p class="text-lg text-blanco-puro/80 mb-10 leading-relaxed">
+          Si quieres implementar esta herramienta en tu institución, adaptarla a tu contexto, o conocer las condiciones de uso, escríbenos.
+        </p>
+        <Button href="/contacto" variant="primary" size="lg">Hablemos</Button>
+      </div>
+    </Container>
+  </section>
+
+</Layout>

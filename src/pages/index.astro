@@ -3,11 +3,15 @@ import Layout from '../layouts/Layout.astro';
 import Container from '../components/ui/Container.astro';
 import Button from '../components/ui/Button.astro';
 import Badge from '../components/ui/Badge.astro';
-import { getFeaturedProjects } from '../lib/projects';
-import { getAllServices } from '../lib/services';
+import { getCollection } from 'astro:content';
 
-const featuredProjects = getFeaturedProjects();
-const services = getAllServices();
+const allProjects = await getCollection('projects');
+const featuredProjects = allProjects
+  .filter((p) => p.data.featured)
+  .sort((a, b) => a.data.order - b.data.order);
+
+const allServices = await getCollection('services');
+const services = allServices.sort((a, b) => a.data.order - b.data.order);
 ---
 <Layout>
 
@@ -111,21 +115,18 @@ const services = getAllServices();
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         {featuredProjects.map((project) => (
-          <a
-            href={`/laboratorio/${project.slug}`}
-            class="group p-8 rounded-lg border border-blanco-puro/10 bg-blanco-puro/[0.03] backdrop-blur-sm hover:border-cyan-synalab/40 hover:bg-blanco-puro/[0.05] transition-all"
-          >
+          <a href={"/laboratorio/" + project.id} class="group p-8 rounded-lg border border-blanco-puro/10 bg-blanco-puro/[0.03] backdrop-blur-sm hover:border-cyan-synalab/40 hover:bg-blanco-puro/[0.05] transition-all">
             <div class="flex items-center justify-between mb-6">
-              <Badge variant={project.status} />
-              {project.version && (
-                <span class="text-xs text-slate-muted font-mono">{project.version}</span>
+              <Badge variant={project.data.status} />
+              {project.data.version && (
+                <span class="text-xs text-slate-muted font-mono">{project.data.version}</span>
               )}
             </div>
             <h3 class="text-2xl font-semibold mb-3 group-hover:text-cyan-synalab transition-colors">
-              {project.name}
+              {project.data.name}
             </h3>
             <p class="text-blanco-puro/70 leading-relaxed mb-6">
-              {project.tagline}
+              {project.data.tagline}
             </p>
             <span class="text-sm text-cyan-synalab font-medium">
               Ver detalle →
@@ -150,16 +151,16 @@ const services = getAllServices();
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         {services.map((service) => (
           <div class="p-8 rounded-lg border border-blanco-puro/10 bg-blanco-puro/[0.03] backdrop-blur-sm flex flex-col">
-            <h3 class="text-xl font-semibold mb-3">{service.name}</h3>
-            <p class="text-cyan-synalab text-sm mb-4 italic">{service.tagline}</p>
+            <h3 class="text-xl font-semibold mb-3">{service.data.name}</h3>
+            <p class="text-cyan-synalab text-sm mb-4 italic">{service.data.tagline}</p>
             <p class="text-blanco-puro/70 leading-relaxed mb-8 flex-grow">
-              {service.description}
+              {service.data.description}
             </p>
             <a
-              href={service.href}
+              href={service.data.href}
               class="text-sm font-medium text-blanco-puro/80 hover:text-cyan-synalab transition-colors"
             >
-              {service.cta} →
+              {service.data.cta} →
             </a>
           </div>
         ))}

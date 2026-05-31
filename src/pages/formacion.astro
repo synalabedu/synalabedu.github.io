@@ -1,0 +1,127 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Container from '../components/ui/Container.astro';
+import Button from '../components/ui/Button.astro';
+import { getCollection, getEntry } from 'astro:content';
+
+const page = await getEntry('pages', 'formacion');
+
+const allPillars = await getCollection('pillars');
+const pillars = allPillars.sort((a, b) => a.data.order - b.data.order);
+
+const modalityLabels: Record<string, string> = {
+  tutoria: 'Tutoría individual',
+  intensivo: 'Programa intensivo',
+  taller: 'Taller grupal',
+};
+---
+<Layout
+  title={page.data.title}
+  description={page.data.seoDescription || page.data.heroDescription}
+>
+
+  <section>
+    <Container class="py-24 md:py-32">
+      <div class="max-w-3xl">
+        {page.data.heroEyebrow && (
+          <p class="text-sm font-semibold tracking-wider uppercase text-cyan-synalab mb-6">
+            {page.data.heroEyebrow}
+          </p>
+        )}
+        <h1 class="text-5xl md:text-6xl font-bold leading-[1.05] tracking-tight mb-8">
+          {page.data.heroTitle}
+        </h1>
+        <p class="text-lg md:text-xl text-blanco-puro/80 leading-relaxed">
+          {page.data.heroDescription}
+        </p>
+      </div>
+    </Container>
+  </section>
+
+  <section>
+    <Container class="pb-20 md:pb-28 space-y-20 md:space-y-24">
+      {pillars.map((pillar, index) => (
+        <article class="grid grid-cols-1 lg:grid-cols-[auto_1fr] gap-8 lg:gap-16">
+
+          <div class="lg:sticky lg:top-24 lg:self-start">
+            <p class="text-7xl md:text-8xl font-bold text-gradient-synalab leading-none mb-4">
+              {String(index + 1).padStart(2, '0')}
+            </p>
+            {pillar.data.signature && (
+              <span class="inline-flex items-center px-2.5 py-1 text-xs font-medium rounded-full border bg-cyan-synalab/15 text-cyan-synalab border-cyan-synalab/30">
+                Pilar signature
+              </span>
+            )}
+          </div>
+
+          <div>
+            <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-6">
+              {pillar.data.name}
+            </h2>
+            <p class="text-lg text-blanco-puro/80 leading-relaxed mb-10">
+              {pillar.data.description}
+            </p>
+
+            {pillar.data.modalities.length > 0 && (
+              <div>
+                <p class="text-xs font-semibold tracking-wider uppercase text-slate-muted mb-4">
+                  Modalidades disponibles
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {pillar.data.modalities.map((modality) => (
+                    <div class="p-6 rounded-lg border border-blanco-puro/10 bg-blanco-puro/[0.03] backdrop-blur-sm">
+                      <p class="text-xs font-semibold tracking-wider uppercase text-cyan-synalab mb-3">
+                        {modalityLabels[modality.type] || modality.type}
+                      </p>
+                      <h3 class="text-lg font-semibold mb-3">{modality.name}</h3>
+                      <p class="text-sm text-blanco-puro/70 leading-relaxed mb-4">
+                        {modality.description}
+                      </p>
+                      {(modality.duration || modality.format) && (
+                        <dl class="text-sm space-y-1.5 pt-4 border-t border-blanco-puro/10">
+                          {modality.duration && (
+                            <div class="flex gap-2">
+                              <dt class="text-slate-muted">Duración:</dt>
+                              <dd class="text-blanco-puro/80">{modality.duration}</dd>
+                            </div>
+                          )}
+                          {modality.format && (
+                            <div class="flex gap-2">
+                              <dt class="text-slate-muted">Formato:</dt>
+                              <dd class="text-blanco-puro/80">{modality.format}</dd>
+                            </div>
+                          )}
+                        </dl>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+
+        </article>
+      ))}
+    </Container>
+  </section>
+
+  <section>
+    <Container class="py-20 md:py-28">
+      <div class="relative max-w-3xl mx-auto overflow-hidden rounded-2xl border border-blanco-puro/10 bg-blanco-puro/[0.03] backdrop-blur-md p-10 md:p-14">
+        <p class="text-sm font-semibold tracking-wider uppercase text-cyan-synalab mb-6">
+          ¿Te interesa formarte con nosotros?
+        </p>
+        <h2 class="text-3xl md:text-5xl font-bold tracking-tight mb-6">
+          Cuéntanos qué te gustaría aprender.
+        </h2>
+        <p class="text-lg text-blanco-puro/80 mb-10 leading-relaxed">
+          Cada formación se adapta al contexto: nivel de partida, tiempo disponible, modalidad preferida y objetivos concretos. Hablemos para diseñar la ruta que te sirva.
+        </p>
+        <Button href="/contacto" variant="primary" size="lg">
+          Iniciar conversación
+        </Button>
+      </div>
+    </Container>
+  </section>
+
+</Layout>
