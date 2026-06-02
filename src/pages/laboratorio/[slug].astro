@@ -3,6 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import Container from '../../components/ui/Container.astro';
 import Button from '../../components/ui/Button.astro';
 import Badge from '../../components/ui/Badge.astro';
+import ProjectCover from '../../components/ui/ProjectCover.astro';
 import { getCollection, type CollectionEntry } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -31,16 +32,58 @@ const categoryLabels: Record<string, string> = {
   gestion: 'Gestión',
   productividad: 'Productividad',
 };
+
+const licenseLabels: Record<string, string> = {
+  'cc-by': 'CC BY 4.0 — Atribución',
+  'cc-by-sa': 'CC BY-SA 4.0 — Atribución, Compartir Igual',
+  'cc-by-nc': 'CC BY-NC 4.0 — Atribución, No Comercial',
+  'cc-by-nc-sa': 'CC BY-NC-SA 4.0 — Atribución, No Comercial, Compartir Igual',
+  'cc-by-nd': 'CC BY-ND 4.0 — Atribución, Sin Derivar',
+  'cc-by-nc-nd': 'CC BY-NC-ND 4.0 — Atribución, No Comercial, Sin Derivar',
+  'cc0': 'CC0 1.0 — Dominio Público',
+  'proprietary': 'Licencia propietaria',
+  'mit': 'Licencia MIT',
+  'gpl-3': 'Licencia GNU GPL v3',
+};
+
+const licenseDescriptions: Record<string, string> = {
+  'cc-by': 'Puedes compartir y adaptar este trabajo con cualquier propósito, incluso comercial, siempre que des crédito apropiado al autor original.',
+  'cc-by-sa': 'Puedes compartir y adaptar este trabajo, incluso para uso comercial, siempre que des crédito y compartas tus modificaciones bajo la misma licencia.',
+  'cc-by-nc': 'Puedes compartir y adaptar este trabajo para fines no comerciales, dando crédito apropiado al autor original.',
+  'cc-by-nc-sa': 'Puedes compartir y adaptar este trabajo para fines no comerciales, dando crédito apropiado y compartiendo cualquier obra derivada bajo la misma licencia.',
+  'cc-by-nd': 'Puedes compartir este trabajo, incluso para uso comercial, sin modificarlo y dando crédito apropiado al autor original.',
+  'cc-by-nc-nd': 'Puedes compartir este trabajo solo para fines no comerciales, sin modificarlo y dando crédito apropiado al autor original.',
+  'cc0': 'Este trabajo está liberado al dominio público. Puedes usarlo, copiarlo, modificarlo y distribuirlo sin restricciones de copyright.',
+  'proprietary': 'Este proyecto tiene licencia propietaria de Synalab. Para condiciones de uso, distribución o modificación, contáctanos directamente.',
+  'mit': 'Software libre bajo licencia MIT. Puedes usarlo, modificarlo y distribuirlo, incluso comercialmente, manteniendo el aviso de copyright original.',
+  'gpl-3': 'Software libre bajo licencia GNU GPL v3. Cualquier obra derivada debe distribuirse también bajo la misma licencia.',
+};
+
+const licenseUrls: Record<string, string> = {
+  'cc-by': 'https://creativecommons.org/licenses/by/4.0/deed.es',
+  'cc-by-sa': 'https://creativecommons.org/licenses/by-sa/4.0/deed.es',
+  'cc-by-nc': 'https://creativecommons.org/licenses/by-nc/4.0/deed.es',
+  'cc-by-nc-sa': 'https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es',
+  'cc-by-nd': 'https://creativecommons.org/licenses/by-nd/4.0/deed.es',
+  'cc-by-nc-nd': 'https://creativecommons.org/licenses/by-nc-nd/4.0/deed.es',
+  'cc0': 'https://creativecommons.org/publicdomain/zero/1.0/deed.es',
+  'proprietary': '',
+  'mit': 'https://opensource.org/licenses/MIT',
+  'gpl-3': 'https://www.gnu.org/licenses/gpl-3.0.html',
+};
 ---
 <Layout title={data.name} description={data.description}>
 
   <section>
     <Container class="py-24 md:py-32">
-      <div class="max-w-3xl">
+      <div class="max-w-5xl mx-auto mb-12">
         <a href="/laboratorio" class="inline-block mb-8 text-sm text-cyan-synalab hover:text-cyan-synalab/80 transition-colors">
           ← Volver al laboratorio
         </a>
+        <ProjectCover project={project} aspectRatio="wide" rounded="2xl" />
+      </div>
 
+      <div class="max-w-3xl">
         <div class="flex flex-wrap items-center gap-3 mb-6">
           <Badge variant={data.status} />
           {data.version && (
@@ -193,6 +236,34 @@ const categoryLabels: Record<string, string> = {
         <p class="text-lg text-blanco-puro/80 leading-relaxed">
           Como toda herramienta del laboratorio, este proyecto fue construido bajo el protocolo de seguridad propio de Synalab: quince reglas aplicadas a cada línea de código. Funciona local-first cuando es posible y no envía datos a servidores externos sin consentimiento explícito del usuario.
         </p>
+      </div>
+    </Container>
+  </section>
+
+  <section>
+    <Container class="py-16 md:py-20">
+      <div class="max-w-3xl">
+        <p class="text-sm font-semibold tracking-wider uppercase text-cyan-synalab mb-4">Licencia y uso</p>
+        <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-6">Cómo puedes usar este proyecto</h2>
+
+        <div class="p-6 md:p-8 rounded-lg border border-blanco-puro/10 bg-blanco-puro/[0.03] backdrop-blur-sm">
+          <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4">
+            <div>
+              <p class="text-xs font-semibold tracking-wider uppercase text-slate-muted mb-2">Licencia</p>
+              <h3 class="text-lg md:text-xl font-semibold">
+                {licenseLabels[data.license] || data.license}
+              </h3>
+            </div>
+            {licenseUrls[data.license] && (
+              <a href={licenseUrls[data.license]} target="_blank" rel="noopener noreferrer" class="text-sm text-cyan-synalab hover:text-cyan-synalab/80 transition-colors whitespace-nowrap">
+                Ver licencia completa →
+              </a>
+            )}
+          </div>
+          <p class="text-base text-blanco-puro/80 leading-relaxed">
+            {licenseDescriptions[data.license] || 'Para condiciones de uso, contacta con Synalab.'}
+          </p>
+        </div>
       </div>
     </Container>
   </section>

@@ -4,6 +4,7 @@ import Container from '../components/ui/Container.astro';
 import Button from '../components/ui/Button.astro';
 import Badge from '../components/ui/Badge.astro';
 import { getCollection } from 'astro:content';
+import ProjectCover from '../components/ui/ProjectCover.astro';
 
 const allProjects = await getCollection('projects');
 const featuredProjects = allProjects
@@ -115,22 +116,25 @@ const services = allServices.sort((a, b) => a.data.order - b.data.order);
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         {featuredProjects.map((project) => (
-          <a href={"/laboratorio/" + project.id} class="group p-8 rounded-lg border border-blanco-puro/10 bg-blanco-puro/[0.03] backdrop-blur-sm hover:border-cyan-synalab/40 hover:bg-blanco-puro/[0.05] transition-all">
-            <div class="flex items-center justify-between mb-6">
-              <Badge variant={project.data.status} />
-              {project.data.version && (
-                <span class="text-xs text-slate-muted font-mono">{project.data.version}</span>
-              )}
+          <a href={"/laboratorio/" + project.id} class="group rounded-lg border border-blanco-puro/10 bg-blanco-puro/[0.03] backdrop-blur-sm hover:border-cyan-synalab/40 hover:bg-blanco-puro/[0.05] transition-all flex flex-col overflow-hidden">
+            <ProjectCover project={project} aspectRatio="video" rounded="lg" />
+            <div class="p-6 flex flex-col flex-grow">
+              <div class="flex items-center justify-between mb-4">
+                <Badge variant={project.data.status} />
+                {project.data.version && (
+                  <span class="text-xs text-slate-muted font-mono">{project.data.version}</span>
+                )}
+              </div>
+              <h3 class="text-2xl font-semibold mb-3 group-hover:text-cyan-synalab transition-colors">
+                {project.data.name}
+              </h3>
+              <p class="text-blanco-puro/70 leading-relaxed mb-6 flex-grow">
+                {project.data.tagline}
+              </p>
+              <span class="text-sm text-cyan-synalab font-medium">
+                Ver detalle →
+              </span>
             </div>
-            <h3 class="text-2xl font-semibold mb-3 group-hover:text-cyan-synalab transition-colors">
-              {project.data.name}
-            </h3>
-            <p class="text-blanco-puro/70 leading-relaxed mb-6">
-              {project.data.tagline}
-            </p>
-            <span class="text-sm text-cyan-synalab font-medium">
-              Ver detalle →
-            </span>
           </a>
         ))}
       </div>
