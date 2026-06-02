@@ -1,0 +1,189 @@
+backend:
+  name: github
+  repo: synalabedu/synalabedu.github.io
+  branch: main
+
+site_url: https://synalabedu.github.io
+display_url: https://synalabedu.github.io
+logo_url: https://synalabedu.github.io/favicon.svg
+
+media_folder: "public/uploads"
+public_folder: "/uploads"
+
+collections:
+
+  - name: "projects"
+    label: "Proyectos del Laboratorio"
+    label_singular: "Proyecto"
+    folder: "src/content/projects"
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "yaml-frontmatter"
+    media_folder: "/public/uploads/projects"
+    public_folder: "/uploads/projects"
+    summary: "{{name}} — {{status}}"
+    fields:
+      - { name: "name", label: "Nombre del proyecto", widget: "string", required: true }
+      - { name: "version", label: "Versión (opcional)", widget: "string", required: false, hint: "Ej: v1, v7, beta" }
+      - name: "status"
+        label: "Estado"
+        widget: "select"
+        required: true
+        options:
+          - { label: "Completo", value: "completo" }
+          - { label: "En desarrollo", value: "desarrollo" }
+          - { label: "En revisión", value: "revision" }
+      - name: "category"
+        label: "Categoría"
+        widget: "select"
+        required: true
+        options:
+          - { label: "Educación", value: "educacion" }
+          - { label: "Gestión", value: "gestion" }
+          - { label: "Productividad", value: "productividad" }
+      - name: "license"
+        label: "Licencia"
+        widget: "select"
+        required: true
+        default: "cc-by-nc-sa"
+        options:
+          - { label: "CC BY 4.0 — Atribución", value: "cc-by" }
+          - { label: "CC BY-SA 4.0 — Atribución, Compartir Igual", value: "cc-by-sa" }
+          - { label: "CC BY-NC 4.0 — Atribución, No Comercial", value: "cc-by-nc" }
+          - { label: "CC BY-NC-SA 4.0 — Atribución, No Comercial, Compartir Igual", value: "cc-by-nc-sa" }
+          - { label: "CC BY-ND 4.0 — Atribución, Sin Derivar", value: "cc-by-nd" }
+          - { label: "CC BY-NC-ND 4.0 — Atribución, No Comercial, Sin Derivar", value: "cc-by-nc-nd" }
+          - { label: "CC0 — Dominio Público", value: "cc0" }
+          - { label: "Licencia propietaria", value: "proprietary" }
+          - { label: "MIT", value: "mit" }
+          - { label: "GPL v3", value: "gpl-3" }
+      - { name: "licenseVersion", label: "Versión de licencia", widget: "string", default: "4.0", required: true }
+      - { name: "coverImage", label: "Imagen de portada", widget: "image", required: false, hint: "Aspect ratio recomendado: 16:9 (1600x900). Formato preferido: WebP." }
+      - { name: "tagline", label: "Frase resumen (tagline)", widget: "string", required: true }
+      - { name: "description", label: "Descripción corta (1-2 frases)", widget: "text", required: true }
+      - { name: "problem", label: "Problema que resuelve", widget: "text", required: false }
+      - { name: "solution", label: "Solución que propone", widget: "text", required: false }
+      - name: "features"
+        label: "Características"
+        label_singular: "Característica"
+        widget: "list"
+        required: false
+        fields:
+          - { name: "title", label: "Título de la característica", widget: "string" }
+          - { name: "description", label: "Descripción", widget: "text" }
+      - name: "techStack"
+        label: "Tecnologías usadas"
+        widget: "list"
+        required: false
+        hint: "Una tecnología por línea. Ej: HTML5, TypeScript, IndexedDB"
+      - { name: "requirements", label: "Requisitos técnicos", widget: "text", required: false }
+      - { name: "targetAudience", label: "Audiencia objetivo", widget: "text", required: false }
+      - name: "images"
+        label: "Galería de imágenes"
+        label_singular: "Imagen"
+        widget: "list"
+        required: false
+        fields:
+          - { name: "src", label: "Imagen", widget: "image" }
+          - { name: "alt", label: "Texto alternativo (accesibilidad)", widget: "string" }
+          - { name: "caption", label: "Pie de foto (opcional)", widget: "string", required: false }
+      - { name: "downloadUrl", label: "URL de descarga (opcional)", widget: "string", required: false }
+      - { name: "documentationUrl", label: "URL de documentación (opcional)", widget: "string", required: false }
+      - { name: "scormCompatible", label: "Compatible con SCORM", widget: "boolean", default: false }
+      - { name: "featured", label: "Destacar en página de Inicio", widget: "boolean", default: false }
+      - { name: "order", label: "Orden de aparición (menor = primero)", widget: "number", default: 99, value_type: "int" }
+      - { name: "body", label: "Notas internas (no se publican)", widget: "markdown", required: false }
+
+  - name: "team"
+    label: "Equipo del Estudio"
+    label_singular: "Miembro del equipo"
+    folder: "src/content/team"
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "yaml-frontmatter"
+    media_folder: "/public/uploads/team"
+    public_folder: "/uploads/team"
+    summary: "{{name}} — {{role}}"
+    fields:
+      - { name: "name", label: "Nombre completo", widget: "string", required: true }
+      - { name: "role", label: "Rol", widget: "string", required: true }
+      - { name: "initials", label: "Iniciales (fallback si no hay foto)", widget: "string", required: true, hint: "Ej: JC para Jader Castro. Máximo 2 letras." }
+      - { name: "photo", label: "Foto de perfil", widget: "image", required: false, hint: "Aspect ratio cuadrado. Formato preferido: WebP." }
+      - { name: "bio", label: "Biografía corta (1 párrafo)", widget: "text", required: true }
+      - name: "longBio"
+        label: "Trayectoria (varios párrafos)"
+        widget: "list"
+        field: { name: "paragraph", label: "Párrafo", widget: "text" }
+        hint: "Cada elemento es un párrafo independiente."
+      - { name: "motivation", label: "Lo que me mueve (motivación personal)", widget: "text", required: false }
+      - name: "specialties"
+        label: "Áreas de especialidad"
+        widget: "list"
+        hint: "Una especialidad por línea."
+      - name: "socials"
+        label: "Redes sociales"
+        widget: "object"
+        fields:
+          - { name: "linkedin", label: "URL de LinkedIn", widget: "string", required: false }
+          - { name: "github", label: "URL de GitHub", widget: "string", required: false }
+          - { name: "email", label: "Correo electrónico", widget: "string", required: false }
+      - { name: "isFounder", label: "Es fundador", widget: "boolean", default: false }
+      - { name: "order", label: "Orden de aparición", widget: "number", default: 99, value_type: "int" }
+      - { name: "body", label: "Notas internas (no se publican)", widget: "markdown", required: false }
+
+  - name: "services"
+    label: "Servicios principales (sección Inicio)"
+    label_singular: "Servicio"
+    folder: "src/content/services"
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "yaml-frontmatter"
+    summary: "{{name}}"
+    fields:
+      - { name: "name", label: "Nombre del servicio", widget: "string", required: true }
+      - { name: "tagline", label: "Frase corta de gancho", widget: "string", required: true }
+      - { name: "description", label: "Descripción", widget: "text", required: true }
+      - { name: "href", label: "URL destino", widget: "string", required: true, hint: "Ej: /formacion, /contacto, /laboratorio" }
+      - { name: "cta", label: "Texto del botón", widget: "string", required: true }
+      - { name: "order", label: "Orden de aparición", widget: "number", default: 99, value_type: "int" }
+      - { name: "body", label: "Notas internas (no se publican)", widget: "markdown", required: false }
+
+  - name: "pillars"
+    label: "Pilares de Formación"
+    label_singular: "Pilar"
+    folder: "src/content/pillars"
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "yaml-frontmatter"
+    summary: "{{name}}"
+    fields:
+      - { name: "name", label: "Nombre del pilar", widget: "string", required: true }
+      - { name: "description", label: "Descripción del pilar", widget: "text", required: true }
+      - name: "modalities"
+        label: "Modalidades disponibles"
+        label_singular: "Modalidad"
+        widget: "list"
+        required: false
+        fields:
+          - name: "type"
+            label: "Tipo de modalidad"
+            widget: "select"
+            options:
+              - { label: "Tutoría individual", value: "tutoria" }
+              - { label: "Programa intensivo", value: "intensivo" }
+              - { label: "Taller grupal", value: "taller" }
+          - { name: "name", label: "Nombre específico de la modalidad", widget: "string" }
+          - { name: "description", label: "Descripción", widget: "text" }
+          - { name: "duration", label: "Duración (opcional)", widget: "string", required: false, hint: "Ej: 8 a 12 sesiones, 6 a 10 semanas" }
+          - { name: "format", label: "Formato (opcional)", widget: "string", required: false, hint: "Ej: En línea, presencial en Cali" }
+      - { name: "signature", label: "Pilar signature (destacado especial)", widget: "boolean", default: false }
+      - { name: "order", label: "Orden de aparición", widget: "number", default: 99, value_type: "int" }
+      - { name: "body", label: "Notas internas (no se publican)", widget: "markdown", required: false }
