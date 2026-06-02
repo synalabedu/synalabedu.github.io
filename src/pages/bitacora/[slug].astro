@@ -1,0 +1,285 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Container from '../../components/ui/Container.astro';
+import Button from '../../components/ui/Button.astro';
+import PostCover from '../../components/ui/PostCover.astro';
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts');
+  return posts
+    .filter((post) => !post.data.draft)
+    .map((post) => ({
+      params: { slug: post.id },
+      props: { post },
+    }));
+}
+
+interface Props {
+  post: CollectionEntry<'posts'>;
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const { data } = post;
+
+const allPosts = await getCollection('posts');
+const relatedPosts = allPosts
+  .filter((p) => !p.data.draft && p.id !== post.id && p.data.category === data.category)
+  .sort((a, b) => new Date(b.data.publishedAt).getTime() - new Date(a.data.publishedAt).getTime())
+  .slice(0, 3);
+
+const categoryLabels: Record<string, string> = {
+  reflexion: 'Reflexión',
+  tutorial: 'Tutorial',
+  'caso-de-uso': 'Caso de uso',
+  anuncio: 'Anuncio',
+};
+
+function formatDate(date: Date | string): string {
+  return new Intl.DateTimeFormat('es-CO', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  }).format(new Date(date));
+}
+
+const authorInitials = data.author.split(' ').map((n) => n[0]).join('').toUpperCase().slice(0, 2);
+---
+<Layout title={data.title} description={data.excerpt}>
+
+  <article>
+    <section>
+      <Container class="py-24 md:py-32">
+        <div class="max-w-3xl mx-auto">
+          <a href="/bitacora" class="inline-block mb-8 text-sm text-cyan-synalab hover:text-cyan-synalab/80 transition-colors">
+            ← Volver a la bitácora
+          </a>
+
+          <div class="flex flex-wrap items-center gap-2 text-sm mb-6">
+            <span class="text-cyan-synalab font-semibold tracking-wider uppercase">
+              {categoryLabels[data.category] || data.category}
+            </span>
+            <span class="text-slate-muted" aria-hidden="true">·</span>
+            <time datetime={new Date(data.publishedAt).toISOString()} class="text-blanco-puro/80">
+              {formatDate(data.publishedAt)}
+            </time>
+            {data.updatedAt && (
+              <>
+                <span class="text-slate-muted" aria-hidden="true">·</span>
+                <span class="text-slate-muted text-xs">
+                  Actualizado el {formatDate(data.updatedAt)}
+                </span>
+              </>
+            )}
+          </div>
+
+          <h1 class="text-4xl md:text-6xl font-bold leading-[1.1] tracking-tight mb-6">
+            {data.title}
+          </h1>
+
+          <p class="text-lg md:text-xl text-blanco-puro/80 leading-relaxed mb-10">
+            {data.excerpt}
+          </p>
+
+          <div class="flex items-center gap-3 text-sm pb-10 border-b border-blanco-puro/10">
+            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-cyan-synalab/20 to-violet-deep/20 flex items-center justify-center text-cyan-synalab font-bold text-sm">
+              {authorInitials}
+            </div>
+            <span class="text-blanco-puro/70">Por <strong class="text-blanco-puro">{data.author}</strong></span>
+          </div>
+        </div>
+      </Container>
+    </section>
+
+    <section>
+      <Container class="pb-12">
+        <div class="max-w-5xl mx-auto">
+          <PostCover post={post} aspectRatio="wide" rounded="2xl" />
+        </div>
+      </Container>
+    </section>
+
+    <section>
+      <Container class="pb-12">
+        <div class="max-w-3xl mx-auto article-content">
+          <Content />
+        </div>
+      </Container>
+    </section>
+
+    {data.tags && data.tags.length > 0 && (
+      <section>
+        <Container class="pb-16">
+          <div class="max-w-3xl mx-auto">
+            <p class="text-xs font-semibold tracking-wider uppercase text-slate-muted mb-3">
+              Etiquetas
+            </p>
+            <div class="flex flex-wrap gap-2">
+              {data.tags.map((tag) => (
+                <span class="px-3 py-1.5 text-sm rounded-full border border-blanco-puro/10 bg-blanco-puro/[0.03] text-blanco-puro/80">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+        </Container>
+      </section>
+    )}
+  </article>
+
+  {relatedPosts.length > 0 && (
+    <section>
+      <Container class="py-16 md:py-20">
+        <p class="text-sm font-semibold tracking-wider uppercase text-cyan-synalab mb-4">Sigue leyendo</p>
+        <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-12">Artículos relacionados</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {relatedPosts.map((related) => (
+            <a href={"/bitacora/" + related.id} class="group rounded-lg border border-blanco-puro/10 bg-blanco-puro/[0.03] backdrop-blur-sm hover:border-cyan-synalab/40 hover:bg-blanco-puro/[0.05] transition-all flex flex-col overflow-hidden">
+              <PostCover post={related} aspectRatio="video" rounded="lg" />
+              <div class="p-6 flex flex-col flex-grow">
+                <div class="flex items-center gap-2 text-xs text-slate-muted mb-3">
+                  <span class="text-cyan-synalab font-semibold tracking-wider uppercase">
+                    {categoryLabels[related.data.category] || related.data.category}
+                  </span>
+                  <span aria-hidden="true">·</span>
+                  <time datetime={new Date(related.data.publishedAt).toISOString()}>
+                    {formatDate(related.data.publishedAt)}
+                  </time>
+                </div>
+                <h3 class="text-lg font-semibold mb-3 group-hover:text-cyan-synalab transition-colors leading-tight">
+                  {related.data.title}
+                </h3>
+                <p class="text-blanco-puro/70 leading-relaxed text-sm flex-grow">
+                  {related.data.excerpt}
+                </p>
+              </div>
+            </a>
+          ))}
+        </div>
+      </Container>
+    </section>
+  )}
+
+  <section>
+    <Container class="py-20 md:py-28">
+      <div class="relative max-w-3xl mx-auto overflow-hidden rounded-2xl border border-blanco-puro/10 bg-blanco-puro/[0.03] backdrop-blur-md p-10 md:p-14">
+        <p class="text-sm font-semibold tracking-wider uppercase text-cyan-synalab mb-6">¿Hablamos?</p>
+        <h2 class="text-3xl md:text-5xl font-bold tracking-tight mb-6">Si esto te resuena, hagamos algo juntos.</h2>
+        <p class="text-lg text-blanco-puro/80 mb-10 leading-relaxed">
+          Cuéntanos qué problema tienes en mente o qué quieres aprender. Cada conversación empieza con una pregunta clara.
+        </p>
+        <Button href="/contacto" variant="primary" size="lg">Iniciar conversación</Button>
+      </div>
+    </Container>
+  </section>
+
+</Layout>
+
+<style>
+  .article-content :global(h2),
+  .article-content :global(h3),
+  .article-content :global(h4) {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    color: var(--color-blanco-puro);
+  }
+  .article-content :global(h2) {
+    font-size: 1.875rem;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+  }
+  .article-content :global(h3) {
+    font-size: 1.5rem;
+    margin-top: 2.5rem;
+    margin-bottom: 0.75rem;
+  }
+  .article-content :global(h4) {
+    font-size: 1.25rem;
+    margin-top: 2rem;
+    margin-bottom: 0.5rem;
+  }
+  .article-content :global(p) {
+    font-size: 1.125rem;
+    line-height: 1.75;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 1.5rem;
+  }
+  .article-content :global(strong) {
+    color: var(--color-blanco-puro);
+    font-weight: 600;
+  }
+  .article-content :global(em) {
+    font-style: italic;
+  }
+  .article-content :global(a) {
+    color: var(--color-cyan-synalab);
+    text-decoration: underline;
+    text-decoration-color: rgba(0, 200, 215, 0.4);
+    text-underline-offset: 2px;
+    transition: color 0.2s;
+  }
+  .article-content :global(a:hover) {
+    color: rgba(0, 200, 215, 0.8);
+  }
+  .article-content :global(ul),
+  .article-content :global(ol) {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.125rem;
+    line-height: 1.75;
+  }
+  .article-content :global(ul) {
+    list-style: disc;
+  }
+  .article-content :global(ol) {
+    list-style: decimal;
+  }
+  .article-content :global(li) {
+    margin-bottom: 0.5rem;
+  }
+  .article-content :global(blockquote) {
+    border-left: 3px solid var(--color-cyan-synalab);
+    padding-left: 1.5rem;
+    margin: 2rem 0;
+    color: rgba(255, 255, 255, 0.9);
+    font-style: italic;
+  }
+  .article-content :global(code) {
+    background-color: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 0.125rem 0.375rem;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9em;
+    color: var(--color-cyan-synalab);
+  }
+  .article-content :global(pre) {
+    background-color: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 1.5rem;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 2rem 0;
+  }
+  .article-content :global(pre code) {
+    background: none;
+    border: none;
+    padding: 0;
+    color: rgba(255, 255, 255, 0.9);
+  }
+  .article-content :global(hr) {
+    border: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin: 3rem 0;
+  }
+  .article-content :global(img) {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 2rem 0;
+  }
+</style>

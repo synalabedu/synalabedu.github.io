@@ -1,0 +1,50 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  post: CollectionEntry<'posts'>;
+  aspectRatio?: 'video' | 'square' | 'wide';
+  rounded?: 'lg' | 'xl' | '2xl';
+}
+
+const { post, aspectRatio = 'video', rounded = 'lg' } = Astro.props;
+const { data } = post;
+
+const aspectClasses: Record<string, string> = {
+  video: 'aspect-video',
+  square: 'aspect-square',
+  wide: 'aspect-[21/9]',
+};
+
+const roundedClasses: Record<string, string> = {
+  lg: 'rounded-lg',
+  xl: 'rounded-xl',
+  '2xl': 'rounded-2xl',
+};
+
+const categoryGradients: Record<string, string> = {
+  reflexion: 'from-cyan-synalab/30 via-electric-blue/25 to-violet-deep/20',
+  tutorial: 'from-electric-blue/30 via-violet-deep/25 to-cyan-synalab/20',
+  'caso-de-uso': 'from-violet-deep/30 via-cyan-synalab/20 to-electric-blue/25',
+  anuncio: 'from-cyan-synalab/35 via-violet-deep/25 to-electric-blue/30',
+};
+
+const gradient = categoryGradients[data.category] || categoryGradients.reflexion;
+---
+
+<div class={"relative overflow-hidden " + aspectClasses[aspectRatio] + " " + roundedClasses[rounded]}>
+  {data.coverImage ? (
+    <img src={data.coverImage} alt={"Portada de " + data.title} class="w-full h-full object-cover" loading="lazy" />
+  ) : (
+    <div class={"absolute inset-0 bg-gradient-to-br " + gradient}>
+      <div class="absolute inset-0 bg-navy-profundo/20"></div>
+      <div class="absolute inset-0 flex items-center justify-center p-6">
+        <span class="text-xl md:text-2xl font-bold text-blanco-puro text-center tracking-tight leading-tight">
+          {data.title}
+        </span>
+      </div>
+      <div class="absolute top-0 right-0 w-32 h-32 bg-cyan-synalab/15 rounded-full blur-3xl"></div>
+      <div class="absolute bottom-0 left-0 w-32 h-32 bg-violet-deep/15 rounded-full blur-3xl"></div>
+    </div>
+  )}
+</div>

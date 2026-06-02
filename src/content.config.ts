@@ -126,4 +126,47 @@ const pillars = defineCollection({
   }),
 });
 
-export const collections = { projects, team, services, pages, pillars };
+/**
+ * Colección: BITÁCORA (BLOG)
+ * Artículos editoriales del laboratorio.
+ */
+const posts = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/posts' }),
+  schema: z.object({
+    title: z.string(),
+    excerpt: z.string(),
+    publishedAt: z.date(),
+    updatedAt: z.date().optional(),
+    coverImage: z.string().optional(),
+    category: z.enum(['reflexion', 'tutorial', 'caso-de-uso', 'anuncio']).default('reflexion'),
+    tags: z.array(z.string()).default([]),
+    author: z.string().default('Jader Castro'),
+    featured: z.boolean().default(false),
+    draft: z.boolean().default(false),
+  }),
+});
+
+/**
+ * Colección: RECURSOS DESCARGABLES
+ * Guías, plantillas, documentos y enlaces curados.
+ */
+const resources = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/resources' }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    type: z.enum(['guia', 'plantilla', 'documento', 'video', 'enlace']).default('documento'),
+    category: z.enum(['educacion', 'gestion', 'productividad', 'general']).default('general'),
+    publishedAt: z.date(),
+    coverImage: z.string().optional(),
+    downloadUrl: z.string().optional(),
+    externalUrl: z.string().optional(),
+    fileFormat: z.string().optional(),
+    fileSize: z.string().optional(),
+    isFree: z.boolean().default(true),
+    price: z.string().optional(),
+    order: z.number().default(99),
+  }),
+});
+
+export const collections = { projects, team, services, pages, pillars, posts, resources };

@@ -1,0 +1,163 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Container from '../../components/ui/Container.astro';
+import PostCover from '../../components/ui/PostCover.astro';
+import { getCollection, getEntry } from 'astro:content';
+
+const page = await getEntry('pages', 'bitacora');
+
+const allPosts = await getCollection('posts');
+const posts = allPosts
+  .filter((p) => !p.data.draft)
+  .sort((a, b) => new Date(b.data.publishedAt).getTime() - new Date(a.data.publishedAt).getTime());
+
+const counts = {
+  todos: posts.length,
+  reflexion: posts.filter((p) => p.data.category === 'reflexion').length,
+  tutorial: posts.filter((p) => p.data.category === 'tutorial').length,
+  'caso-de-uso': posts.filter((p) => p.data.category === 'caso-de-uso').length,
+  anuncio: posts.filter((p) => p.data.category === 'anuncio').length,
+};
+
+const categoryLabels: Record<string, string> = {
+  reflexion: 'Reflexión',
+  tutorial: 'Tutorial',
+  'caso-de-uso': 'Caso de uso',
+  anuncio: 'Anuncio',
+};
+
+function formatDate(date: Date): string {
+  return new Intl.DateTimeFormat('es-CO', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  }).format(new Date(date));
+}
+---
+<Layout
+  title={page.data.title}
+  description={page.data.seoDescription || page.data.heroDescription}
+>
+
+  <section>
+    <Container class="py-24 md:py-32">
+      <div class="max-w-3xl">
+        {page.data.heroEyebrow && (
+          <p class="text-sm font-semibold tracking-wider uppercase text-cyan-synalab mb-6">
+            {page.data.heroEyebrow}
+          </p>
+        )}
+        <h1 class="text-5xl md:text-6xl font-bold leading-[1.05] tracking-tight mb-8">
+          {page.data.heroTitle}
+        </h1>
+        <p class="text-lg md:text-xl text-blanco-puro/80 leading-relaxed">
+          {page.data.heroDescription}
+        </p>
+      </div>
+    </Container>
+  </section>
+
+  <section>
+    <Container class="pb-10">
+      <div class="flex flex-wrap gap-2" role="tablist" aria-label="Filtrar artículos por categoría">
+        <button type="button" data-filter="todos" class="filter-btn filter-active px-4 py-2 rounded-full text-sm font-medium border border-blanco-puro/10 bg-blanco-puro/[0.03] hover:border-cyan-synalab/40 transition-colors">
+          Todos <span class="counter">({counts.todos})</span>
+        </button>
+        <button type="button" data-filter="reflexion" class="filter-btn px-4 py-2 rounded-full text-sm font-medium border border-blanco-puro/10 bg-blanco-puro/[0.03] hover:border-cyan-synalab/40 transition-colors">
+          Reflexión <span class="counter">({counts.reflexion})</span>
+        </button>
+        <button type="button" data-filter="tutorial" class="filter-btn px-4 py-2 rounded-full text-sm font-medium border border-blanco-puro/10 bg-blanco-puro/[0.03] hover:border-cyan-synalab/40 transition-colors">
+          Tutorial <span class="counter">({counts.tutorial})</span>
+        </button>
+        <button type="button" data-filter="caso-de-uso" class="filter-btn px-4 py-2 rounded-full text-sm font-medium border border-blanco-puro/10 bg-blanco-puro/[0.03] hover:border-cyan-synalab/40 transition-colors">
+          Caso de uso <span class="counter">({counts['caso-de-uso']})</span>
+        </button>
+        <button type="button" data-filter="anuncio" class="filter-btn px-4 py-2 rounded-full text-sm font-medium border border-blanco-puro/10 bg-blanco-puro/[0.03] hover:border-cyan-synalab/40 transition-colors">
+          Anuncio <span class="counter">({counts.anuncio})</span>
+        </button>
+      </div>
+    </Container>
+  </section>
+
+  <section>
+    <Container class="pb-20 md:pb-28">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {posts.map((post) => (
+          <a href={"/bitacora/" + post.id} data-category={post.data.category} class="post-card group rounded-lg border border-blanco-puro/10 bg-blanco-puro/[0.03] backdrop-blur-sm hover:border-cyan-synalab/40 hover:bg-blanco-puro/[0.05] transition-all flex flex-col overflow-hidden">
+            <PostCover post={post} aspectRatio="video" rounded="lg" />
+            <div class="p-6 flex flex-col flex-grow">
+              <div class="flex flex-wrap items-center gap-2 text-xs text-slate-muted mb-3">
+                <span class="text-cyan-synalab font-semibold tracking-wider uppercase">
+                  {categoryLabels[post.data.category] || post.data.category}
+                </span>
+                <span aria-hidden="true">·</span>
+                <time datetime={new Date(post.data.publishedAt).toISOString()}>
+                  {formatDate(post.data.publishedAt)}
+                </time>
+              </div>
+              <h2 class="text-xl font-semibold mb-3 group-hover:text-cyan-synalab transition-colors leading-tight">
+                {post.data.title}
+              </h2>
+              <p class="text-blanco-puro/70 leading-relaxed flex-grow">
+                {post.data.excerpt}
+              </p>
+              <span class="text-sm text-cyan-synalab font-medium mt-6">
+                Leer artículo →
+              </span>
+            </div>
+          </a>
+        ))}
+      </div>
+
+      <p id="empty-state" class="hidden text-center text-blanco-puro/60 py-16">
+        No hay artículos en esta categoría todavía.
+      </p>
+    </Container>
+  </section>
+
+</Layout>
+
+<style>
+  .filter-active {
+    background-color: rgba(0, 200, 215, 0.15) !important;
+    border-color: rgba(0, 200, 215, 0.4) !important;
+    color: var(--color-cyan-synalab);
+  }
+  .filter-active .counter {
+    color: rgba(0, 200, 215, 0.7);
+  }
+  .counter {
+    color: var(--color-slate-muted);
+  }
+</style>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', function () {
+    var filterButtons = document.querySelectorAll('.filter-btn');
+    var cards = document.querySelectorAll('.post-card');
+    var emptyState = document.getElementById('empty-state');
+
+    filterButtons.forEach(function (button) {
+      button.addEventListener('click', function () {
+        var filter = button.dataset.filter;
+
+        filterButtons.forEach(function (b) { b.classList.remove('filter-active'); });
+        button.classList.add('filter-active');
+
+        var visibleCount = 0;
+        cards.forEach(function (card) {
+          if (filter === 'todos' || card.dataset.category === filter) {
+            card.style.display = '';
+            visibleCount++;
+          } else {
+            card.style.display = 'none';
+          }
+        });
+
+        if (emptyState) {
+          emptyState.classList.toggle('hidden', visibleCount > 0);
+        }
+      });
+    });
+  });
+</script>
