@@ -187,3 +187,120 @@ collections:
       - { name: "signature", label: "Pilar signature (destacado especial)", widget: "boolean", default: false }
       - { name: "order", label: "Orden de aparición", widget: "number", default: 99, value_type: "int" }
       - { name: "body", label: "Notas internas (no se publican)", widget: "markdown", required: false }
+
+      # ============================================================
+  # BITÁCORA (BLOG)
+  # ============================================================
+  - name: "posts"
+    label: "Bitácora"
+    label_singular: "Artículo"
+    folder: "src/content/posts"
+    create: true
+    delete: true
+    extension: "md"
+    format: "yaml-frontmatter"
+    slug: "{{slug}}"
+    summary: "{{title}} · {{publishedAt}}"
+    identifier_field: "title"
+    fields:
+      - { label: "Título", name: "title", widget: "string" }
+      - { label: "Resumen (excerpt)", name: "excerpt", widget: "text", hint: "Un párrafo corto que aparece en el listado y al inicio del artículo." }
+      - { label: "Fecha de publicación", name: "publishedAt", widget: "date", format: "YYYY-MM-DD", default: "" }
+      - { label: "Fecha de actualización", name: "updatedAt", widget: "date", format: "YYYY-MM-DD", required: false, hint: "Solo si editas el artículo significativamente después de publicarlo." }
+      - { label: "Imagen de portada", name: "coverImage", widget: "image", required: false, media_folder: "/public/uploads/posts", public_folder: "/uploads/posts", hint: "Opcional. Si no hay, se usa un gradient generado por categoría." }
+      - label: "Categoría"
+        name: "category"
+        widget: "select"
+        default: "reflexion"
+        options:
+          - { label: "Reflexión", value: "reflexion" }
+          - { label: "Tutorial", value: "tutorial" }
+          - { label: "Caso de uso", value: "caso-de-uso" }
+          - { label: "Anuncio", value: "anuncio" }
+      - { label: "Etiquetas", name: "tags", widget: "list", required: false, hint: "Palabras clave separadas. Ej: ia, seguridad, manifiesto." }
+      - { label: "Autor", name: "author", widget: "string", default: "Jader Castro" }
+      - { label: "Destacado", name: "featured", widget: "boolean", default: false, hint: "Marca este artículo como destacado." }
+      - { label: "Borrador", name: "draft", widget: "boolean", default: false, hint: "Si está activo, el artículo NO se publica en el sitio." }
+      - { label: "Contenido", name: "body", widget: "markdown" }
+
+      # ============================================================
+  # BITÁCORA (BLOG)
+  # ============================================================
+  - name: "posts"
+    label: "Bitácora"
+    label_singular: "Artículo"
+    folder: "src/content/posts"
+    create: true
+    delete: true
+    extension: "md"
+    format: "yaml-frontmatter"
+    slug: "{{slug}}"
+    summary: "{{title}} · {{publishedAt}}"
+    identifier_field: "title"
+    fields:
+      - { label: "Título", name: "title", widget: "string" }
+      - { label: "Resumen (excerpt)", name: "excerpt", widget: "text", hint: "Un párrafo corto que aparece en el listado y al inicio del artículo." }
+      - { label: "Fecha de publicación", name: "publishedAt", widget: "date", format: "YYYY-MM-DD", default: "" }
+      - { label: "Fecha de actualización", name: "updatedAt", widget: "date", format: "YYYY-MM-DD", required: false, hint: "Solo si editas el artículo significativamente después de publicarlo." }
+      - { label: "Imagen de portada", name: "coverImage", widget: "image", required: false, media_folder: "/public/uploads/posts", public_folder: "/uploads/posts", hint: "Opcional. Si no hay, se usa un gradient generado por categoría." }
+      - label: "Categoría"
+        name: "category"
+        widget: "select"
+        default: "reflexion"
+        options:
+          - { label: "Reflexión", value: "reflexion" }
+          - { label: "Tutorial", value: "tutorial" }
+          - { label: "Caso de uso", value: "caso-de-uso" }
+          - { label: "Anuncio", value: "anuncio" }
+      - { label: "Etiquetas", name: "tags", widget: "list", required: false, hint: "Palabras clave separadas. Ej: ia, seguridad, manifiesto." }
+      - { label: "Autor", name: "author", widget: "string", default: "Jader Castro" }
+      - { label: "Destacado", name: "featured", widget: "boolean", default: false, hint: "Marca este artículo como destacado." }
+      - { label: "Borrador", name: "draft", widget: "boolean", default: false, hint: "Si está activo, el artículo NO se publica en el sitio." }
+      - { label: "Contenido", name: "body", widget: "markdown" }
+
+  # ============================================================
+  # RECURSOS DESCARGABLES
+  # ============================================================
+  - name: "resources"
+    label: "Recursos"
+    label_singular: "Recurso"
+    folder: "src/content/resources"
+    create: true
+    delete: true
+    extension: "md"
+    format: "yaml-frontmatter"
+    slug: "{{slug}}"
+    summary: "{{title}}"
+    identifier_field: "title"
+    fields:
+      - { label: "Título", name: "title", widget: "string" }
+      - { label: "Descripción", name: "description", widget: "text", hint: "Una descripción breve que explica qué es el recurso y para qué sirve." }
+      - label: "Tipo de recurso"
+        name: "type"
+        widget: "select"
+        default: "documento"
+        options:
+          - { label: "Guía", value: "guia" }
+          - { label: "Plantilla", value: "plantilla" }
+          - { label: "Documento", value: "documento" }
+          - { label: "Video", value: "video" }
+          - { label: "Enlace", value: "enlace" }
+      - label: "Categoría"
+        name: "category"
+        widget: "select"
+        default: "general"
+        options:
+          - { label: "Educación", value: "educacion" }
+          - { label: "Gestión", value: "gestion" }
+          - { label: "Productividad", value: "productividad" }
+          - { label: "General", value: "general" }
+      - { label: "Fecha de publicación", name: "publishedAt", widget: "date", format: "YYYY-MM-DD" }
+      - { label: "Imagen de portada", name: "coverImage", widget: "image", required: false, media_folder: "/public/uploads/resources", public_folder: "/uploads/resources", hint: "Opcional." }
+      - { label: "Archivo descargable", name: "downloadUrl", widget: "file", required: false, media_folder: "/public/uploads/resources", public_folder: "/uploads/resources", hint: "Sube el archivo PDF, DOCX, etc. Se usará para el botón Descargar." }
+      - { label: "Enlace externo", name: "externalUrl", widget: "string", required: false, hint: "Alternativa: URL completa si el recurso vive fuera del sitio (YouTube, GitHub, etc.)." }
+      - { label: "Formato del archivo", name: "fileFormat", widget: "string", required: false, hint: "Ej: PDF, DOCX, MP4." }
+      - { label: "Tamaño o extensión", name: "fileSize", widget: "string", required: false, hint: "Ej: 2.5 MB, 32 páginas, 15 min." }
+      - { label: "¿Es gratis?", name: "isFree", widget: "boolean", default: true }
+      - { label: "Precio", name: "price", widget: "string", required: false, hint: "Solo si el recurso NO es gratis. Ej: COP 25.000." }
+      - { label: "Orden de aparición", name: "order", widget: "number", default: 99, value_type: "int", min: 1, hint: "Números menores aparecen primero." }
+      - { label: "Contenido extendido", name: "body", widget: "markdown", required: false, hint: "Opcional. Texto adicional sobre el recurso." }
