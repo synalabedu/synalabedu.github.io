@@ -135,8 +135,11 @@ const posts = defineCollection({
   schema: z.object({
     title: z.string(),
     excerpt: z.string(),
-    publishedAt: z.date(),
-    updatedAt: z.date().optional(),
+    publishedAt: z.coerce.date(),
+    updatedAt: z.preprocess(
+      (val) => (val === '' || val == null ? undefined : val),
+      z.coerce.date().optional()
+    ),
     coverImage: z.string().optional(),
     category: z.enum(['reflexion', 'tutorial', 'caso-de-uso', 'anuncio']).default('reflexion'),
     tags: z.array(z.string()).default([]),
@@ -157,7 +160,7 @@ const resources = defineCollection({
     description: z.string(),
     type: z.enum(['guia', 'plantilla', 'documento', 'video', 'enlace']).default('documento'),
     category: z.enum(['educacion', 'gestion', 'productividad', 'general']).default('general'),
-    publishedAt: z.date(),
+    publishedAt: z.coerce.date(),
     coverImage: z.string().optional(),
     downloadUrl: z.string().optional(),
     externalUrl: z.string().optional(),
