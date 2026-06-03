@@ -1,0 +1,247 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Container from '../components/ui/Container.astro';
+import { getCollection, getEntry } from 'astro:content';
+
+const page = await getEntry('pages', 'recursos');
+
+const allResources = await getCollection('resources');
+const resources = allResources.sort((a, b) => {
+  if (a.data.order !== b.data.order) return a.data.order - b.data.order;
+  return new Date(b.data.publishedAt).getTime() - new Date(a.data.publishedAt).getTime();
+});
+
+const typeLabels: Record<string, string> = {
+  guia: 'Guía',
+  plantilla: 'Plantilla',
+  documento: 'Documento',
+  video: 'Video',
+  enlace: 'Enlace',
+};
+
+const categoryLabels: Record<string, string> = {
+  educacion: 'Educación',
+  gestion: 'Gestión',
+  productividad: 'Productividad',
+  general: 'General',
+};
+
+const typeCounts = {
+  todos: resources.length,
+  guia: resources.filter((r) => r.data.type === 'guia').length,
+  plantilla: resources.filter((r) => r.data.type === 'plantilla').length,
+  documento: resources.filter((r) => r.data.type === 'documento').length,
+  video: resources.filter((r) => r.data.type === 'video').length,
+  enlace: resources.filter((r) => r.data.type === 'enlace').length,
+};
+
+const categoryCounts = {
+  todas: resources.length,
+  educacion: resources.filter((r) => r.data.category === 'educacion').length,
+  gestion: resources.filter((r) => r.data.category === 'gestion').length,
+  productividad: resources.filter((r) => r.data.category === 'productividad').length,
+  general: resources.filter((r) => r.data.category === 'general').length,
+};
+---
+<Layout
+  title={page.data.title}
+  description={page.data.seoDescription || page.data.heroDescription}
+>
+
+  <section>
+    <Container class="py-24 md:py-32">
+      <div class="max-w-3xl">
+        {page.data.heroEyebrow && (
+          <p class="text-sm font-semibold tracking-wider uppercase text-cyan-synalab mb-6">
+            {page.data.heroEyebrow}
+          </p>
+        )}
+        <h1 class="text-5xl md:text-6xl font-bold leading-[1.05] tracking-tight mb-8">
+          {page.data.heroTitle}
+        </h1>
+        <p class="text-lg md:text-xl text-blanco-puro/80 leading-relaxed">
+          {page.data.heroDescription}
+        </p>
+      </div>
+    </Container>
+  </section>
+
+  <section>
+    <Container class="pb-10">
+      <div class="space-y-6">
+
+        <div>
+          <p class="text-xs font-semibold tracking-wider uppercase text-slate-muted mb-3">Por tipo</p>
+          <div class="flex flex-wrap gap-2" role="tablist" aria-label="Filtrar por tipo de recurso">
+            <button type="button" data-type="todos" class="type-btn type-active px-4 py-2 rounded-full text-sm font-medium border border-blanco-puro/10 bg-blanco-puro/[0.03] hover:border-cyan-synalab/40 transition-colors">
+              Todos <span class="counter">({typeCounts.todos})</span>
+            </button>
+            <button type="button" data-type="guia" class="type-btn px-4 py-2 rounded-full text-sm font-medium border border-blanco-puro/10 bg-blanco-puro/[0.03] hover:border-cyan-synalab/40 transition-colors">
+              Guía <span class="counter">({typeCounts.guia})</span>
+            </button>
+            <button type="button" data-type="plantilla" class="type-btn px-4 py-2 rounded-full text-sm font-medium border border-blanco-puro/10 bg-blanco-puro/[0.03] hover:border-cyan-synalab/40 transition-colors">
+              Plantilla <span class="counter">({typeCounts.plantilla})</span>
+            </button>
+            <button type="button" data-type="documento" class="type-btn px-4 py-2 rounded-full text-sm font-medium border border-blanco-puro/10 bg-blanco-puro/[0.03] hover:border-cyan-synalab/40 transition-colors">
+              Documento <span class="counter">({typeCounts.documento})</span>
+            </button>
+            <button type="button" data-type="video" class="type-btn px-4 py-2 rounded-full text-sm font-medium border border-blanco-puro/10 bg-blanco-puro/[0.03] hover:border-cyan-synalab/40 transition-colors">
+              Video <span class="counter">({typeCounts.video})</span>
+            </button>
+            <button type="button" data-type="enlace" class="type-btn px-4 py-2 rounded-full text-sm font-medium border border-blanco-puro/10 bg-blanco-puro/[0.03] hover:border-cyan-synalab/40 transition-colors">
+              Enlace <span class="counter">({typeCounts.enlace})</span>
+            </button>
+          </div>
+        </div>
+
+        <div>
+          <p class="text-xs font-semibold tracking-wider uppercase text-slate-muted mb-3">Por categoría</p>
+          <div class="flex flex-wrap gap-2" role="tablist" aria-label="Filtrar por categoría">
+            <button type="button" data-category="todas" class="category-btn category-active px-4 py-2 rounded-full text-sm font-medium border border-blanco-puro/10 bg-blanco-puro/[0.03] hover:border-cyan-synalab/40 transition-colors">
+              Todas <span class="counter">({categoryCounts.todas})</span>
+            </button>
+            <button type="button" data-category="educacion" class="category-btn px-4 py-2 rounded-full text-sm font-medium border border-blanco-puro/10 bg-blanco-puro/[0.03] hover:border-cyan-synalab/40 transition-colors">
+              Educación <span class="counter">({categoryCounts.educacion})</span>
+            </button>
+            <button type="button" data-category="gestion" class="category-btn px-4 py-2 rounded-full text-sm font-medium border border-blanco-puro/10 bg-blanco-puro/[0.03] hover:border-cyan-synalab/40 transition-colors">
+              Gestión <span class="counter">({categoryCounts.gestion})</span>
+            </button>
+            <button type="button" data-category="productividad" class="category-btn px-4 py-2 rounded-full text-sm font-medium border border-blanco-puro/10 bg-blanco-puro/[0.03] hover:border-cyan-synalab/40 transition-colors">
+              Productividad <span class="counter">({categoryCounts.productividad})</span>
+            </button>
+            <button type="button" data-category="general" class="category-btn px-4 py-2 rounded-full text-sm font-medium border border-blanco-puro/10 bg-blanco-puro/[0.03] hover:border-cyan-synalab/40 transition-colors">
+              General <span class="counter">({categoryCounts.general})</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </Container>
+  </section>
+
+  <section>
+    <Container class="pb-20 md:pb-28">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {resources.map((resource) => (
+          <article data-type={resource.data.type} data-category={resource.data.category} class="resource-card group rounded-lg border border-blanco-puro/10 bg-blanco-puro/[0.03] backdrop-blur-sm hover:border-cyan-synalab/40 hover:bg-blanco-puro/[0.05] transition-all flex flex-col p-6">
+
+            <div class="flex flex-wrap items-center gap-2 mb-5">
+              <span class="px-2.5 py-1 text-[10px] font-bold tracking-wider uppercase rounded-full bg-cyan-synalab/15 text-cyan-synalab border border-cyan-synalab/30">
+                {typeLabels[resource.data.type] || resource.data.type}
+              </span>
+              <span class="px-2.5 py-1 text-[10px] font-medium tracking-wider uppercase rounded-full bg-blanco-puro/[0.05] text-blanco-puro/70 border border-blanco-puro/10">
+                {categoryLabels[resource.data.category] || resource.data.category}
+              </span>
+              <span class="ml-auto text-xs font-semibold tracking-wider uppercase">
+                {resource.data.isFree ? (
+                  <span class="text-cyan-synalab">Gratis</span>
+                ) : (
+                  <span class="text-violet-deep">{resource.data.price}</span>
+                )}
+              </span>
+            </div>
+
+            <h2 class="text-xl font-semibold mb-3 leading-tight group-hover:text-cyan-synalab transition-colors">
+              {resource.data.title}
+            </h2>
+
+            <p class="text-blanco-puro/70 leading-relaxed text-sm mb-5 flex-grow">
+              {resource.data.description}
+            </p>
+
+            {(resource.data.fileFormat || resource.data.fileSize) && (
+              <div class="flex items-center gap-2 text-xs text-slate-muted mb-5 pb-5 border-b border-blanco-puro/[0.06]">
+                {resource.data.fileFormat && <span>{resource.data.fileFormat}</span>}
+                {resource.data.fileFormat && resource.data.fileSize && <span aria-hidden="true">·</span>}
+                {resource.data.fileSize && <span>{resource.data.fileSize}</span>}
+              </div>
+            )}
+
+            {resource.data.downloadUrl ? (
+              <a href={resource.data.downloadUrl} download class="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-md bg-cyan-synalab/10 border border-cyan-synalab/30 text-cyan-synalab text-sm font-medium hover:bg-cyan-synalab/20 transition-colors">
+                Descargar
+              </a>
+            ) : resource.data.externalUrl ? (
+              <a href={resource.data.externalUrl} target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-md bg-cyan-synalab/10 border border-cyan-synalab/30 text-cyan-synalab text-sm font-medium hover:bg-cyan-synalab/20 transition-colors">
+                Ver recurso ↗
+              </a>
+            ) : (
+              <span class="inline-flex items-center justify-center px-4 py-2.5 rounded-md border border-blanco-puro/10 text-slate-muted text-sm">
+                Próximamente
+              </span>
+            )}
+
+          </article>
+        ))}
+      </div>
+
+      <p id="empty-state" class="hidden text-center text-blanco-puro/60 py-16">
+        No hay recursos que coincidan con los filtros seleccionados.
+      </p>
+    </Container>
+  </section>
+
+</Layout>
+
+<style>
+  .type-active,
+  .category-active {
+    background-color: rgba(0, 200, 215, 0.15) !important;
+    border-color: rgba(0, 200, 215, 0.4) !important;
+    color: var(--color-cyan-synalab);
+  }
+  .type-active .counter,
+  .category-active .counter {
+    color: rgba(0, 200, 215, 0.7);
+  }
+  .counter {
+    color: var(--color-slate-muted);
+  }
+</style>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', function () {
+    var typeButtons = document.querySelectorAll('.type-btn');
+    var categoryButtons = document.querySelectorAll('.category-btn');
+    var cards = document.querySelectorAll('.resource-card');
+    var emptyState = document.getElementById('empty-state');
+
+    var activeType = 'todos';
+    var activeCategory = 'todas';
+
+    function applyFilters() {
+      var visibleCount = 0;
+      cards.forEach(function (card) {
+        var matchType = activeType === 'todos' || card.dataset.type === activeType;
+        var matchCategory = activeCategory === 'todas' || card.dataset.category === activeCategory;
+        if (matchType && matchCategory) {
+          card.style.display = '';
+          visibleCount++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+      if (emptyState) {
+        emptyState.classList.toggle('hidden', visibleCount > 0);
+      }
+    }
+
+    typeButtons.forEach(function (button) {
+      button.addEventListener('click', function () {
+        activeType = button.dataset.type;
+        typeButtons.forEach(function (b) { b.classList.remove('type-active'); });
+        button.classList.add('type-active');
+        applyFilters();
+      });
+    });
+
+    categoryButtons.forEach(function (button) {
+      button.addEventListener('click', function () {
+        activeCategory = button.dataset.category;
+        categoryButtons.forEach(function (b) { b.classList.remove('category-active'); });
+        button.classList.add('category-active');
+        applyFilters();
+      });
+    });
+  });
+</script>
