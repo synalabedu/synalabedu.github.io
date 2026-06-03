@@ -2,16 +2,12 @@ backend:
   name: github
   repo: synalabedu/synalabedu.github.io
   branch: main
-
 site_url: https://synalabedu.github.io
 display_url: https://synalabedu.github.io
 logo_url: https://synalabedu.github.io/favicon.svg
-
 media_folder: "public/uploads"
 public_folder: "/uploads"
-
 collections:
-
   - name: "projects"
     label: "Proyectos del Laboratorio"
     label_singular: "Proyecto"
@@ -188,7 +184,7 @@ collections:
       - { name: "order", label: "Orden de aparición", widget: "number", default: 99, value_type: "int" }
       - { name: "body", label: "Notas internas (no se publican)", widget: "markdown", required: false }
 
-      # ============================================================
+  # ============================================================
   # BITÁCORA (BLOG)
   # ============================================================
   - name: "posts"
@@ -205,43 +201,8 @@ collections:
     fields:
       - { label: "Título", name: "title", widget: "string" }
       - { label: "Resumen (excerpt)", name: "excerpt", widget: "text", hint: "Un párrafo corto que aparece en el listado y al inicio del artículo." }
-      - { label: "Fecha de publicación", name: "publishedAt", widget: "date", format: "YYYY-MM-DD", default: "" }
-      - { label: "Fecha de actualización", name: "updatedAt", widget: "date", format: "YYYY-MM-DD", required: false, hint: "Solo si editas el artículo significativamente después de publicarlo." }
-      - { label: "Imagen de portada", name: "coverImage", widget: "image", required: false, media_folder: "/public/uploads/posts", public_folder: "/uploads/posts", hint: "Opcional. Si no hay, se usa un gradient generado por categoría." }
-      - label: "Categoría"
-        name: "category"
-        widget: "select"
-        default: "reflexion"
-        options:
-          - { label: "Reflexión", value: "reflexion" }
-          - { label: "Tutorial", value: "tutorial" }
-          - { label: "Caso de uso", value: "caso-de-uso" }
-          - { label: "Anuncio", value: "anuncio" }
-      - { label: "Etiquetas", name: "tags", widget: "list", required: false, hint: "Palabras clave separadas. Ej: ia, seguridad, manifiesto." }
-      - { label: "Autor", name: "author", widget: "string", default: "Jader Castro" }
-      - { label: "Destacado", name: "featured", widget: "boolean", default: false, hint: "Marca este artículo como destacado." }
-      - { label: "Borrador", name: "draft", widget: "boolean", default: false, hint: "Si está activo, el artículo NO se publica en el sitio." }
-      - { label: "Contenido", name: "body", widget: "markdown" }
-
-      # ============================================================
-  # BITÁCORA (BLOG)
-  # ============================================================
-  - name: "posts"
-    label: "Bitácora"
-    label_singular: "Artículo"
-    folder: "src/content/posts"
-    create: true
-    delete: true
-    extension: "md"
-    format: "yaml-frontmatter"
-    slug: "{{slug}}"
-    summary: "{{title}} · {{publishedAt}}"
-    identifier_field: "title"
-    fields:
-      - { label: "Título", name: "title", widget: "string" }
-      - { label: "Resumen (excerpt)", name: "excerpt", widget: "text", hint: "Un párrafo corto que aparece en el listado y al inicio del artículo." }
-      - { label: "Fecha de publicación", name: "publishedAt", widget: "date", format: "YYYY-MM-DD", default: "" }
-      - { label: "Fecha de actualización", name: "updatedAt", widget: "date", format: "YYYY-MM-DD", required: false, hint: "Solo si editas el artículo significativamente después de publicarlo." }
+      - { label: "Fecha de publicación", name: "publishedAt", widget: "datetime", type: "date", format: "YYYY-MM-DD" }
+      - { label: "Fecha de actualización", name: "updatedAt", widget: "datetime", type: "date", format: "YYYY-MM-DD", required: false, hint: "Solo si editas el artículo significativamente después de publicarlo." }
       - { label: "Imagen de portada", name: "coverImage", widget: "image", required: false, media_folder: "/public/uploads/posts", public_folder: "/uploads/posts", hint: "Opcional. Si no hay, se usa un gradient generado por categoría." }
       - label: "Categoría"
         name: "category"
@@ -294,7 +255,7 @@ collections:
           - { label: "Gestión", value: "gestion" }
           - { label: "Productividad", value: "productividad" }
           - { label: "General", value: "general" }
-      - { label: "Fecha de publicación", name: "publishedAt", widget: "date", format: "YYYY-MM-DD" }
+      - { label: "Fecha de publicación", name: "publishedAt", widget: "datetime", type: "date", format: "YYYY-MM-DD" }
       - { label: "Imagen de portada", name: "coverImage", widget: "image", required: false, media_folder: "/public/uploads/resources", public_folder: "/uploads/resources", hint: "Opcional." }
       - { label: "Archivo descargable", name: "downloadUrl", widget: "file", required: false, media_folder: "/public/uploads/resources", public_folder: "/uploads/resources", hint: "Sube el archivo PDF, DOCX, etc. Se usará para el botón Descargar." }
       - { label: "Enlace externo", name: "externalUrl", widget: "string", required: false, hint: "Alternativa: URL completa si el recurso vive fuera del sitio (YouTube, GitHub, etc.)." }
