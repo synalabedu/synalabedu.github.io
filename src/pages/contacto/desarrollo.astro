@@ -34,9 +34,8 @@ const labelClasses = 'block text-sm font-medium text-blanco-puro/80 mb-2';
     <Container class="py-12 md:py-16">
       <div class="max-w-3xl mx-auto">
         <div class="p-8 md:p-12 rounded-2xl border border-blanco-puro/10 bg-blanco-puro/[0.03] backdrop-blur-sm">
-          <form action="https://formspree.io/f/mykaypnp" method="POST" class="space-y-5">
+          <form action="https://formspree.io/f/mykaypnp" method="POST" class="space-y-5" data-contact-form>
             <input type="hidden" name="_subject" value="Synalab — Solicitud de desarrollo a medida" />
-            <input type="hidden" name="_next" value={`${SITE.url}/contacto/gracias`} />
             <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true" />
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -103,6 +102,8 @@ const labelClasses = 'block text-sm font-medium text-blanco-puro/80 mb-2';
               </label>
             </div>
 
+            <div data-form-error class="hidden p-4 rounded-md border border-red-500/30 bg-red-500/10 text-sm text-red-200" role="alert"></div>
+
             <div class="pt-2">
               <Button type="submit" variant="primary">Solicitar cotización</Button>
             </div>
@@ -128,4 +129,70 @@ const labelClasses = 'block text-sm font-medium text-blanco-puro/80 mb-2';
       </div>
     </Container>
   </section>
+  <script>
+  document.querySelectorAll('form[data-contact-form]').forEach((form) => {
+    const submitBtn = form.querySelector('button[type="submit"]') as HTMLButtonElement | null;
+    const errorBox = form.querySelector('[data-form-error]') as HTMLElement | null;
+    const originalBtnHTML = submitBtn ? submitBtn.innerHTML : 'Enviar';
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      // Reset error display
+      if (errorBox) {
+        errorBox.classList.add('hidden');
+        errorBox.textContent = '';
+      }
+
+      // Disable button, show loading state
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = 'Enviando...';
+        submitBtn.style.opacity = '0.6';
+      }
+
+      try {
+        const formData = new FormData(form as HTMLFormElement);
+        const response = await fetch((form as HTMLFormElement).action, {
+          method: 'POST',
+          body: formData,
+          headers: { Accept: 'application/json' }
+        });
+
+        if (response.ok) {
+          window.location.href = '/contacto/gracias';
+          return;
+        }
+
+        let errorMessage = 'No se pudo enviar el mensaje. Por favor intenta de nuevo en unos minutos.';
+        try {
+          const data = await response.json();
+          if (data && data.errors && data.errors.length > 0) {
+            errorMessage = data.errors.map((err: { message: string }) => err.message).join('. ');
+          }
+        } catch {}
+
+        showError(errorMessage);
+      } catch {
+        showError('No se pudo conectar con el servicio. Revisa tu conexión e intenta de nuevo.');
+      }
+
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalBtnHTML;
+        submitBtn.style.opacity = '1';
+      }
+    });
+
+    function showError(message: string) {
+      if (errorBox) {
+        errorBox.textContent = message;
+        errorBox.classList.remove('hidden');
+        errorBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } else {
+        alert(message);
+      }
+    }
+  });
+</script>
 </Layout>
