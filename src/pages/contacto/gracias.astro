@@ -1,0 +1,38 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Container from '../../components/ui/Container.astro';
+import Button from '../../components/ui/Button.astro';
+---
+<Layout
+  title="Mensaje recibido"
+  description="Gracias por escribirnos. Tu mensaje llegó a Synalab y te responderemos pronto."
+>
+  <section>
+    <Container class="py-32 md:py-40">
+      <div class="max-w-2xl mx-auto text-center">
+        <div class="w-16 h-16 rounded-full bg-cyan-synalab/15 border border-cyan-synalab/30 flex items-center justify-center mx-auto mb-8">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-cyan-synalab" aria-hidden="true">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+        </div>
+
+        <p class="text-sm font-semibold tracking-wider uppercase text-cyan-synalab mb-6">
+          Mensaje recibido
+        </p>
+
+        <h1 class="text-4xl md:text-5xl font-bold leading-[1.1] tracking-tight mb-6">
+          Gracias por escribirnos.
+        </h1>
+
+        <p class="text-lg md:text-xl text-blanco-puro/80 leading-relaxed mb-10">
+          Tu mensaje llegó al laboratorio. Lo leeremos con atención y responderemos al correo que indicaste lo antes posible. Por lo general, las respuestas llegan en uno o dos días hábiles.
+        </p>
+
+        <div class="flex flex-wrap gap-3 justify-center">
+          <Button href="/" variant="primary">Volver al inicio</Button>
+          <Button href="/laboratorio" variant="secondary">Ver el laboratorio</Button>
+        </div>
+      </div>
+    </Container>
+  </section>
+</Layout>

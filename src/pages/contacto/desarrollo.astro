@@ -34,7 +34,11 @@ const labelClasses = 'block text-sm font-medium text-blanco-puro/80 mb-2';
     <Container class="py-12 md:py-16">
       <div class="max-w-3xl mx-auto">
         <div class="p-8 md:p-12 rounded-2xl border border-blanco-puro/10 bg-blanco-puro/[0.03] backdrop-blur-sm">
-          <form action="#" class="space-y-5">
+          <form action="https://formspree.io/f/mykaypnp" method="POST" class="space-y-5">
+            <input type="hidden" name="_subject" value="Synalab — Solicitud de desarrollo a medida" />
+            <input type="hidden" name="_next" value={`${SITE.url}/contacto/gracias`} />
+            <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
             <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
               <div>
                 <label for="nombre" class={labelClasses}>Nombre</label>
@@ -91,11 +95,16 @@ const labelClasses = 'block text-sm font-medium text-blanco-puro/80 mb-2';
                 </select>
               </div>
             </div>
-            <div class="flex flex-col sm:flex-row sm:items-center gap-4 pt-2">
+
+            <div class="flex items-start gap-3 pt-2">
+              <input type="checkbox" id="consent-desarrollo" name="consent" required value="aceptado" class="mt-1 w-4 h-4 rounded border-blanco-puro/20 bg-navy-profundo accent-cyan-synalab cursor-pointer flex-shrink-0" />
+              <label for="consent-desarrollo" class="text-sm text-blanco-puro/70 leading-relaxed cursor-pointer">
+                He leído y acepto la <a href="/legal/privacidad" class="text-cyan-synalab underline decoration-cyan-synalab/40 underline-offset-2 hover:decoration-cyan-synalab/80 transition-colors">Política de privacidad</a> y autorizo a Synalab el tratamiento de mis datos personales para evaluar y responder a esta solicitud.
+              </label>
+            </div>
+
+            <div class="pt-2">
               <Button type="submit" variant="primary">Solicitar cotización</Button>
-              <p class="text-xs text-slate-muted">
-                Por ahora este formulario no envía. Escríbenos directamente a {SITE.email}.
-              </p>
             </div>
           </form>
         </div>
