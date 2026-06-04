@@ -2,8 +2,8 @@
 name: "Desarrollo a medida"
 tagline: "¿Existe un problema real que merezca su propia herramienta?"
 description: "Diseñamos y construimos software específico para cada contexto, con criterio contextual, protocolo de seguridad y acuerdos de servicio documentados."
-href: "/contacto"
-cta: "Solicitar cotización"
+href: /contacto/desarrollo
+cta: "Solicitar desarrollo"
 order: 2
 ---
 

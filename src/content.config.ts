@@ -44,6 +44,7 @@ const projects = defineCollection({
       'gpl-3',
     ]).default('cc-by-nc-sa'),
     licenseVersion: z.string().default('4.0'),
+    accessModel: z.enum(['libre', 'acuerdo']).default('libre'),
     scormCompatible: z.boolean().default(false),
     featured: z.boolean().default(false),
     order: z.number().default(99),

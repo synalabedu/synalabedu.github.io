@@ -1,5 +1,6 @@
 ---
 name: "SIGMA"
+accessModel: acuerdo
 status: "desarrollo"
 category: "gestion"
 license: "cc-by-nc-sa"

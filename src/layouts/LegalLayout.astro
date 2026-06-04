@@ -1,0 +1,97 @@
+---
+import Layout from './Layout.astro';
+import Container from '../components/ui/Container.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  lastUpdated: string;
+}
+
+const { title, description, lastUpdated } = Astro.props;
+---
+<Layout title={title} description={description}>
+
+  <section>
+    <Container class="py-24 md:py-32">
+      <div class="max-w-3xl mx-auto">
+        <p class="text-sm font-semibold tracking-wider uppercase text-cyan-synalab mb-6">
+          Marco legal
+        </p>
+        <h1 class="text-4xl md:text-5xl font-bold leading-[1.1] tracking-tight mb-6">
+          {title}
+        </h1>
+        <p class="text-sm text-slate-muted">
+          Última actualización: {lastUpdated}
+        </p>
+      </div>
+    </Container>
+  </section>
+
+  <section>
+    <Container class="pb-20 md:pb-28">
+      <div class="max-w-3xl mx-auto legal-content">
+        <slot />
+      </div>
+    </Container>
+  </section>
+
+</Layout>
+
+<style>
+  .legal-content :global(h2) {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    font-size: 1.5rem;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    color: var(--color-blanco-puro);
+  }
+  .legal-content :global(h3) {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.125rem;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+    color: var(--color-blanco-puro);
+  }
+  .legal-content :global(p) {
+    font-size: 1rem;
+    line-height: 1.75;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 1.25rem;
+  }
+  .legal-content :global(ul),
+  .legal-content :global(ol) {
+    margin-bottom: 1.25rem;
+    padding-left: 1.5rem;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1rem;
+    line-height: 1.75;
+  }
+  .legal-content :global(ul) {
+    list-style: disc;
+  }
+  .legal-content :global(ol) {
+    list-style: decimal;
+  }
+  .legal-content :global(li) {
+    margin-bottom: 0.5rem;
+  }
+  .legal-content :global(strong) {
+    color: var(--color-blanco-puro);
+    font-weight: 600;
+  }
+  .legal-content :global(a) {
+    color: var(--color-cyan-synalab);
+    text-decoration: underline;
+    text-decoration-color: rgba(0, 200, 215, 0.4);
+    text-underline-offset: 2px;
+    transition: color 0.2s;
+  }
+  .legal-content :global(a:hover) {
+    color: rgba(0, 200, 215, 0.8);
+  }
+</style>

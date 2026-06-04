@@ -103,7 +103,14 @@ const licenseUrls: Record<string, string> = {
           {data.description}
         </p>
 
-        {(data.downloadUrl || data.documentationUrl) && (
+        {data.accessModel === 'acuerdo' ? (
+          <div class="flex flex-wrap gap-3 mt-10">
+            <Button href="/contacto" variant="primary">Hablemos sobre este proyecto</Button>
+            {data.documentationUrl && (
+              <Button href={data.documentationUrl} variant="secondary">Documentación</Button>
+            )}
+          </div>
+        ) : (data.downloadUrl || data.documentationUrl) && (
           <div class="flex flex-wrap gap-3 mt-10">
             {data.downloadUrl && (
               <Button href={data.downloadUrl} variant="primary">Descargar</Button>
@@ -116,6 +123,32 @@ const licenseUrls: Record<string, string> = {
       </div>
     </Container>
   </section>
+
+  {data.accessModel === 'acuerdo' && (
+    <section>
+      <Container class="py-12 md:py-16">
+        <div class="max-w-3xl mx-auto">
+          <div class="rounded-2xl border border-cyan-synalab/30 bg-cyan-synalab/[0.05] backdrop-blur-md p-8 md:p-10">
+            <p class="text-sm font-semibold tracking-wider uppercase text-cyan-synalab mb-4">
+              Proyecto de acceso por acuerdo
+            </p>
+            <h2 class="text-2xl md:text-3xl font-bold mb-4 tracking-tight">
+              Este proyecto requiere conversación previa
+            </h2>
+            <p class="text-blanco-puro/80 leading-relaxed mb-4">
+              Por su envergadura técnica y su alcance operativo, {data.name} no se ofrece como descarga directa desde el sitio. Su acceso se define caso por caso mediante un acuerdo específico de uso, ajustado al contexto del solicitante: tipo de organización, problema a resolver, necesidad de personalización y modelo de soporte.
+            </p>
+            <p class="text-blanco-puro/80 leading-relaxed mb-6">
+              Esta diferenciación no compromete la misión pedagógica del estudio: refleja que ciertas soluciones requieren un acompañamiento técnico más cercano y un modelo sostenible de continuidad.
+            </p>
+            <Button href="/contacto" variant="primary">
+              Iniciar conversación
+            </Button>
+          </div>
+        </div>
+      </Container>
+    </section>
+  )}
 
   {data.problem && (
     <section>

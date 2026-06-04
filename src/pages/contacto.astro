@@ -9,9 +9,8 @@ const labelClasses = 'block text-sm font-medium text-blanco-puro/80 mb-2';
 ---
 <Layout
   title="Contacto"
-  description="Conversemos sobre tu proyecto, formación o cualquier consulta. Synalab está abierto a problemas reales que merezcan soluciones bien construidas."
+  description="Conversemos sobre tu consulta, formación o cualquier inquietud. Synalab está abierto a problemas reales que merezcan soluciones bien construidas."
 >
-
   <section>
     <Container class="py-24 md:py-32">
       <div class="max-w-3xl">
@@ -22,7 +21,7 @@ const labelClasses = 'block text-sm font-medium text-blanco-puro/80 mb-2';
           Cuéntanos qué <span class="text-gradient-synalab">problema</span> tienes.
         </h1>
         <p class="text-lg md:text-xl text-blanco-puro/80 leading-relaxed">
-          Tres caminos para empezar: una consulta directa, una solicitud de desarrollo a medida, o un mensaje sobre formación. Elige el que te haga sentido.
+          Para conversar, preguntar por formación, interesarte en un proyecto del laboratorio o cualquier consulta general. Si lo que necesitas es un desarrollo a medida con su propio alcance, hay un <a href="/contacto/desarrollo" class="text-cyan-synalab underline decoration-cyan-synalab/40 underline-offset-2 hover:decoration-cyan-synalab/80 transition-colors">formulario específico para eso</a>.
         </p>
       </div>
     </Container>
@@ -31,7 +30,6 @@ const labelClasses = 'block text-sm font-medium text-blanco-puro/80 mb-2';
   <section>
     <Container class="py-12 md:py-16">
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-
         <div class="p-8 rounded-lg border border-blanco-puro/10 bg-blanco-puro/[0.03] backdrop-blur-sm">
           <div class="w-12 h-12 rounded-md bg-cyan-synalab/10 flex items-center justify-center mb-4">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-cyan-synalab" aria-hidden="true">
@@ -70,13 +68,7 @@ const labelClasses = 'block text-sm font-medium text-blanco-puro/80 mb-2';
           <p class="text-xs font-semibold tracking-wider uppercase text-slate-muted mb-3">Redes</p>
           <ul class="flex gap-3">
             <li>
-              <a
-                href={SOCIAL.instagram}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Instagram de Synalab"
-                class="flex items-center justify-center w-10 h-10 rounded-md border border-blanco-puro/10 text-blanco-puro/80 hover:text-cyan-synalab hover:border-cyan-synalab/40 transition-colors"
-              >
+              <a href={SOCIAL.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram de Synalab" class="flex items-center justify-center w-10 h-10 rounded-md border border-blanco-puro/10 text-blanco-puro/80 hover:text-cyan-synalab hover:border-cyan-synalab/40 transition-colors">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                   <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
                   <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
@@ -85,26 +77,14 @@ const labelClasses = 'block text-sm font-medium text-blanco-puro/80 mb-2';
               </a>
             </li>
             <li>
-              <a
-                href={SOCIAL.facebook}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Facebook de Synalab"
-                class="flex items-center justify-center w-10 h-10 rounded-md border border-blanco-puro/10 text-blanco-puro/80 hover:text-cyan-synalab hover:border-cyan-synalab/40 transition-colors"
-              >
+              <a href={SOCIAL.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook de Synalab" class="flex items-center justify-center w-10 h-10 rounded-md border border-blanco-puro/10 text-blanco-puro/80 hover:text-cyan-synalab hover:border-cyan-synalab/40 transition-colors">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                   <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
                 </svg>
               </a>
             </li>
             <li>
-              <a
-                href={SOCIAL.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="GitHub de Synalab"
-                class="flex items-center justify-center w-10 h-10 rounded-md border border-blanco-puro/10 text-blanco-puro/80 hover:text-cyan-synalab hover:border-cyan-synalab/40 transition-colors"
-              >
+              <a href={SOCIAL.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub de Synalab" class="flex items-center justify-center w-10 h-10 rounded-md border border-blanco-puro/10 text-blanco-puro/80 hover:text-cyan-synalab hover:border-cyan-synalab/40 transition-colors">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                   <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
                 </svg>
@@ -112,7 +92,6 @@ const labelClasses = 'block text-sm font-medium text-blanco-puro/80 mb-2';
             </li>
           </ul>
         </div>
-
       </div>
     </Container>
   </section>
@@ -122,57 +101,33 @@ const labelClasses = 'block text-sm font-medium text-blanco-puro/80 mb-2';
       <div class="max-w-3xl mx-auto">
         <div class="p-8 md:p-12 rounded-2xl border border-blanco-puro/10 bg-blanco-puro/[0.03] backdrop-blur-sm">
           <p class="text-sm font-semibold tracking-wider uppercase text-cyan-synalab mb-4">
-            Consulta general
+            Mensaje general
           </p>
           <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-4">
             Para empezar una conversación.
           </h2>
           <p class="text-base text-blanco-puro/70 mb-8 leading-relaxed">
-            Si tienes una idea, una pregunta sobre formación o algo que quieras explorar, este es el camino corto.
+            Cuéntanos brevemente de qué se trata. Sirve para consultas sobre formación, interés en algún proyecto del laboratorio (incluidos los de acceso por acuerdo) o cualquier otra inquietud.
           </p>
-
           <form action="#" class="space-y-5">
             <div>
-              <label for="nombre-general" class={labelClasses}>Nombre</label>
-              <input
-                type="text"
-                id="nombre-general"
-                name="nombre"
-                required
-                maxlength="80"
-                autocomplete="name"
-                placeholder="Tu nombre"
-                class={inputClasses}
-              />
+              <label for="nombre" class={labelClasses}>Nombre</label>
+              <input type="text" id="nombre" name="nombre" required maxlength="80" autocomplete="name" placeholder="Tu nombre" class={inputClasses} />
             </div>
-
             <div>
-              <label for="correo-general" class={labelClasses}>Correo electrónico</label>
-              <input
-                type="email"
-                id="correo-general"
-                name="email"
-                required
-                maxlength="120"
-                autocomplete="email"
-                placeholder="nombre@correo.com"
-                class={inputClasses}
-              />
+              <label for="email" class={labelClasses}>Correo electrónico</label>
+              <input type="email" id="email" name="email" required maxlength="120" autocomplete="email" placeholder="nombre@correo.com" class={inputClasses} />
             </div>
-
             <div>
-              <label for="mensaje-general" class={labelClasses}>Mensaje</label>
-              <textarea
-                id="mensaje-general"
-                name="mensaje"
-                required
-                maxlength="1500"
-                rows="5"
-                placeholder="Cuéntanos brevemente de qué se trata"
-                class={inputClasses}
-              ></textarea>
+              <label for="asunto" class={labelClasses}>
+                Asunto <span class="text-slate-muted font-normal">(opcional)</span>
+              </label>
+              <input type="text" id="asunto" name="asunto" maxlength="120" placeholder="Sobre qué nos escribes" class={inputClasses} />
             </div>
-
+            <div>
+              <label for="mensaje" class={labelClasses}>Mensaje</label>
+              <textarea id="mensaje" name="mensaje" required maxlength="1500" rows="6" placeholder="Cuéntanos brevemente de qué se trata" class={inputClasses}></textarea>
+            </div>
             <div class="flex flex-col sm:flex-row sm:items-center gap-4">
               <Button type="submit" variant="primary">Enviar mensaje</Button>
               <p class="text-xs text-slate-muted">
@@ -188,132 +143,19 @@ const labelClasses = 'block text-sm font-medium text-blanco-puro/80 mb-2';
   <section>
     <Container class="py-12 md:py-16">
       <div class="max-w-3xl mx-auto">
-        <div class="p-8 md:p-12 rounded-2xl border border-blanco-puro/10 bg-blanco-puro/[0.03] backdrop-blur-sm">
+        <div class="p-8 md:p-10 rounded-2xl border border-cyan-synalab/30 bg-cyan-synalab/[0.05] backdrop-blur-md">
           <p class="text-sm font-semibold tracking-wider uppercase text-cyan-synalab mb-4">
-            Desarrollo a medida
+            ¿Tienes un proyecto de desarrollo a medida?
           </p>
-          <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-4">
-            ¿Tu problema necesita su propia herramienta?
+          <h2 class="text-2xl md:text-3xl font-bold tracking-tight mb-4">
+            Hay un formulario específico para eso.
           </h2>
-          <p class="text-base text-blanco-puro/70 mb-8 leading-relaxed">
-            Para solicitudes de software hecho a medida, cuéntanos algunos detalles. Con eso evaluamos si encaja con el laboratorio y te enviamos una propuesta inicial.
+          <p class="text-base text-blanco-puro/80 leading-relaxed mb-6">
+            Si lo que necesitas es software hecho a medida, una herramienta con su propio alcance o un sistema construido desde cero, te invitamos a usar el formulario detallado de desarrollo. Pide algunos datos adicionales (tipo de proyecto, cronograma, presupuesto estimado) que nos ayudan a entender mejor tu solicitud y enviar una propuesta inicial más ajustada.
           </p>
-
-          <form action="#" class="space-y-5">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-              <div>
-                <label for="nombre-medida" class={labelClasses}>Nombre</label>
-                <input
-                  type="text"
-                  id="nombre-medida"
-                  name="nombre"
-                  required
-                  maxlength="80"
-                  autocomplete="name"
-                  placeholder="Tu nombre"
-                  class={inputClasses}
-                />
-              </div>
-              <div>
-                <label for="correo-medida" class={labelClasses}>Correo electrónico</label>
-                <input
-                  type="email"
-                  id="correo-medida"
-                  name="email"
-                  required
-                  maxlength="120"
-                  autocomplete="email"
-                  placeholder="nombre@correo.com"
-                  class={inputClasses}
-                />
-              </div>
-            </div>
-
-            <div>
-              <label for="organizacion-medida" class={labelClasses}>
-                Organización <span class="text-slate-muted font-normal">(opcional)</span>
-              </label>
-              <input
-                type="text"
-                id="organizacion-medida"
-                name="organizacion"
-                maxlength="120"
-                placeholder="Institución, empresa o colectivo"
-                class={inputClasses}
-              />
-            </div>
-
-            <div>
-              <label for="tipo-proyecto" class={labelClasses}>Tipo de proyecto</label>
-              <select
-                id="tipo-proyecto"
-                name="tipo_proyecto"
-                required
-                class={inputClasses}
-              >
-                <option value="">Selecciona una opción</option>
-                <option value="educativo">Software educativo</option>
-                <option value="gestion">Sistema de gestión</option>
-                <option value="administrativo">Herramienta administrativa</option>
-                <option value="web">Aplicación web o sitio</option>
-                <option value="inclusivo">Tecnología para inclusión</option>
-                <option value="otro">Otro</option>
-              </select>
-            </div>
-
-            <div>
-              <label for="problema-medida" class={labelClasses}>Descripción del problema</label>
-              <textarea
-                id="problema-medida"
-                name="descripcion"
-                required
-                maxlength="2000"
-                rows="5"
-                placeholder="¿Qué problema resuelve? ¿Quién la usaría? ¿Qué herramientas existen hoy y por qué no son suficientes?"
-                class={inputClasses}
-              ></textarea>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-              <div>
-                <label for="cronograma" class={labelClasses}>Cronograma deseado</label>
-                <select
-                  id="cronograma"
-                  name="cronograma"
-                  class={inputClasses}
-                >
-                  <option value="">Sin urgencia definida</option>
-                  <option value="urgente">Lo antes posible</option>
-                  <option value="corto">En 1 a 3 meses</option>
-                  <option value="medio">En 3 a 6 meses</option>
-                  <option value="largo">Más de 6 meses</option>
-                </select>
-              </div>
-              <div>
-                <label for="presupuesto" class={labelClasses}>
-                  Presupuesto estimado <span class="text-slate-muted font-normal">(opcional)</span>
-                </label>
-                <select
-                  id="presupuesto"
-                  name="presupuesto"
-                  class={inputClasses}
-                >
-                  <option value="">Por definir</option>
-                  <option value="menos-5">Menos de $5M COP</option>
-                  <option value="5-15">$5M – $15M COP</option>
-                  <option value="15-30">$15M – $30M COP</option>
-                  <option value="mas-30">Más de $30M COP</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="flex flex-col sm:flex-row sm:items-center gap-4 pt-2">
-              <Button type="submit" variant="primary">Solicitar cotización</Button>
-              <p class="text-xs text-slate-muted">
-                Por ahora este formulario no envía. Escríbenos a {SITE.email}.
-              </p>
-            </div>
-          </form>
+          <Button href="/contacto/desarrollo" variant="primary">
+            Ir al formulario de desarrollo
+          </Button>
         </div>
       </div>
     </Container>
@@ -335,5 +177,4 @@ const labelClasses = 'block text-sm font-medium text-blanco-puro/80 mb-2';
       </div>
     </Container>
   </section>
-
 </Layout>

@@ -1,0 +1,122 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Container from '../../components/ui/Container.astro';
+import Button from '../../components/ui/Button.astro';
+import { SITE } from '../../lib/site';
+
+const inputClasses = 'w-full px-4 py-3 rounded-md border border-blanco-puro/10 bg-blanco-puro/[0.02] text-blanco-puro placeholder:text-blanco-puro/30 focus:border-cyan-synalab/50 focus:bg-blanco-puro/[0.04] focus:outline-none transition-colors';
+const labelClasses = 'block text-sm font-medium text-blanco-puro/80 mb-2';
+---
+<Layout
+  title="Desarrollo a medida"
+  description="Solicita un desarrollo de software a medida para tu organización o proyecto específico. Synalab evalúa cada solicitud caso por caso."
+>
+  <section>
+    <Container class="py-24 md:py-32">
+      <div class="max-w-3xl">
+        <a href="/contacto" class="inline-block mb-8 text-sm text-cyan-synalab hover:text-cyan-synalab/80 transition-colors">
+          ← Volver al contacto general
+        </a>
+        <p class="text-sm font-semibold tracking-wider uppercase text-cyan-synalab mb-6">
+          Desarrollo a medida
+        </p>
+        <h1 class="text-5xl md:text-6xl font-bold leading-[1.05] tracking-tight mb-8">
+          ¿Tu problema necesita su <span class="text-gradient-synalab">propia herramienta</span>?
+        </h1>
+        <p class="text-lg md:text-xl text-blanco-puro/80 leading-relaxed">
+          Para solicitudes de software hecho a medida, este formulario nos da el contexto que necesitamos para evaluar si encaja con el laboratorio y enviarte una propuesta inicial. Tomamos cada solicitud caso por caso, así que mientras más claro sea el problema, mejor la respuesta.
+        </p>
+      </div>
+    </Container>
+  </section>
+
+  <section>
+    <Container class="py-12 md:py-16">
+      <div class="max-w-3xl mx-auto">
+        <div class="p-8 md:p-12 rounded-2xl border border-blanco-puro/10 bg-blanco-puro/[0.03] backdrop-blur-sm">
+          <form action="#" class="space-y-5">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div>
+                <label for="nombre" class={labelClasses}>Nombre</label>
+                <input type="text" id="nombre" name="nombre" required maxlength="80" autocomplete="name" placeholder="Tu nombre" class={inputClasses} />
+              </div>
+              <div>
+                <label for="email" class={labelClasses}>Correo electrónico</label>
+                <input type="email" id="email" name="email" required maxlength="120" autocomplete="email" placeholder="nombre@correo.com" class={inputClasses} />
+              </div>
+            </div>
+            <div>
+              <label for="organizacion" class={labelClasses}>
+                Organización <span class="text-slate-muted font-normal">(opcional)</span>
+              </label>
+              <input type="text" id="organizacion" name="organizacion" maxlength="120" placeholder="Institución, empresa o colectivo" class={inputClasses} />
+            </div>
+            <div>
+              <label for="tipo_proyecto" class={labelClasses}>Tipo de proyecto</label>
+              <select id="tipo_proyecto" name="tipo_proyecto" required class={inputClasses}>
+                <option value="">Selecciona una opción</option>
+                <option value="educativo">Software educativo</option>
+                <option value="gestion">Sistema de gestión</option>
+                <option value="administrativo">Herramienta administrativa</option>
+                <option value="web">Aplicación web o sitio</option>
+                <option value="inclusivo">Tecnología para inclusión</option>
+                <option value="otro">Otro</option>
+              </select>
+            </div>
+            <div>
+              <label for="descripcion" class={labelClasses}>Descripción del problema</label>
+              <textarea id="descripcion" name="descripcion" required maxlength="2000" rows="6" placeholder="¿Qué problema resuelve? ¿Quién la usaría? ¿Qué herramientas existen hoy y por qué no son suficientes?" class={inputClasses}></textarea>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div>
+                <label for="cronograma" class={labelClasses}>Cronograma deseado</label>
+                <select id="cronograma" name="cronograma" class={inputClasses}>
+                  <option value="">Sin urgencia definida</option>
+                  <option value="urgente">Lo antes posible</option>
+                  <option value="corto">En 1 a 3 meses</option>
+                  <option value="medio">En 3 a 6 meses</option>
+                  <option value="largo">Más de 6 meses</option>
+                </select>
+              </div>
+              <div>
+                <label for="presupuesto" class={labelClasses}>
+                  Presupuesto estimado <span class="text-slate-muted font-normal">(opcional)</span>
+                </label>
+                <select id="presupuesto" name="presupuesto" class={inputClasses}>
+                  <option value="">Por definir</option>
+                  <option value="menos-5">Menos de $5M COP</option>
+                  <option value="5-15">$5M – $15M COP</option>
+                  <option value="15-30">$15M – $30M COP</option>
+                  <option value="mas-30">Más de $30M COP</option>
+                </select>
+              </div>
+            </div>
+            <div class="flex flex-col sm:flex-row sm:items-center gap-4 pt-2">
+              <Button type="submit" variant="primary">Solicitar cotización</Button>
+              <p class="text-xs text-slate-muted">
+                Por ahora este formulario no envía. Escríbenos directamente a {SITE.email}.
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <section>
+    <Container class="py-20 md:py-28">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-6">
+          ¿Aún no sabes si tu idea encaja?
+        </h2>
+        <p class="text-lg text-blanco-puro/80 mb-8 leading-relaxed">
+          Antes de enviar la solicitud, conoce los proyectos que ya construyó el laboratorio. Te dará una idea del tipo de problemas que resolvemos y del estilo de software que producimos.
+        </p>
+        <div class="flex flex-wrap gap-3 justify-center">
+          <Button href="/laboratorio" variant="secondary">Ver el laboratorio</Button>
+          <Button href="/manifiesto" variant="secondary">Leer el manifiesto</Button>
+        </div>
+      </div>
+    </Container>
+  </section>
+</Layout>
