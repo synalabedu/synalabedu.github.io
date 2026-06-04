@@ -1,5 +1,6 @@
 ---
 import { SITE, SOCIAL, FOOTER_LINKS } from '../../lib/site';
+import Logo from '../ui/Logo.astro';
 
 const currentYear = new Date().getFullYear();
 ---
@@ -9,11 +10,7 @@ const currentYear = new Date().getFullYear();
     <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12">
 
       <div class="md:col-span-5">
-        <a href="/" class="inline-flex items-baseline" aria-label={`${SITE.name} — Inicio`}>
-          <span class="text-2xl font-display font-bold text-gradient-synalab tracking-tight">
-            SYNALAB
-          </span>
-        </a>
+        <Logo size="footer" />
         <p class="mt-3 text-sm text-blanco-puro/70 max-w-sm">
           {SITE.descriptor}. Estudio independiente de creación de software funcional impulsado por inteligencia artificial.
         </p>

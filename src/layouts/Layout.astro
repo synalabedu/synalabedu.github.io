@@ -26,8 +26,20 @@ const canonicalUrl = new URL(Astro.url.pathname, SITE.url).toString();
 const ogImage = new URL(image, SITE.url).toString();
 ---
 <!doctype html>
-<html lang={SITE.language}>
+<html lang="es">
   <head>
+    <script is:inline>
+      (function() {
+        try {
+          const stored = localStorage.getItem('synalab-theme');
+          const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          const theme = stored || (systemPrefersDark ? 'dark' : 'light');
+          document.documentElement.setAttribute('data-theme', theme);
+        } catch (e) {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        }
+      })();
+    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />

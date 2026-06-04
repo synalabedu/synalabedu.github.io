@@ -204,7 +204,7 @@ const authorInitials = data.author.split(' ').map((n) => n[0]).join('').toUpperC
   .article-content :global(p) {
     font-size: 1.125rem;
     line-height: 1.75;
-    color: rgba(255, 255, 255, 0.8);
+    color: rgb(from var(--color-blanco-puro) r g b / 0.8);
     margin-bottom: 1.5rem;
   }
   .article-content :global(strong) {
@@ -217,18 +217,18 @@ const authorInitials = data.author.split(' ').map((n) => n[0]).join('').toUpperC
   .article-content :global(a) {
     color: var(--color-cyan-synalab);
     text-decoration: underline;
-    text-decoration-color: rgba(0, 200, 215, 0.4);
+    text-decoration-color: rgb(from var(--color-cyan-synalab) r g b / 0.4);
     text-underline-offset: 2px;
     transition: color 0.2s;
   }
   .article-content :global(a:hover) {
-    color: rgba(0, 200, 215, 0.8);
+    color: rgb(from var(--color-cyan-synalab) r g b / 0.8);
   }
   .article-content :global(ul),
   .article-content :global(ol) {
     margin-bottom: 1.5rem;
     padding-left: 1.5rem;
-    color: rgba(255, 255, 255, 0.8);
+    color: rgb(from var(--color-blanco-puro) r g b / 0.8);
     font-size: 1.125rem;
     line-height: 1.75;
   }
@@ -245,12 +245,12 @@ const authorInitials = data.author.split(' ').map((n) => n[0]).join('').toUpperC
     border-left: 3px solid var(--color-cyan-synalab);
     padding-left: 1.5rem;
     margin: 2rem 0;
-    color: rgba(255, 255, 255, 0.9);
+    color: rgb(from var(--color-blanco-puro) r g b / 0.9);
     font-style: italic;
   }
   .article-content :global(code) {
-    background-color: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: rgb(from var(--color-blanco-puro) r g b / 0.06);
+    border: 1px solid rgb(from var(--color-blanco-puro) r g b / 0.1);
     padding: 0.125rem 0.375rem;
     border-radius: 4px;
     font-family: 'Courier New', monospace;
@@ -258,8 +258,8 @@ const authorInitials = data.author.split(' ').map((n) => n[0]).join('').toUpperC
     color: var(--color-cyan-synalab);
   }
   .article-content :global(pre) {
-    background-color: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: rgb(from var(--color-blanco-puro) r g b / 0.03);
+    border: 1px solid rgb(from var(--color-blanco-puro) r g b / 0.1);
     padding: 1.5rem;
     border-radius: 8px;
     overflow-x: auto;
@@ -269,11 +269,11 @@ const authorInitials = data.author.split(' ').map((n) => n[0]).join('').toUpperC
     background: none;
     border: none;
     padding: 0;
-    color: rgba(255, 255, 255, 0.9);
+    color: rgb(from var(--color-blanco-puro) r g b / 0.9);
   }
   .article-content :global(hr) {
     border: 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 1px solid rgb(from var(--color-blanco-puro) r g b / 0.1);
     margin: 3rem 0;
   }
   .article-content :global(img) {

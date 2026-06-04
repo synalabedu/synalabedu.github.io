@@ -1,0 +1,33 @@
+---
+interface Props {
+  size?: 'header' | 'footer';
+  class?: string;
+}
+
+const { size = 'header', class: className = '' } = Astro.props;
+
+const sizeClasses: Record<string, string> = {
+  header: 'h-11 md:h-13',
+  footer: 'h-18 md:h-21',
+};
+---
+<a href="/" class={"inline-flex items-center " + className} aria-label="Synalab — Inicio">
+  <img
+    src="/logos/Logo-blanco.webp"
+    alt="Synalab"
+    class={"logo-dark w-auto " + sizeClasses[size]}
+    width="811"
+    height="514"
+    loading="eager"
+    decoding="async"
+  />
+  <img
+    src="/logos/Logo-oscuro.webp"
+    alt="Synalab"
+    class={"logo-light w-auto " + sizeClasses[size]}
+    width="811"
+    height="514"
+    loading="eager"
+    decoding="async"
+  />
+</a>
