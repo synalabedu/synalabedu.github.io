@@ -4,6 +4,22 @@ import { SITE } from '../lib/site';
 import Header from '../components/layout/Header.astro';
 import Footer from '../components/layout/Footer.astro';
 
+// Content Security Policy: lista blanca de orígenes permitidos.
+// Si añades un nuevo servicio externo (Stripe, YouTube embed, etc.),
+// agrégalo a la directiva correspondiente.
+const csp = [
+  "default-src 'self'",
+  "script-src 'self' 'unsafe-inline' https://gc.zgo.at",
+  "style-src 'self' 'unsafe-inline'",
+  "img-src 'self' data: https:",
+  "font-src 'self' data:",
+  "connect-src 'self' https://formspree.io https://*.goatcounter.com https://gc.zgo.at",
+  "form-action 'self' https://formspree.io",
+  "base-uri 'self'",
+  "object-src 'none'",
+  "upgrade-insecure-requests"
+].join('; ');
+
 interface Props {
   title?: string;
   description?: string;
@@ -41,6 +57,11 @@ const ogImage = new URL(image, SITE.url).toString();
       })();
     </script>
     <meta charset="UTF-8" />
+    <meta http-equiv="Content-Security-Policy" content={csp} />
+
+  <script is:inline>
+    /* tu script anti-flash existente */
+  </script>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
 
