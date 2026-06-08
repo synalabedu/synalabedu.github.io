@@ -1,23 +1,14 @@
 ---
 name: "Programación práctica"
-description: "Llevar las ideas a código real, con proyectos que se puedan usar. Cubre desde lo básico (variables, lógica, estructuras) hasta lo intermedio (proyectos web, scripts útiles, automatizaciones). El énfasis siempre está en el problema concreto, no en el lenguaje."
+description: "Aprende a transformar ideas en soluciones funcionales mediante proyectos reales. Desde los fundamentos de la programación hasta el desarrollo de aplicaciones, el énfasis está en comprender el problema, diseñar la solución y construirla con criterio."
 order: 2
 modalities:
   - type: "tutoria"
-    name: "Tutoría individual"
-    description: "Acompañamiento personalizado para proyectos propios o aprendizaje guiado de un lenguaje específico."
-    duration: "10 a 16 sesiones"
-    format: "En línea o presencial en Cali"
-  - type: "intensivo"
-    name: "Programa intensivo"
-    description: "Ruta formativa estructurada que termina con un proyecto entregable construido por el estudiante."
-    duration: "8 a 12 semanas"
-    format: "Grupos pequeños, sesiones semanales en línea o presenciales"
-  - type: "taller"
-    name: "Taller temático"
-    description: "Sesión grupal enfocada en una habilidad específica: introducción a un lenguaje, automatización con scripts, primer proyecto web."
-    duration: "6 a 8 horas"
-    format: "Presencial o en línea"
+    name: "Programación desde cero"
+    description: "Aprende a construir programas y aplicaciones comprendiendo la lógica detrás del código, paso a paso y mediante proyectos reales."
+    duration: "10 a 16 sesiones."
+    format: "En línea o presencial en Cali."
+  
 ---
 
 Contenido extendido del pilar formativo. Editable desde el panel administrativo.

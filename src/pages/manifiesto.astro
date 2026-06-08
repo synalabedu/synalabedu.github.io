@@ -4,14 +4,14 @@ import Container from '../components/ui/Container.astro';
 import Button from '../components/ui/Button.astro';
 import { SITE } from '../lib/site';
 
-const valores = [
+const principios = [
   {
     nombre: 'Propósito antes que código',
     descripcion: 'Toda herramienta parte de una necesidad real identificada. Si no existe una necesidad clara, no existe razón para construirla.',
   },
   {
     nombre: 'Seguridad no negociable',
-    descripcion: 'Nada sale del laboratorio sin haber pasado el protocolo de seguridad propio. Quince reglas aplicadas a cada línea de código, sin excepción.',
+    descripcion: 'Nada sale del laboratorio sin validación. Más de 90 reglas se aplican según alcance, propósito y riesgo.',
   },
   {
     nombre: 'Local-first',
@@ -24,6 +24,29 @@ const valores = [
   {
     nombre: 'Replicabilidad',
     descripcion: 'Las mejores soluciones trascienden el problema que las originó. Cada herramienta debe poder adaptarse, evolucionar y generar valor en nuevos contextos.',
+  },
+];
+
+const valores = [
+  {
+    nombre: 'Criterio',
+    descripcion: 'La tecnología es una herramienta, no un fin. Cada decisión de diseño, desarrollo o implementación debe responder a una necesidad real y tener una razón clara para existir.',
+  },
+  {
+    nombre: 'Responsabilidad',
+    descripcion: 'Desarrollar software implica asumir las consecuencias de lo que se crea. Cada solución debe desarrollarse con rigor, validarse en contexto y entregarse con estándares profesionales.',
+  },
+  {
+    nombre: 'Utilidad',
+    descripcion: 'El valor de una herramienta se mide por su capacidad para resolver problemas reales. Si una solución no aporta una mejora concreta, no justifica ser construida.',
+  },
+  {
+    nombre: 'Seguridad',
+    descripcion: 'La confianza se construye protegiendo aquello que importa. La seguridad forma parte del proceso de desarrollo desde el inicio y no se considera una característica opcional.',
+  },
+  {
+    nombre: 'Autonomía',
+    descripcion: 'Las personas deben mantener el control sobre sus herramientas y sus datos. Por ello, las soluciones se diseñan para reducir dependencias innecesarias y favorecer la sostenibilidad a largo plazo.',
   },
 ];
 ---
@@ -76,7 +99,7 @@ const valores = [
           ¿Qué es?
         </p>
         <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-8">
-          Un estudio independiente con principios.
+          Un estudio independiente con principios
         </h2>
         <div class="space-y-6 text-lg text-blanco-puro/80 leading-relaxed">
           <p>
@@ -97,14 +120,14 @@ const valores = [
           El principio
         </p>
         <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-8">
-          Un laboratorio se define por cómo trabaja, no por lo que construye.
+          Un laboratorio se define por cómo trabaja, no por lo que construye
         </h2>
         <div class="space-y-6 text-lg text-blanco-puro/80 leading-relaxed">
           <p>
-            Un laboratorio no establece de antemano cuál será el resultado final; establece el método con el que abordará cada problema. Synalab opera bajo ese principio: los estándares de criterio, seguridad y funcionalidad permanecen constantes, mientras que las necesidades y contextos pueden cambiar.
+            Un laboratorio no se define por un catálogo de productos, sino por el método que utiliza para construirlos. Synalab opera bajo ese principio: los estándares de criterio, seguridad, funcionalidad y calidad permanecen constantes; lo que cambia es la necesidad que se busca resolver.
           </p>
           <p>
-            Esa flexibilidad no implica ausencia de enfoque, sino la consecuencia natural de trabajar con un método sólido. La experiencia educativa es el punto de partida, no el límite. Desde esa base se desarrollan herramientas aplicables a cualquier entorno donde exista un problema real que merezca una solución útil.
+            Esa flexibilidad no implica ausencia de enfoque. Por el contrario, es el resultado de trabajar con un proceso de desarrollo claro y consistente. Cuando el método es sólido, el dominio del problema puede variar sin comprometer los principios que orientan la construcción de cada solución.
           </p>
         </div>
       </div>
@@ -134,27 +157,107 @@ const valores = [
     </Container>
   </section>
 
+<section>
+  <Container class="py-20 md:py-28">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-5xl mx-auto">
+      <div class="relative overflow-hidden rounded-2xl border border-cyan-synalab/20 p-8 md:p-10">
+        <div class="absolute inset-0 -z-10 pointer-events-none" aria-hidden="true">
+          <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-cyan-synalab/10 via-transparent to-electric-blue/5"></div>
+        </div>
+        <p class="text-sm font-semibold tracking-wider uppercase text-cyan-synalab mb-4">
+          Misión
+        </p>
+        <h2 class="text-2xl md:text-3xl font-bold tracking-tight mb-6">
+          Lo que hacemos cada día
+        </h2>
+        <p class="text-base md:text-lg text-blanco-puro/85 leading-relaxed">
+          Diseñar y desarrollar software funcional, seguro y útil mediante <span class="text-gradient-synalab font-semibold">vibe coding</span>, transformando necesidades reales en soluciones digitales confiables. Cada herramienta se construye bajo criterios claros de utilidad, estándares propios de seguridad y un proceso de desarrollo orientado a generar valor en contextos reales de uso.
+        </p>
+      </div>
+
+      <div class="relative overflow-hidden rounded-2xl border border-violet-deep/20 p-8 md:p-10">
+        <div class="absolute inset-0 -z-10 pointer-events-none" aria-hidden="true">
+          <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-violet-deep/10 via-transparent to-cyan-synalab/5"></div>
+        </div>
+        <p class="text-sm font-semibold tracking-wider uppercase text-cyan-synalab mb-4">
+          Visión
+        </p>
+        <h2 class="text-2xl md:text-3xl font-bold tracking-tight mb-6">
+          Hacia dónde vamos
+        </h2>
+        <div class="flex items-baseline gap-3 mb-5">
+          <span class="text-5xl md:text-6xl font-bold text-gradient-synalab leading-none">
+            2032
+          </span>
+          <span class="text-base md:text-lg text-blanco-puro/60 font-medium">
+            el horizonte
+          </span>
+        </div>
+        <p class="text-base md:text-lg text-blanco-puro/85 leading-relaxed">
+          Ser reconocido en Latinoamérica como un laboratorio independiente de desarrollo de software que demuestra cómo la inteligencia artificial, aplicada con criterio, estándares de seguridad y comprensión contextual, puede generar soluciones útiles para problemas reales en diversos entornos.
+        </p>
+      </div>
+    </div>
+  </Container>
+</section>
+
+<section>
+  <Container class="py-20 md:py-28">
+    <div class="max-w-3xl mx-auto mb-16 text-center">
+      <p class="text-sm font-semibold tracking-wider uppercase text-cyan-synalab mb-4">
+        Lo que creemos
+      </p>
+      <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-6">
+        Nuestros valores
+      </h2>
+      <p class="text-lg text-blanco-puro/80 leading-relaxed">
+        Cinco creencias que sostienen cada decisión del laboratorio.
+      </p>
+    </div>
+    <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
+      {valores.map((valor, index) => (
+        <div class={`group relative overflow-hidden rounded-2xl border border-blanco-puro/10 p-8 md:p-10 transition-all duration-300 hover:border-cyan-synalab/40 hover:-translate-y-1 ${index === 4 ? 'md:col-span-2' : ''}`}>
+          <div class="absolute inset-0 -z-10 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300" aria-hidden="true">
+            <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-cyan-synalab/5 via-transparent to-violet-deep/5"></div>
+          </div>
+          <div class="flex items-start gap-5 md:gap-6">
+            <span class="text-5xl md:text-6xl font-bold text-gradient-synalab leading-none flex-shrink-0">
+              {String(index + 1).padStart(2, '0')}
+            </span>
+            <div class="flex-1">
+              <h3 class="text-xl md:text-2xl font-semibold mb-3">{valor.nombre}</h3>
+              <p class="text-base md:text-lg text-blanco-puro/80 leading-relaxed">
+                {valor.descripcion}
+              </p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </Container>
+</section>
+
   <section>
     <Container class="py-20 md:py-28">
       <div class="max-w-3xl mb-16">
         <p class="text-sm font-semibold tracking-wider uppercase text-cyan-synalab mb-4">
-          Valores
+          Principios
         </p>
         <h2 class="text-3xl md:text-4xl font-bold tracking-tight">
-          Cinco principios que no se negocian.
+          Cinco principios que no se negocian
         </h2>
       </div>
 
       <div class="max-w-3xl space-y-12">
-        {valores.map((valor, index) => (
+        {principios.map((principio, index) => (
           <div class="grid grid-cols-[auto_1fr] gap-6 md:gap-8">
             <span class="text-5xl md:text-6xl font-bold text-gradient-synalab leading-none">
               {String(index + 1).padStart(2, '0')}
             </span>
             <div>
-              <h3 class="text-xl md:text-2xl font-semibold mb-3">{valor.nombre}</h3>
+              <h3 class="text-xl md:text-2xl font-semibold mb-3">{principio.nombre}</h3>
               <p class="text-lg text-blanco-puro/80 leading-relaxed">
-                {valor.descripcion}
+                {principio.descripcion}
               </p>
             </div>
           </div>

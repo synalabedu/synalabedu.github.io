@@ -1,7 +1,7 @@
 ---
 title: "Recursos"
 heroEyebrow: "Recursos del laboratorio"
-heroTitle: "Material práctico para tu contexto."
-heroDescription: "Guías, plantillas, documentos y enlaces que extienden el trabajo del laboratorio. Algunos son gratuitos y de acceso abierto, otros tienen condiciones de uso específicas. Todos pasaron por el criterio del estudio."
+heroTitle: "Proyectos, herramientas y conocimiento aplicado"
+heroDescription: "Una colección de desarrollos, documentos, guías y recursos surgidos del trabajo del laboratorio. Cada publicación responde a una necesidad real y refleja los principios de construcción, utilidad y seguridad que definen a Synalab."
 seoDescription: "Recursos descargables de Synalab: guías, plantillas y documentos para educación, gestión y productividad. Material curado bajo el criterio del laboratorio."
 ---

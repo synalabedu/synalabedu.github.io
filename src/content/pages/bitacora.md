@@ -1,7 +1,7 @@
 ---
 title: "Bitácora"
 heroEyebrow: "Bitácora del laboratorio"
-heroTitle: "Notas desde el taller."
-heroDescription: "Reflexiones sobre construcción de software con criterio, decisiones del laboratorio, tutoriales prácticos y aprendizajes de cada proyecto. Sin calendario fijo: aquí se publica cuando hay algo que vale la pena decir."
+heroTitle: "Ideas, procesos y aprendizajes compartidos"
+heroDescription: "Reflexiones sobre construcción de software, inteligencia artificial, tecnología, educación y decisiones del laboratorio. Un espacio para documentar experiencias, compartir conocimiento y registrar aquello que merece ser construido, aprendido o discutido."
 seoDescription: "Bitácora editorial de Synalab: reflexiones, tutoriales y notas sobre construcción de software con IA, educación inclusiva y tecnología consciente."
 ---

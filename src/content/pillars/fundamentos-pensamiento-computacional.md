@@ -1,18 +1,14 @@
 ---
 name: "Fundamentos del pensamiento computacional"
-description: "La base de todo el resto. Lógica formal, resolución de problemas, descomposición, abstracción y reconocimiento de patrones. Sin lenguajes ni sintaxis: el músculo mental que después permite aprender cualquier tecnología sin perderse en el ruido."
+description: "La base sobre la que se construye todo lo demás. Desarrollo de la lógica, la resolución estructurada de problemas, la abstracción y el reconocimiento de patrones. Antes de aprender herramientas o lenguajes, se fortalece la capacidad de pensar con claridad y construir soluciones."
 order: 1
 modalities:
   - type: "tutoria"
-    name: "Tutoría individual"
-    description: "Acompañamiento uno a uno para construir las bases desde cero, al ritmo del estudiante."
-    duration: "8 a 12 sesiones"
-    format: "En línea o presencial en Cali"
-  - type: "taller"
-    name: "Taller introductorio"
-    description: "Sesión grupal corta para introducir el pensamiento computacional a estudiantes o docentes que se enfrentan al tema por primera vez."
-    duration: "4 a 6 horas"
-    format: "Presencial o en línea, grupos de hasta 20 personas"
+    name: "Pensamiento computacional"
+    description: "La base para desarrollar lógica, reconocer patrones, descomponer problemas y diseñar soluciones antes de programar."
+    duration: "8 a 12 sesiones."
+    format: "En línea o presencial en Cali."
+
 ---
 
 Contenido extendido del pilar formativo. Editable desde el panel administrativo.
