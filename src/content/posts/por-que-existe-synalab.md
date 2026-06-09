@@ -1,10 +1,15 @@
 ---
-title: "Por qué Synalab existe"
-excerpt: "Un estudio independiente que combina pedagogía, criterio humano y construcción de software con IA. Pero ¿por qué hacer falta uno más? Aquí la razón."
+title: Por qué Synalab existe
+excerpt: Un estudio independiente que combina pedagogía, criterio humano y construcción de software con IA. Pero ¿por qué hacer falta uno más? Aquí la razón.
 publishedAt: 2025-01-15
-category: "reflexion"
-tags: ["manifiesto", "synalab", "ia"]
-author: "Jader Castro"
+updatedAt: ''
+category: reflexion
+tags:
+  - manifiesto
+  - synalab
+  - ia
+  - PDF
+author: Jader Castro
 featured: true
 draft: false
 ---
