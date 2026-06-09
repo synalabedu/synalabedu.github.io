@@ -129,61 +129,53 @@ const categoryCounts = {
     <Container class="pb-20 md:pb-28">
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {resources.map((resource) => (
-          <article data-type={resource.data.type} data-category={resource.data.category} class="resource-card group rounded-lg border border-blanco-puro/10 bg-blanco-puro/[0.03] backdrop-blur-sm hover:border-cyan-synalab/40 hover:bg-blanco-puro/[0.05] transition-all flex flex-col p-6">
-
-            <div class="flex flex-wrap items-center gap-2 mb-5">
-              <span class="px-2.5 py-1 text-[10px] font-bold tracking-wider uppercase rounded-full bg-cyan-synalab/15 text-cyan-synalab border border-cyan-synalab/30">
-                {typeLabels[resource.data.type] || resource.data.type}
-              </span>
-              <span class="px-2.5 py-1 text-[10px] font-medium tracking-wider uppercase rounded-full bg-blanco-puro/[0.05] text-blanco-puro/70 border border-blanco-puro/10">
-                {categoryLabels[resource.data.category] || resource.data.category}
-              </span>
-              <span class="ml-auto text-xs font-semibold tracking-wider uppercase">
-                {resource.data.isFree ? (
-                  <span class="text-cyan-synalab">Gratis</span>
-                ) : (
-                  <span class="text-violet-deep">{resource.data.price}</span>
-                )}
+          <a href={"/recursos/" + resource.id} data-type={resource.data.type} data-category={resource.data.category} class="resource-card group rounded-lg border border-blanco-puro/10 bg-blanco-puro/[0.03] backdrop-blur-sm hover:border-cyan-synalab/40 hover:bg-blanco-puro/[0.05] transition-all flex flex-col overflow-hidden">
+            {resource.data.coverImage && (
+              <div class="aspect-video overflow-hidden bg-blanco-puro/[0.03]">
+                <img src={resource.data.coverImage} alt={resource.data.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+              </div>
+            )}
+            <div class="p-6 flex flex-col flex-grow">
+              <div class="flex flex-wrap items-center gap-2 mb-5">
+                <span class="px-2.5 py-1 text-[10px] font-bold tracking-wider uppercase rounded-full bg-cyan-synalab/15 text-cyan-synalab border border-cyan-synalab/30">
+                  {typeLabels[resource.data.type] || resource.data.type}
+                </span>
+                <span class="px-2.5 py-1 text-[10px] font-medium tracking-wider uppercase rounded-full bg-blanco-puro/[0.05] text-blanco-puro/70 border border-blanco-puro/10">
+                  {categoryLabels[resource.data.category] || resource.data.category}
+                </span>
+                <span class="ml-auto text-xs font-semibold tracking-wider uppercase">
+                  {resource.data.isFree ? (
+                    <span class="text-cyan-synalab">Gratis</span>
+                  ) : (
+                    <span class="text-violet-deep">{resource.data.price}</span>
+                  )}
+                </span>
+              </div>
+              <h2 class="text-xl font-semibold mb-3 leading-tight group-hover:text-cyan-synalab transition-colors">
+                {resource.data.title}
+              </h2>
+              <p class="text-blanco-puro/70 leading-relaxed text-sm mb-5 flex-grow">
+                {resource.data.description}
+              </p>
+              {resource.data.tags && resource.data.tags.length > 0 && (
+                <div class="mb-5 flex flex-wrap gap-2">
+                  {resource.data.tags.map((tag) => (
+                    <TagBadge tag={tag} section="recursos" size="sm" linked={false} />
+                  ))}
+                </div>
+              )}
+              {(resource.data.fileFormat || resource.data.fileSize) && (
+                <div class="flex items-center gap-2 text-xs text-slate-muted mb-5 pb-5 border-b border-blanco-puro/[0.06]">
+                  {resource.data.fileFormat && <span>{resource.data.fileFormat}</span>}
+                  {resource.data.fileFormat && resource.data.fileSize && <span aria-hidden="true">·</span>}
+                  {resource.data.fileSize && <span>{resource.data.fileSize}</span>}
+                </div>
+              )}
+              <span class="text-sm text-cyan-synalab font-medium mt-auto">
+                Ver detalle →
               </span>
             </div>
-
-            <h2 class="text-xl font-semibold mb-3 leading-tight group-hover:text-cyan-synalab transition-colors">
-              {resource.data.title}
-            </h2>
-
-            <p class="text-blanco-puro/70 leading-relaxed text-sm mb-5 flex-grow">
-              {resource.data.description}
-            </p>
-            {resource.data.tags && resource.data.tags.length > 0 && (
-              <div class="mb-5 flex flex-wrap gap-2">
-                {resource.data.tags.map((tag) => (
-                  <TagBadge tag={tag} section="recursos" size="sm" />
-                ))}
-              </div>
-            )}
-            {(resource.data.fileFormat || resource.data.fileSize) && (
-              <div class="flex items-center gap-2 text-xs text-slate-muted mb-5 pb-5 border-b border-blanco-puro/[0.06]">
-                {resource.data.fileFormat && <span>{resource.data.fileFormat}</span>}
-                {resource.data.fileFormat && resource.data.fileSize && <span aria-hidden="true">·</span>}
-                {resource.data.fileSize && <span>{resource.data.fileSize}</span>}
-              </div>
-            )}
-
-            {resource.data.downloadUrl ? (
-              <a href={resource.data.downloadUrl} download class="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-md bg-cyan-synalab/10 border border-cyan-synalab/30 text-cyan-synalab text-sm font-medium hover:bg-cyan-synalab/20 transition-colors">
-                Descargar
-              </a>
-            ) : resource.data.externalUrl ? (
-              <a href={resource.data.externalUrl} target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-md bg-cyan-synalab/10 border border-cyan-synalab/30 text-cyan-synalab text-sm font-medium hover:bg-cyan-synalab/20 transition-colors">
-                Ver recurso ↗
-              </a>
-            ) : (
-              <span class="inline-flex items-center justify-center px-4 py-2.5 rounded-md border border-blanco-puro/10 text-slate-muted text-sm">
-                Próximamente
-              </span>
-            )}
-
-          </article>
+          </a>
         ))}
       </div>
 

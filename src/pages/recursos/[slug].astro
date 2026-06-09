@@ -1,0 +1,305 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Container from '../../components/ui/Container.astro';
+import Button from '../../components/ui/Button.astro';
+import TagBadge from '../../components/ui/TagBadge.astro';
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+  const resources = await getCollection('resources');
+  return resources.map((resource) => ({
+    params: { slug: resource.id },
+    props: { resource },
+  }));
+}
+
+interface Props {
+  resource: CollectionEntry<'resources'>;
+}
+
+const { resource } = Astro.props;
+const { Content } = await render(resource);
+const { data } = resource;
+
+const allResources = await getCollection('resources');
+const relatedResources = allResources
+  .filter((r) => r.id !== resource.id && r.data.category === data.category)
+  .sort((a, b) => {
+    if (a.data.order !== b.data.order) return a.data.order - b.data.order;
+    return new Date(b.data.publishedAt).getTime() - new Date(a.data.publishedAt).getTime();
+  })
+  .slice(0, 3);
+
+const typeLabels: Record<string, string> = {
+  guia: 'Guía',
+  plantilla: 'Plantilla',
+  documento: 'Documento',
+  video: 'Video',
+  enlace: 'Enlace',
+};
+
+const categoryLabels: Record<string, string> = {
+  educacion: 'Educación',
+  gestion: 'Gestión',
+  productividad: 'Productividad',
+  general: 'General',
+};
+
+function formatDate(date: Date | string): string {
+  return new Intl.DateTimeFormat('es-CO', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  }).format(new Date(date));
+}
+---
+
+<Layout title={data.title} description={data.description}>
+  <article>
+    <section>
+      <Container class="py-24 md:py-32">
+        <div class="max-w-3xl mx-auto">
+          <a href="/recursos" class="inline-block mb-8 text-sm text-cyan-synalab hover:text-cyan-synalab/80 transition-colors">
+            ← Volver a Recursos
+          </a>
+
+          <div class="flex flex-wrap items-center gap-2 mb-6">
+            <span class="px-2.5 py-1 text-[10px] font-bold tracking-wider uppercase rounded-full bg-cyan-synalab/15 text-cyan-synalab border border-cyan-synalab/30">
+              {typeLabels[data.type] || data.type}
+            </span>
+            <span class="px-2.5 py-1 text-[10px] font-medium tracking-wider uppercase rounded-full bg-blanco-puro/[0.05] text-blanco-puro/70 border border-blanco-puro/10">
+              {categoryLabels[data.category] || data.category}
+            </span>
+            <span class="ml-auto text-xs font-semibold tracking-wider uppercase">
+              {data.isFree ? (
+                <span class="text-cyan-synalab">Gratis</span>
+              ) : (
+                <span class="text-violet-deep">{data.price}</span>
+              )}
+            </span>
+          </div>
+
+          <h1 class="text-4xl md:text-6xl font-bold leading-[1.1] tracking-tight mb-6">
+            {data.title}
+          </h1>
+
+          <p class="text-lg md:text-xl text-blanco-puro/80 leading-relaxed mb-8">
+            {data.description}
+          </p>
+
+          <div class="flex flex-wrap items-center gap-3 text-sm text-slate-muted pb-8 border-b border-blanco-puro/10">
+            {data.fileFormat && <span>{data.fileFormat}</span>}
+            {data.fileFormat && data.fileSize && <span aria-hidden="true">·</span>}
+            {data.fileSize && <span>{data.fileSize}</span>}
+            {(data.fileFormat || data.fileSize) && <span aria-hidden="true">·</span>}
+            <time datetime={new Date(data.publishedAt).toISOString()}>
+              Publicado el {formatDate(data.publishedAt)}
+            </time>
+          </div>
+        </div>
+      </Container>
+    </section>
+
+    {data.coverImage && (
+      <section>
+        <Container class="pb-12">
+          <div class="max-w-5xl mx-auto">
+            <img src={data.coverImage} alt={data.title} class="w-full h-auto rounded-2xl border border-blanco-puro/10" loading="lazy" />
+          </div>
+        </Container>
+      </section>
+    )}
+
+    <section>
+      <Container class="pb-12">
+        <div class="max-w-3xl mx-auto flex flex-wrap gap-3">
+          {data.downloadUrl && (
+            <Button href={data.downloadUrl} variant="primary" size="lg">
+              Descargar recurso
+            </Button>
+          )}
+          {!data.downloadUrl && data.externalUrl && (
+            <Button href={data.externalUrl} variant="primary" size="lg">
+              Ver recurso ↗
+            </Button>
+          )}
+          {!data.downloadUrl && !data.externalUrl && (
+            <p class="text-slate-muted text-sm">Próximamente disponible.</p>
+          )}
+        </div>
+      </Container>
+    </section>
+
+    <section>
+      <Container class="pb-12">
+        <div class="max-w-3xl mx-auto article-content">
+          <Content />
+        </div>
+      </Container>
+    </section>
+
+    {data.tags && data.tags.length > 0 && (
+      <section>
+        <Container class="pb-16">
+          <div class="max-w-3xl mx-auto">
+            <p class="text-xs font-semibold tracking-wider uppercase text-slate-muted mb-3">
+              Etiquetas
+            </p>
+            <div class="flex flex-wrap gap-2">
+              {data.tags.map((tag) => (
+                <TagBadge tag={tag} section="recursos" size="md" />
+              ))}
+            </div>
+          </div>
+        </Container>
+      </section>
+    )}
+  </article>
+
+  {relatedResources.length > 0 && (
+    <section>
+      <Container class="py-16 md:py-20">
+        <p class="text-sm font-semibold tracking-wider uppercase text-cyan-synalab mb-4">Recursos relacionados</p>
+        <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-12">Otros recursos de esta categoría</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {relatedResources.map((related) => (
+            <a href={"/recursos/" + related.id} class="group p-6 rounded-lg border border-blanco-puro/10 bg-blanco-puro/[0.03] backdrop-blur-sm hover:border-cyan-synalab/40 hover:bg-blanco-puro/[0.05] transition-all flex flex-col">
+              <div class="flex items-center gap-2 mb-4">
+                <span class="px-2 py-0.5 text-[10px] font-bold tracking-wider uppercase rounded-full bg-cyan-synalab/15 text-cyan-synalab border border-cyan-synalab/30">
+                  {typeLabels[related.data.type] || related.data.type}
+                </span>
+              </div>
+              <h3 class="text-lg font-semibold mb-3 group-hover:text-cyan-synalab transition-colors leading-tight">
+                {related.data.title}
+              </h3>
+              <p class="text-blanco-puro/70 leading-relaxed text-sm flex-grow">
+                {related.data.description}
+              </p>
+            </a>
+          ))}
+        </div>
+      </Container>
+    </section>
+  )}
+
+  <section>
+    <Container class="py-20 md:py-28">
+      <div class="relative max-w-3xl mx-auto overflow-hidden rounded-2xl border border-blanco-puro/10 bg-blanco-puro/[0.03] backdrop-blur-md p-10 md:p-14">
+        <p class="text-sm font-semibold tracking-wider uppercase text-cyan-synalab mb-6">¿Necesitas algo más?</p>
+        <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-6">¿Este recurso no resuelve tu caso?</h2>
+        <p class="text-lg text-blanco-puro/80 mb-10 leading-relaxed">
+          Adaptamos plantillas, creamos contenidos a medida y diseñamos soluciones para necesidades específicas. Conversemos sobre lo que necesitas.
+        </p>
+        <Button href="/contacto" variant="primary" size="lg">Hablemos</Button>
+      </div>
+    </Container>
+  </section>
+</Layout>
+
+<style>
+  .article-content :global(h2),
+  .article-content :global(h3),
+  .article-content :global(h4) {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    color: var(--color-blanco-puro);
+  }
+  .article-content :global(h2) {
+    font-size: 1.875rem;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+  }
+  .article-content :global(h3) {
+    font-size: 1.5rem;
+    margin-top: 2.5rem;
+    margin-bottom: 0.75rem;
+  }
+  .article-content :global(h4) {
+    font-size: 1.25rem;
+    margin-top: 2rem;
+    margin-bottom: 0.5rem;
+  }
+  .article-content :global(p) {
+    font-size: 1.125rem;
+    line-height: 1.75;
+    color: rgb(from var(--color-blanco-puro) r g b / 0.8);
+    margin-bottom: 1.5rem;
+  }
+  .article-content :global(strong) {
+    color: var(--color-blanco-puro);
+    font-weight: 600;
+  }
+  .article-content :global(em) {
+    font-style: italic;
+  }
+  .article-content :global(a) {
+    color: var(--color-cyan-synalab);
+    text-decoration: underline;
+    text-decoration-color: rgb(from var(--color-cyan-synalab) r g b / 0.4);
+    text-underline-offset: 2px;
+    transition: color 0.2s;
+  }
+  .article-content :global(a:hover) {
+    color: rgb(from var(--color-cyan-synalab) r g b / 0.8);
+  }
+  .article-content :global(ul),
+  .article-content :global(ol) {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+    color: rgb(from var(--color-blanco-puro) r g b / 0.8);
+    font-size: 1.125rem;
+    line-height: 1.75;
+  }
+  .article-content :global(ul) {
+    list-style: disc;
+  }
+  .article-content :global(ol) {
+    list-style: decimal;
+  }
+  .article-content :global(li) {
+    margin-bottom: 0.5rem;
+  }
+  .article-content :global(blockquote) {
+    border-left: 3px solid var(--color-cyan-synalab);
+    padding-left: 1.5rem;
+    margin: 2rem 0;
+    color: rgb(from var(--color-blanco-puro) r g b / 0.9);
+    font-style: italic;
+  }
+  .article-content :global(code) {
+    background-color: rgb(from var(--color-blanco-puro) r g b / 0.06);
+    border: 1px solid rgb(from var(--color-blanco-puro) r g b / 0.1);
+    padding: 0.125rem 0.375rem;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9em;
+    color: var(--color-cyan-synalab);
+  }
+  .article-content :global(pre) {
+    background-color: rgb(from var(--color-blanco-puro) r g b / 0.03);
+    border: 1px solid rgb(from var(--color-blanco-puro) r g b / 0.1);
+    padding: 1.5rem;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 2rem 0;
+  }
+  .article-content :global(pre code) {
+    background: none;
+    border: none;
+    padding: 0;
+    color: rgb(from var(--color-blanco-puro) r g b / 0.9);
+  }
+  .article-content :global(hr) {
+    border: 0;
+    border-top: 1px solid rgb(from var(--color-blanco-puro) r g b / 0.1);
+    margin: 3rem 0;
+  }
+  .article-content :global(img) {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 2rem 0;
+  }
+</style>
