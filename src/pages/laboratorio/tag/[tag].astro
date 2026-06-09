@@ -6,9 +6,7 @@ import TagBadge from '../../../components/ui/TagBadge.astro';
 import { slugify } from '../../../lib/slugify';
 
 export async function getStaticPaths() {
-  const projects = await getCollection('projects', ({ data }) =>
-    data.status === 'published'
-  );
+  const projects = await getCollection('projects');
 
   const tagMap = new Map<string, { tag: string; projects: typeof projects }>();
 

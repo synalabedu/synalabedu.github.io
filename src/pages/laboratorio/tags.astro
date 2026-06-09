@@ -4,9 +4,7 @@ import Layout from '../../layouts/Layout.astro';
 import Container from '../../components/ui/Container.astro';
 import TagBadge from '../../components/ui/TagBadge.astro';
 
-const projects = await getCollection('projects', ({ data }) =>
-  data.status === 'published'
-);
+const projects = await getCollection('projects');
 
 const tagCounts = new Map<string, number>();
 projects.forEach((project) => {
