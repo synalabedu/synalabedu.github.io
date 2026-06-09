@@ -39,6 +39,7 @@ collections:
           - { label: "Educación", value: "educacion" }
           - { label: "Gestión", value: "gestion" }
           - { label: "Productividad", value: "productividad" }
+      - { label: "Etiquetas", name: "tags", widget: "list", required: false, default: [], hint: "Palabras clave para clasificar y filtrar el proyecto. Ej: ia, robotica, accesibilidad. Usa minúsculas sin acentos para consistencia." }
       - name: "license"
         label: "Licencia"
         widget: "select"
@@ -221,7 +222,7 @@ collections:
           - { label: "Tutorial", value: "tutorial" }
           - { label: "Caso de uso", value: "caso-de-uso" }
           - { label: "Anuncio", value: "anuncio" }
-      - { label: "Etiquetas", name: "tags", widget: "list", required: false, hint: "Palabras clave separadas. Ej: ia, seguridad, manifiesto." }
+      - { label: "Etiquetas", name: "tags", widget: "list", required: false, default: [], hint: "Palabras clave para clasificar y filtrar el artículo. Ej: ia, seguridad, manifiesto. Usa minúsculas sin acentos para consistencia." }
       - { label: "Autor", name: "author", widget: "string", default: "Jader Castro" }
       - { label: "Destacado", name: "featured", widget: "boolean", default: false, hint: "Marca este artículo como destacado." }
       - { label: "Borrador", name: "draft", widget: "boolean", default: false, hint: "Si está activo, el artículo NO se publica en el sitio." }
@@ -263,6 +264,7 @@ collections:
           - { label: "Gestión", value: "gestion" }
           - { label: "Productividad", value: "productividad" }
           - { label: "General", value: "general" }
+      - { label: "Etiquetas", name: "tags", widget: "list", required: false, default: [], hint: "Palabras clave para clasificar el recurso. Ej: ia, seguridad, plantilla. Usa minúsculas sin acentos para consistencia." }
       - { label: "Fecha de publicación", name: "publishedAt", widget: "datetime", type: "date", format: "YYYY-MM-DD" }
       - { label: "Imagen de portada", name: "coverImage", widget: "image", required: false, media_folder: "/public/uploads/resources", public_folder: "/uploads/resources", hint: "Opcional." }
       - { label: "Archivo descargable", name: "downloadUrl", widget: "file", required: false, media_folder: "/public/uploads/resources", public_folder: "/uploads/resources", hint: "Sube el archivo PDF, DOCX, etc. Se usará para el botón Descargar." }
