@@ -47,5 +47,6 @@ export const FOOTER_LINKS = {
     { label: 'Política de privacidad', href: '/legal/privacidad' },
     { label: 'Términos de uso del sitio', href: '/legal/terminos-sitio' },
     { label: 'Términos de uso del software', href: '/legal/terminos-software' },
+    { label: 'Licencias y derechos de uso', href: '/legal/licencias' },
   ],
 } as const;
