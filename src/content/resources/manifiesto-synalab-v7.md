@@ -3,6 +3,9 @@ title: Manifiesto Synalab v7.0
 description: Documento maestro de marca, principios y método del laboratorio. Versión 7.0 del manifiesto fundacional con todos los valores, protocolos y criterios de evaluación de proyectos.
 type: documento
 category: general
+tags:
+  - PDF
+  - Legal
 publishedAt: 2025-01-10
 coverImage: https://mailrelay.com/wp-content/uploads/2018/03/que-es-un-blog-1.png
 downloadUrl: /uploads/Informe_SEMTI_2025-2026.md
