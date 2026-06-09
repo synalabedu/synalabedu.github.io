@@ -8,6 +8,7 @@ category: reflexion
 tags:
   - prueba
   - juanprueba
+  - prueba2
 author: Jader Castro
 featured: true
 draft: false
