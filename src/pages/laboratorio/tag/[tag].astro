@@ -8,25 +8,31 @@ import { slugify } from '../../../lib/slugify';
 export async function getStaticPaths() {
   const projects = await getCollection('projects');
 
-  const tagMap = new Map<string, { tag: string; projects: typeof projects }>();
+  const tagMap = new Map();
 
   projects.forEach((project) => {
-    (project.data.tags || []).forEach((tag) => {
+    const tags = project.data.tags || [];
+    tags.forEach((tag) => {
       const slug = slugify(tag);
       if (!tagMap.has(slug)) {
-        tagMap.set(slug, { tag, projects: [] });
+        tagMap.set(slug, { tag: tag, projects: [] });
       }
-      tagMap.get(slug)!.projects.push(project);
+      tagMap.get(slug).projects.push(project);
     });
   });
 
-  return Array.from(tagMap.entries()).map(([slug, { tag, projects }]) => ({
-    params: { tag: slug },
-    props: {
-      tag,
-      projects: projects.sort((a, b) => a.data.order - b.data.order),
-    },
-  }));
+  const paths = [];
+  tagMap.forEach((value, slug) => {
+    const sortedProjects = value.projects.sort(function (a, b) {
+      return a.data.order - b.data.order;
+    });
+    paths.push({
+      params: { tag: slug },
+      props: { tag: value.tag, projects: sortedProjects }
+    });
+  });
+
+  return paths;
 }
 
 const { tag, projects } = Astro.props;
@@ -39,10 +45,7 @@ const { tag, projects } = Astro.props;
   <section>
     <Container class="py-20 md:py-24">
       <div class="max-w-3xl">
-        
-          href="/laboratorio"
-          class="text-sm text-cyan-synalab hover:underline mb-6 inline-block"
-        >
+        <a href="/laboratorio" class="text-sm text-cyan-synalab hover:underline mb-6 inline-block">
           ← Volver a Laboratorio
         </a>
         <p class="text-sm font-semibold tracking-wider uppercase text-cyan-synalab mb-4">
@@ -65,12 +68,9 @@ const { tag, projects } = Astro.props;
     <Container class="pb-24">
       <div class="max-w-5xl grid grid-cols-1 md:grid-cols-2 gap-6">
         {projects.map((project) => (
-          <a
-            href={`/laboratorio/${project.slug}`}
-            class="group block p-6 rounded-2xl border border-blanco-puro/10 hover:border-cyan-synalab/40 transition-all hover:-translate-y-1"
-          >
+          <a href={"/laboratorio/" + project.id} class="group block p-6 rounded-2xl border border-blanco-puro/10 hover:border-cyan-synalab/40 transition-all hover:-translate-y-1">
             <h2 class="text-xl md:text-2xl font-semibold tracking-tight mb-3 group-hover:text-cyan-synalab transition-colors">
-              {project.data.title}
+              {project.data.name}
             </h2>
             <p class="text-base text-blanco-puro/80 leading-relaxed mb-4">
               {project.data.tagline}
@@ -78,7 +78,7 @@ const { tag, projects } = Astro.props;
             {project.data.tags && project.data.tags.length > 0 && (
               <div class="flex flex-wrap gap-2">
                 {project.data.tags.map((t) => (
-                  <TagBadge tag={t} section="laboratorio" size="sm" />
+                  <TagBadge tag={t} section="laboratorio" size="sm" linked={false} />
                 ))}
               </div>
             )}
