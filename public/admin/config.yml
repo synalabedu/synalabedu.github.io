@@ -56,7 +56,6 @@ collections:
           - { label: "MIT", value: "mit" }
           - { label: "GPL v3", value: "gpl-3" }
       - { name: "licenseVersion", label: "Versión de licencia", widget: "string", default: "4.0", required: true }
-      - { name: "licenseVersion", label: "Versión de licencia", widget: "string", default: "4.0", required: true }
       - name: "accessModel"
         label: "Modelo de acceso"
         widget: "select"
@@ -65,7 +64,6 @@ collections:
         options:
           - { label: "Acceso libre (descarga directa)", value: "libre" }
           - { label: "Acceso por acuerdo (contactar para uso)", value: "acuerdo" }
-      - { name: "coverImage", label: "Imagen de portada", widget: "image", required: false, hint: "Aspect ratio recomendado: 16:9 (1600x900). Formato preferido: WebP." }
       - { name: "coverImage", label: "Imagen de portada", widget: "image", required: false, hint: "Aspect ratio recomendado: 16:9 (1600x900). Formato preferido: WebP." }
       - { name: "tagline", label: "Frase resumen (tagline)", widget: "string", required: true }
       - { name: "description", label: "Descripción corta (1-2 frases)", widget: "text", required: true }
