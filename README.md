@@ -2,8 +2,6 @@
   <img src="./public/logos/Logo-blanco.webp" alt="Synalab" width="120" />
 </p>
 
-<h1 align="center">Synalab</h1>
-
 <p align="center">
   <strong>Educación Tecnológica Consciente</strong><br/>
   <sub>Estudio independiente de creación de software funcional impulsado por inteligencia artificial.</sub><br/>
@@ -57,9 +55,11 @@ Código fuente del **sitio web oficial de Synalab**, construido como sitio está
 
 ## Licencia
 
-El **código** de este repositorio está bajo licencia [MIT](LICENSE). Eres libre de usar, modificar, distribuir o vender el código manteniendo el aviso de copyright original.
+El **código** de este repositorio está bajo licencia [GNU GPL v3](LICENSE). Eres libre de usar, modificar y redistribuir el código, pero cualquier obra derivada debe distribuirse también bajo GPL v3, manteniendo el código fuente abierto y preservando el aviso de copyright original.
 
-El **contenido editorial** (textos, imágenes, recursos pedagógicos, manifiesto) tiene licencias específicas indicadas en cada proyecto y recurso, generalmente bajo Creative Commons. Consulta cada pieza de contenido para conocer sus términos específicos.
+El **contenido editorial** (textos, imágenes, recursos pedagógicos, manifiesto) está, salvo indicación contraria, bajo licencia [Creative Commons BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es): puedes compartirlo y adaptarlo para fines no comerciales, dando atribución y compartiendo cualquier obra derivada bajo la misma licencia. Cada proyecto y recurso puede declarar una licencia específica diferente.
+
+La **marca "Synalab"** y el logo asociado son propiedad de Jader Castro y no están cubiertos por las licencias anteriores. Su uso requiere autorización explícita.
 
 ---
 
