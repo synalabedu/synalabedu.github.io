@@ -1,11 +1,14 @@
 ---
-title: "Guía de implementación: Ordena tu Día en aula"
-description: "Manual paso a paso para implementar Ordena tu Día en aulas con estudiantes con TEA o diversidad cognitiva. Desde la instalación inicial hasta la creación de secuencias personalizadas."
-type: "guia"
-category: "educacion"
+title: 'Guía de implementación: Ordena tu Día en aula'
+description: Manual paso a paso para implementar Ordena tu Día en aulas con estudiantes con TEA o diversidad cognitiva. Desde la instalación inicial hasta la creación de secuencias personalizadas.
+type: guia
+category: educacion
+tags:
+  - PDF
 publishedAt: 2025-02-15
-fileFormat: "PDF"
-fileSize: "24 páginas"
+externalUrl: ''
+fileFormat: PDF
+fileSize: 24 páginas
 isFree: true
 order: 2
 ---
