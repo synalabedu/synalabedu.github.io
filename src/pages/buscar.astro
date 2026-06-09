@@ -1,0 +1,151 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Container from '../components/ui/Container.astro';
+---
+
+<Layout
+  title="Buscar"
+  description="Encuentra artículos, proyectos y recursos en todo el sitio de Synalab."
+>
+  <section>
+    <Container class="py-24 md:py-32">
+      <div class="max-w-3xl mx-auto">
+        <p class="text-sm font-semibold tracking-wider uppercase text-cyan-synalab mb-6">
+          Búsqueda
+        </p>
+        <h1 class="text-5xl md:text-6xl font-bold leading-[1.05] tracking-tight mb-8">
+          Buscar en Synalab
+        </h1>
+        <p class="text-lg md:text-xl text-blanco-puro/80 leading-relaxed mb-12">
+          Encuentra artículos de la bitácora, proyectos del laboratorio y recursos descargables. La búsqueda se ejecuta completa en tu navegador: ninguna consulta sale a un servidor externo.
+        </p>
+
+        <div id="search"></div>
+
+        <noscript>
+          <p class="mt-8 p-4 rounded-lg border border-blanco-puro/10 bg-blanco-puro/[0.03] text-blanco-puro/70">
+            La búsqueda requiere JavaScript activo en tu navegador.
+          </p>
+        </noscript>
+
+        <p class="mt-16 text-sm text-slate-muted">
+          Búsqueda implementada con <a href="https://pagefind.app" target="_blank" rel="noopener noreferrer" class="text-cyan-synalab hover:underline">Pagefind</a>: indexación estática, sin servidor, sin tracking.
+        </p>
+      </div>
+    </Container>
+  </section>
+</Layout>
+
+<link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
+<script src="/pagefind/pagefind-ui.js" is:inline></script>
+
+<script is:inline>
+  window.addEventListener('DOMContentLoaded', function () {
+    if (typeof PagefindUI === 'undefined') {
+      var searchDiv = document.getElementById('search');
+      if (searchDiv) {
+        searchDiv.innerHTML = '<p style="padding: 1rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.03); color: rgba(255,255,255,0.7);">La búsqueda solo funciona en el sitio publicado. En desarrollo local, ejecuta <code style="color: var(--color-cyan-synalab);">npm run build &amp;&amp; npm run preview</code> para probarla.</p>';
+      }
+      return;
+    }
+    new PagefindUI({
+      element: '#search',
+      showSubResults: true,
+      showImages: false,
+      resetStyles: false,
+      translations: {
+        placeholder: 'Buscar en el sitio…',
+        clear_search: 'Limpiar',
+        load_more: 'Cargar más resultados',
+        search_label: 'Buscar en el sitio',
+        filters_label: 'Filtros',
+        zero_results: 'No se encontraron resultados para [SEARCH_TERM]',
+        many_results: '[COUNT] resultados para [SEARCH_TERM]',
+        one_result: '1 resultado para [SEARCH_TERM]',
+        alt_search: 'No se encontraron resultados para [SEARCH_TERM]. Mostrando resultados para [DIFFERENT_TERM]',
+        search_suggestion: 'No se encontraron resultados para [SEARCH_TERM]. Intenta con:',
+        searching: 'Buscando [SEARCH_TERM]…'
+      }
+    });
+  });
+</script>
+
+<style is:global>
+  .pagefind-ui {
+    --pagefind-ui-scale: 1;
+    --pagefind-ui-primary: var(--color-cyan-synalab);
+    --pagefind-ui-text: var(--color-blanco-puro);
+    --pagefind-ui-background: rgb(from var(--color-blanco-puro) r g b / 0.03);
+    --pagefind-ui-border: rgb(from var(--color-blanco-puro) r g b / 0.1);
+    --pagefind-ui-tag: rgb(from var(--color-blanco-puro) r g b / 0.05);
+    --pagefind-ui-border-width: 1px;
+    --pagefind-ui-border-radius: 12px;
+    --pagefind-ui-image-border-radius: 8px;
+    --pagefind-ui-image-box-ratio: 3 / 2;
+    --pagefind-ui-font: inherit;
+  }
+
+  .pagefind-ui__search-input {
+    background-color: rgb(from var(--color-blanco-puro) r g b / 0.03) !important;
+    color: var(--color-blanco-puro) !important;
+    border-color: rgb(from var(--color-blanco-puro) r g b / 0.1) !important;
+  }
+
+  .pagefind-ui__search-input::placeholder {
+    color: rgb(from var(--color-blanco-puro) r g b / 0.4) !important;
+  }
+
+  .pagefind-ui__search-input:focus {
+    border-color: var(--color-cyan-synalab) !important;
+    outline: none !important;
+    box-shadow: 0 0 0 3px rgb(from var(--color-cyan-synalab) r g b / 0.15) !important;
+  }
+
+  .pagefind-ui__search-clear {
+    color: var(--color-cyan-synalab) !important;
+  }
+
+  .pagefind-ui__result {
+    border-color: rgb(from var(--color-blanco-puro) r g b / 0.1) !important;
+    padding: 1.25rem 0 !important;
+  }
+
+  .pagefind-ui__result-link {
+    color: var(--color-blanco-puro) !important;
+    font-weight: 600 !important;
+    transition: color 0.2s !important;
+  }
+
+  .pagefind-ui__result-link:hover {
+    color: var(--color-cyan-synalab) !important;
+  }
+
+  .pagefind-ui__result-excerpt {
+    color: rgb(from var(--color-blanco-puro) r g b / 0.7) !important;
+    line-height: 1.6 !important;
+  }
+
+  .pagefind-ui__result-excerpt mark {
+    background-color: rgb(from var(--color-cyan-synalab) r g b / 0.2) !important;
+    color: var(--color-cyan-synalab) !important;
+    padding: 0 0.25rem !important;
+    border-radius: 3px !important;
+    font-weight: 600 !important;
+  }
+
+  .pagefind-ui__message {
+    color: rgb(from var(--color-blanco-puro) r g b / 0.7) !important;
+  }
+
+  .pagefind-ui__button {
+    background-color: rgb(from var(--color-cyan-synalab) r g b / 0.1) !important;
+    color: var(--color-cyan-synalab) !important;
+    border: 1px solid rgb(from var(--color-cyan-synalab) r g b / 0.3) !important;
+    border-radius: 8px !important;
+    transition: all 0.2s !important;
+  }
+
+  .pagefind-ui__button:hover {
+    background-color: rgb(from var(--color-cyan-synalab) r g b / 0.2) !important;
+  }
+</style>
