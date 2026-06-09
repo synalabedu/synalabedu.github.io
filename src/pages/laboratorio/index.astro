@@ -4,6 +4,7 @@ import Container from '../../components/ui/Container.astro';
 import Badge from '../../components/ui/Badge.astro';
 import ProjectCover from '../../components/ui/ProjectCover.astro';
 import { getCollection, getEntry } from 'astro:content';
+import TagBadge from '../../components/ui/TagBadge.astro';
 
 const page = await getEntry('pages', 'laboratorio');
 
@@ -89,7 +90,11 @@ const categoryCounts = {
           </button>
         </div>
       </div>
-
+      <div>
+        <a href="/laboratorio/tags" class="text-sm text-cyan-synalab hover:underline inline-flex items-center gap-1">
+          Ver todas las etiquetas →
+        </a>
+      </div>
     </Container>
   </section>
 
@@ -112,6 +117,13 @@ const categoryCounts = {
               <p class="text-blanco-puro/70 leading-relaxed mb-6 flex-grow">
                 {project.data.tagline}
               </p>
+              {project.data.tags && project.data.tags.length > 0 && (
+                <div class="mb-4 flex flex-wrap gap-2">
+                  {project.data.tags.map((tag) => (
+                    <TagBadge tag={tag} section="laboratorio" size="sm" linked={false} />
+                  ))}
+                </div>
+              )}
               <span class="text-sm text-cyan-synalab font-medium">
                 Ver detalle →
               </span>

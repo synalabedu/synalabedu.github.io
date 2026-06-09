@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Container from '../components/ui/Container.astro';
 import { getCollection, getEntry } from 'astro:content';
+import TagBadge from '../components/ui/TagBadge.astro';
 
 const page = await getEntry('pages', 'recursos');
 
@@ -114,6 +115,11 @@ const categoryCounts = {
             </button>
           </div>
         </div>
+        <div>
+          <a href="/recursos/tags" class="text-sm text-cyan-synalab hover:underline inline-flex items-center gap-1">
+            Ver todas las etiquetas →
+          </a>
+        </div>
 
       </div>
     </Container>
@@ -148,7 +154,13 @@ const categoryCounts = {
             <p class="text-blanco-puro/70 leading-relaxed text-sm mb-5 flex-grow">
               {resource.data.description}
             </p>
-
+            {resource.data.tags && resource.data.tags.length > 0 && (
+              <div class="mb-5 flex flex-wrap gap-2">
+                {resource.data.tags.map((tag) => (
+                  <TagBadge tag={tag} section="recursos" size="sm" />
+                ))}
+              </div>
+            )}
             {(resource.data.fileFormat || resource.data.fileSize) && (
               <div class="flex items-center gap-2 text-xs text-slate-muted mb-5 pb-5 border-b border-blanco-puro/[0.06]">
                 {resource.data.fileFormat && <span>{resource.data.fileFormat}</span>}

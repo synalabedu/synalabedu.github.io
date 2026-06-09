@@ -1,0 +1,94 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../../layouts/Layout.astro';
+import Container from '../../../components/ui/Container.astro';
+import TagBadge from '../../../components/ui/TagBadge.astro';
+import PostCover from '../../../components/ui/PostCover.astro';
+import { slugify } from '../../../lib/slugify';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts', ({ data }) => !data.draft);
+
+  // Construye un mapa: slug → { tagOriginal, posts[] }
+  const tagMap = new Map<string, { tag: string; posts: typeof posts }>();
+
+  posts.forEach((post) => {
+    (post.data.tags || []).forEach((tag) => {
+      const slug = slugify(tag);
+      if (!tagMap.has(slug)) {
+        tagMap.set(slug, { tag, posts: [] });
+      }
+      tagMap.get(slug)!.posts.push(post);
+    });
+  });
+
+  return Array.from(tagMap.entries()).map(([slug, { tag, posts }]) => ({
+    params: { tag: slug },
+    props: {
+      tag,
+      posts: posts.sort(
+        (a, b) => new Date(b.data.publishedAt).getTime() - new Date(a.data.publishedAt).getTime()
+      ),
+    },
+  }));
+}
+
+const { tag, posts } = Astro.props;
+---
+
+<Layout
+  title={`Etiqueta: ${tag} | Bitácora`}
+  description={`Artículos de la Bitácora etiquetados como ${tag}.`}
+>
+  <section>
+    <Container class="py-20 md:py-24">
+      <div class="max-w-3xl">
+        <a
+          href="/bitacora"
+          class="text-sm text-cyan-synalab hover:underline mb-6 inline-block"
+        >
+          ← Volver a Bitácora
+        </a>
+        <p class="text-sm font-semibold tracking-wider uppercase text-cyan-synalab mb-4">
+          Etiqueta
+        </p>
+        <div class="flex items-center gap-4 mb-6 flex-wrap">
+          <h1 class="text-4xl md:text-5xl font-bold tracking-tight">
+            {tag}
+          </h1>
+          <TagBadge tag={tag} section="bitacora" linked={false} size="md" />
+        </div>
+        <p class="text-lg text-blanco-puro/80">
+          {posts.length} {posts.length === 1 ? 'artículo' : 'artículos'} con esta etiqueta.
+        </p>
+      </div>
+    </Container>
+  </section>
+
+  <section>
+    <Container class="pb-24">
+      <div class="max-w-3xl space-y-12">
+        {posts.map((post) => (
+          <article class="group">
+            <a href={`/bitacora/${post.slug}`} class="block">
+              <PostCover post={post} />
+              <h2 class="text-2xl md:text-3xl font-bold tracking-tight mt-6 mb-3 group-hover:text-cyan-synalab transition-colors">
+                {post.data.title}
+              </h2>
+              <p class="text-base text-blanco-puro/80 leading-relaxed">
+                {post.data.excerpt}
+              </p>
+            </a>
+            {post.data.tags && post.data.tags.length > 0 && (
+              <div class="mt-4 flex flex-wrap gap-2">
+                {post.data.tags.map((t) => (
+                  <TagBadge tag={t} section="bitacora" size="sm" />
+                ))}
+              </div>
+            )}
+          </article>
+        ))}
+      </div>
+    </Container>
+  </section>
+</Layout>

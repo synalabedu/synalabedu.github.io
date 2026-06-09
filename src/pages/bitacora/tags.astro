@@ -1,0 +1,64 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Container from '../../components/ui/Container.astro';
+import TagBadge from '../../components/ui/TagBadge.astro';
+
+const posts = await getCollection('posts', ({ data }) => !data.draft);
+
+// Cuenta cuántos posts hay por tag
+const tagCounts = new Map<string, number>();
+posts.forEach((post) => {
+  (post.data.tags || []).forEach((tag) => {
+    tagCounts.set(tag, (tagCounts.get(tag) || 0) + 1);
+  });
+});
+
+// Ordena por cantidad descendente, luego alfabéticamente
+const tagsOrdered = Array.from(tagCounts.entries()).sort((a, b) => {
+  if (b[1] !== a[1]) return b[1] - a[1];
+  return a[0].localeCompare(b[0]);
+});
+---
+
+<Layout
+  title="Etiquetas | Bitácora"
+  description="Todas las etiquetas usadas en la Bitácora de Synalab."
+>
+  <section>
+    <Container class="py-20 md:py-24">
+      <div class="max-w-3xl">
+        <a
+          href="/bitacora"
+          class="text-sm text-cyan-synalab hover:underline mb-6 inline-block"
+        >
+          ← Volver a Bitácora
+        </a>
+        <p class="text-sm font-semibold tracking-wider uppercase text-cyan-synalab mb-4">
+          Bitácora
+        </p>
+        <h1 class="text-4xl md:text-5xl font-bold tracking-tight mb-6">
+          Todas las etiquetas
+        </h1>
+        <p class="text-lg text-blanco-puro/80 mb-12">
+          {tagsOrdered.length} {tagsOrdered.length === 1 ? 'etiqueta' : 'etiquetas'} en uso.
+        </p>
+
+        {tagsOrdered.length === 0 ? (
+          <p class="text-blanco-puro/60">
+            Aún no hay artículos etiquetados.
+          </p>
+        ) : (
+          <div class="flex flex-wrap gap-3">
+            {tagsOrdered.map(([tag, count]) => (
+              <div class="flex items-center gap-2">
+                <TagBadge tag={tag} section="bitacora" size="md" />
+                <span class="text-sm text-blanco-puro/60">{count}</span>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </Container>
+  </section>
+</Layout>

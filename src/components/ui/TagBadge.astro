@@ -1,0 +1,45 @@
+---
+import { slugify } from '../../lib/slugify';
+
+interface Props {
+  tag: string;
+  /** A qué sección pertenece el tag para construir el link */
+  section: 'bitacora' | 'laboratorio' | 'recursos';
+  /** Si es false, renderiza como span no clickeable (para tag activo en filtro) */
+  linked?: boolean;
+  /** Tamaño visual */
+  size?: 'sm' | 'md';
+}
+
+const { tag, section, linked = true, size = 'md' } = Astro.props;
+
+const slug = slugify(tag);
+const href = `/${section}/tag/${slug}`;
+
+const sizeClasses = {
+  sm: 'px-2.5 py-0.5 text-xs',
+  md: 'px-3 py-1 text-sm',
+};
+
+const baseClasses = [
+  'inline-flex items-center rounded-full font-medium',
+  'border transition-colors duration-200',
+  sizeClasses[size],
+].join(' ');
+
+const interactiveClasses = linked
+  ? 'border-cyan-synalab/20 bg-cyan-synalab/10 text-cyan-synalab hover:bg-cyan-synalab/20 hover:border-cyan-synalab/40 cursor-pointer'
+  : 'border-cyan-synalab/40 bg-cyan-synalab/15 text-cyan-synalab cursor-default';
+
+const classes = `${baseClasses} ${interactiveClasses}`;
+---
+
+{linked ? (
+  <a href={href} class={classes}>
+    {tag}
+  </a>
+) : (
+  <span class={classes}>
+    {tag}
+  </span>
+)}

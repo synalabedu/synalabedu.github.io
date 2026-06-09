@@ -1,0 +1,98 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../../layouts/Layout.astro';
+import Container from '../../../components/ui/Container.astro';
+import TagBadge from '../../../components/ui/TagBadge.astro';
+import { slugify } from '../../../lib/slugify';
+
+export async function getStaticPaths() {
+  const resources = await getCollection('resources');
+
+  const tagMap = new Map<string, { tag: string; resources: typeof resources }>();
+
+  resources.forEach((resource) => {
+    (resource.data.tags || []).forEach((tag) => {
+      const slug = slugify(tag);
+      if (!tagMap.has(slug)) {
+        tagMap.set(slug, { tag, resources: [] });
+      }
+      tagMap.get(slug)!.resources.push(resource);
+    });
+  });
+
+  return Array.from(tagMap.entries()).map(([slug, { tag, resources }]) => ({
+    params: { tag: slug },
+    props: {
+      tag,
+      resources: resources.sort(
+        (a, b) => new Date(b.data.publishedAt).getTime() - new Date(a.data.publishedAt).getTime()
+      ),
+    },
+  }));
+}
+
+const { tag, resources } = Astro.props;
+---
+
+<Layout
+  title={`Etiqueta: ${tag} | Recursos`}
+  description={`Recursos descargables etiquetados como ${tag}.`}
+>
+  <section>
+    <Container class="py-20 md:py-24">
+      <div class="max-w-3xl">
+        <a
+          href="/recursos"
+          class="text-sm text-cyan-synalab hover:underline mb-6 inline-block"
+        >
+          ← Volver a Recursos
+        </a>
+        <p class="text-sm font-semibold tracking-wider uppercase text-cyan-synalab mb-4">
+          Etiqueta
+        </p>
+        <div class="flex items-center gap-4 mb-6 flex-wrap">
+          <h1 class="text-4xl md:text-5xl font-bold tracking-tight">
+            {tag}
+          </h1>
+          <TagBadge tag={tag} section="recursos" linked={false} size="md" />
+        </div>
+        <p class="text-lg text-blanco-puro/80">
+          {resources.length} {resources.length === 1 ? 'recurso' : 'recursos'} con esta etiqueta.
+        </p>
+      </div>
+    </Container>
+  </section>
+
+  <section>
+    <Container class="pb-24">
+      <div class="max-w-3xl grid grid-cols-1 md:grid-cols-2 gap-6">
+        {resources.map((resource) => (
+          <article class="group p-6 rounded-2xl border border-blanco-puro/10 hover:border-cyan-synalab/40 transition-all">
+            <h2 class="text-xl font-semibold tracking-tight mb-3">
+              {resource.data.title}
+            </h2>
+            <p class="text-base text-blanco-puro/80 leading-relaxed mb-4">
+              {resource.data.description}
+            </p>
+            {resource.data.tags && resource.data.tags.length > 0 && (
+              <div class="flex flex-wrap gap-2 mb-4">
+                {resource.data.tags.map((t) => (
+                  <TagBadge tag={t} section="recursos" size="sm" />
+                ))}
+              </div>
+            )}
+            {resource.data.file && (
+              
+                href={resource.data.file}
+                class="inline-flex items-center gap-2 text-cyan-synalab hover:underline text-sm font-medium"
+                download
+              >
+                ↓ Descargar
+              </a>
+            )}
+          </article>
+        ))}
+      </div>
+    </Container>
+  </section>
+</Layout>

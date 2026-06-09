@@ -4,6 +4,7 @@ import Container from '../../components/ui/Container.astro';
 import Button from '../../components/ui/Button.astro';
 import PostCover from '../../components/ui/PostCover.astro';
 import { getCollection, render, type CollectionEntry } from 'astro:content';
+import TagBadge from '../../components/ui/TagBadge.astro';
 
 export async function getStaticPaths() {
   const posts = await getCollection('posts');
@@ -117,9 +118,7 @@ const authorInitials = data.author.split(' ').map((n) => n[0]).join('').toUpperC
             </p>
             <div class="flex flex-wrap gap-2">
               {data.tags.map((tag) => (
-                <span class="px-3 py-1.5 text-sm rounded-full border border-blanco-puro/10 bg-blanco-puro/[0.03] text-blanco-puro/80">
-                  {tag}
-                </span>
+                <TagBadge tag={tag} section="bitacora" size="md" />
               ))}
             </div>
           </div>

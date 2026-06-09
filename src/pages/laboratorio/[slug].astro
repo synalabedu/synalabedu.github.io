@@ -5,6 +5,7 @@ import Button from '../../components/ui/Button.astro';
 import Badge from '../../components/ui/Badge.astro';
 import ProjectCover from '../../components/ui/ProjectCover.astro';
 import { getCollection, type CollectionEntry } from 'astro:content';
+import TagBadge from '../../components/ui/TagBadge.astro';
 
 export async function getStaticPaths() {
   const projects = await getCollection('projects');
@@ -256,6 +257,21 @@ const licenseUrls: Record<string, string> = {
               </div>
             )}
           </dl>
+        </div>
+      </Container>
+    </section>
+  )}
+
+  {data.tags && data.tags.length > 0 && (
+    <section>
+      <Container class="py-12 md:py-16">
+        <div class="max-w-3xl">
+          <p class="text-sm font-semibold tracking-wider uppercase text-cyan-synalab mb-4">Etiquetas</p>
+          <div class="flex flex-wrap gap-2">
+            {data.tags.map((tag) => (
+              <TagBadge tag={tag} section="laboratorio" size="md" />
+            ))}
+          </div>
         </div>
       </Container>
     </section>
