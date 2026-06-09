@@ -5,6 +5,7 @@ type: guia
 category: educacion
 tags:
   - PDF
+  - Ejemplo
 publishedAt: 2025-02-15
 externalUrl: ''
 fileFormat: PDF
