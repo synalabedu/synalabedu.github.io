@@ -55,83 +55,11 @@ Código fuente del **sitio web oficial de Synalab**, construido como sitio está
 - **Estático** — generado en build, servido como HTML/CSS/JS plano
 - **Seguridad como práctica continua** — CSP, SRI, HSTS, security.txt, Dependabot, CodeQL
 
-## Estructura del repositorio
-
-\`\`\`
-src/
-├── pages/           # Páginas del sitio (Astro routing)
-├── content/         # Contenido editorial (markdown + frontmatter)
-│   ├── posts/       # Bitácora
-│   ├── projects/    # Laboratorio
-│   ├── resources/   # Recursos descargables
-│   ├── team/        # Equipo del estudio
-│   └── ...
-├── components/      # Componentes Astro reutilizables
-├── layouts/         # Layouts base
-└── lib/             # Constantes y utilidades
-
-public/
-├── admin/           # Panel administrativo (Sveltia CMS)
-└── uploads/         # Recursos multimedia
-\`\`\`
-
-## Desarrollo local
-
-**Requisitos:** Node.js 22+ y npm
-
-\`\`\`bash
-# Instalar dependencias
-npm install
-
-# Servidor de desarrollo (hot-reload)
-npm run dev
-# → http://localhost:4321
-
-# Build de producción + índice de búsqueda
-npm run build
-
-# Preview del build (necesario para probar Pagefind)
-npm run preview
-\`\`\`
-
-## Despliegue
-
-Cada push a la rama \`main\` activa el workflow de GitHub Actions que construye el sitio y lo despliega a GitHub Pages. Tiempo total: 1-2 minutos.
-
-Pipeline en \`.github/workflows/\`.
-
-## Administración del contenido
-
-El sitio incluye un panel administrativo en [/admin](https://synalabedu.github.io/admin/) basado en [Sveltia CMS](https://github.com/sveltia/sveltia-cms). Permite editar contenido (bitácora, laboratorio, recursos, manifiesto, etc.) directamente desde el navegador sin tocar código. Los cambios se commitean automáticamente al repositorio.
-
-## Seguridad
-
-- **Headers HTTP estrictos** (CSP, HSTS, X-Content-Type-Options, Referrer-Policy)
-- **Subresource Integrity (SRI)** en scripts externos
-- **Dependabot** activo para actualizaciones automáticas semanales
-- **CodeQL** corriendo análisis de seguridad en cada push
-- \`security.txt\` (RFC 9116) en [/.well-known/security.txt](https://synalabedu.github.io/.well-known/security.txt)
-- Reporte responsable de vulnerabilidades vía email
-
 ## Licencia
 
-El **código** de este repositorio está bajo licencia [a definir — sugerencia: MIT o Apache 2.0].
+El **código** de este repositorio está bajo licencia [MIT](LICENSE). Eres libre de usar, modificar, distribuir o vender el código manteniendo el aviso de copyright original.
 
-El **contenido editorial** (textos, imágenes, recursos pedagógicos) tiene licencias específicas indicadas en cada proyecto/recurso, generalmente Creative Commons.
-
-## Contacto
-
-**Jader Castro** — Fundador y desarrollador principal
-
-📧 [synalabedu@outlook.com](mailto:synalabedu@outlook.com)  
-📍 Cali, Colombia  
-🌐 [synalabedu.github.io](https://synalabedu.github.io)
-
-## Redes
-
-- Instagram: [@synalabedu](https://instagram.com/synalabedu)
-- Facebook: [synalabedu](https://facebook.com/synalabedu)
-- GitHub: [@synalabedu](https://github.com/synalabedu)
+El **contenido editorial** (textos, imágenes, recursos pedagógicos, manifiesto) tiene licencias específicas indicadas en cada proyecto y recurso, generalmente bajo Creative Commons. Consulta cada pieza de contenido para conocer sus términos específicos.
 
 ---
 
