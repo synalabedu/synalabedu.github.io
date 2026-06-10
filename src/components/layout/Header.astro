@@ -75,8 +75,12 @@ import Logo from '../ui/Logo.astro';
   </div>
 </div>
 
-<link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
-<script src="/pagefind/pagefind-ui.js" is:inline></script>
+{import.meta.env.PROD && (
+  <link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
+)}
+{import.meta.env.PROD && (
+  <script src="/pagefind/pagefind-ui.js" is:inline></script>
+)}
 
 <script>
   const toggle = document.querySelector('[data-menu-toggle]');
