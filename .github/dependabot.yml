@@ -1,14 +1,25 @@
 version: 2
 updates:
+  # ─────────────────────────────────────────────────────────────
+  # Dependencias npm (Astro, Tailwind, Sveltia CMS, Pagefind, etc.)
+  # ─────────────────────────────────────────────────────────────
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
       interval: "weekly"
       day: "monday"
     open-pull-requests-limit: 5
+    ignore:
+      - dependency-name: "esbuild"
+        # esbuild es una dep transitiva controlada por Astro/Vite.
+        # Cuando Vite/Astro soporten esbuild 0.28+, quitar este ignore.
     labels:
       - "dependencies"
+    commit-message:
+      prefix: "chore(deps)"
+      prefix-development: "chore(deps-dev)"
     groups:
+      # Grupos específicos primero (mayor prioridad de match)
       astro-ecosystem:
         patterns:
           - "astro"
@@ -17,9 +28,19 @@ updates:
         patterns:
           - "tailwindcss"
           - "@tailwindcss/*"
+      cms:
+        patterns:
+          - "@sveltia/*"
+          - "sveltia-cms"
+      # Grupos genéricos por tipo (atrapan el resto)
+      production-dependencies:
+        dependency-type: "production"
       dev-dependencies:
         dependency-type: "development"
 
+  # ─────────────────────────────────────────────────────────────
+  # GitHub Actions workflows
+  # ─────────────────────────────────────────────────────────────
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
@@ -27,3 +48,5 @@ updates:
     labels:
       - "dependencies"
       - "github-actions"
+    commit-message:
+      prefix: "chore(ci)"
