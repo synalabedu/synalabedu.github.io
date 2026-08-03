@@ -45,7 +45,7 @@ images:
     alt: Captura de Juego
     caption: ''
 downloadUrl: https://1drv.ms/u/c/5D08A20A07E86BBB/IQA8ZR9m9_QZRZxN1vr-RizDAfweNmLWcpzf7jOpq9dFad4?e=eGLQaw
-documentationUrl: https://1drv.ms/b/c/5D08A20A07E86BBB/IQD4Y8fhC6QsRr7bw5eCvm-RAQplzufS9aSEE7GPkbn3reY?e=QfA4UV
+documentationUrl: https://1drv.ms/b/c/5D08A20A07E86BBB/IQDMJxuJHbW0R7OgV3FSnw62AdukKBjtUOL97_g9nyqjPBk?e=uTCdL0
 scormCompatible: true
 featured: true
 order: 1
