@@ -1,7 +1,7 @@
 ---
 name: Galaxia de Bloques
-version: v23.0
-status: revision
+version: v21
+status: completo
 category: educacion
 tags:
   - gamificación
@@ -30,7 +30,7 @@ techStack:
   - HTML
   - CSS
   - JS
-requirements: ''
+requirements: Chrome, Edge, Firefox, Safari (desktop)
 targetAudience: 'Estudiantes de cuarto y quinto de primaria (8 a 11 años) con diagnóstico de Trastorno del Espectro Autista niveles 1, 2 y 3 según el DSM-5. El diseño aprovecha las fortalezas cognitivas documentadas en esta población: afinidad por sistemas basados en reglas, capacidad de detección de patrones, pensamiento visual-espacial y preferencia por entornos estructurados y predecibles. La dificultad escala progresivamente en 40 niveles por mundo, con guía visual automática (mano animada), retroalimentación positiva inmediata (confetti, sonidos, estrellas), ajustes sensoriales (sonido y animaciones configurables) y aprendizaje sin error con reintento ilimitado.'
 images:
   - src: /uploads/projects/Galaxia de Bloques.png
@@ -42,9 +42,9 @@ images:
   - src: /uploads/projects/GB5.png
     alt: Captura de Juego
     caption: ''
-downloadUrl: ''
-documentationUrl: ''
-scormCompatible: false
+downloadUrl: https://1drv.ms/u/c/5D08A20A07E86BBB/IQA8ZR9m9_QZRZxN1vr-RizDAfweNmLWcpzf7jOpq9dFad4?e=eGLQaw
+documentationUrl: https://1drv.ms/b/c/5D08A20A07E86BBB/IQD4Y8fhC6QsRr7bw5eCvm-RAQplzufS9aSEE7GPkbn3reY?e=QfA4UV
+scormCompatible: true
 featured: true
-order: 99
+order: 1
 ---
